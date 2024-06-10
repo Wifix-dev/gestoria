@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100 bg-light">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,8 +24,8 @@
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
     </head>
-    <body class="font-sans  bg-white p-0">
-    <header id="header" class="header fixed-top d-flex align-items-center">
+    <body class="font-sans p-0">
+    <header id="header" class="header fixed-top  d-flex align-items-center">
 
 <div class="d-flex align-items-center justify-content-between">
   <a href="index.html" class="logo d-flex align-items-center">
@@ -479,8 +479,8 @@
 
 </aside><!-- End Sidebar-->
 
-<main id="main" class="bg-light">
-    {{$slot}}
+<main id="main" class=" ">
+    @yield('content')
 </main><!-- End #main -->
 
 

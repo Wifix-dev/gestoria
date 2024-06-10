@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
     })->name('dashboard');
 
     Route::get('/denouncement', [UserController::class, 'UserDenunciation'])->middleware('role:user')->name('denouncement');
+    Route::get('/denouncement/{id}', [UserController::class, 'GetDenouncement'])->middleware('role:user')->name('denouncement.info');
     Route::post('/denouncement/save',  [UserController::class, 'SaveDenouncement'])->middleware('role:user');
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->middleware('role:admin')->name('admin.dashboard');
 });
