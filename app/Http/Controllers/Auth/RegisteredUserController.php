@@ -9,7 +9,9 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -39,11 +41,13 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+        $folder_name=Str::random(10);
+        Storage::disk('public')->makeDirectory('imagenes/'.$folder_name);
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
+            'folder_name' => $folder_name,
             'password' => Hash::make($request->password),
         ]);
 

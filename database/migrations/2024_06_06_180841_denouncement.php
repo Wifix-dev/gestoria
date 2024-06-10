@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('id_type_denouncement');
             $table->json('initial_evidence')->nullable();
             $table->enum('status', ['Sometida','En proceso','Pendiente a comentarios','Cerrada']);
-            $table->string('final_evidence')->nullable();
+            $table->json('final_evidence')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('user_id')->nullable(); // Clave foránea
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

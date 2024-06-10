@@ -24,7 +24,7 @@
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
     </head>
-    <body class="font-sans antialiased bg-white p-0">
+    <body class="font-sans  bg-white p-0">
     <header id="header" class="header fixed-top d-flex align-items-center">
 
 <div class="d-flex align-items-center justify-content-between">
@@ -479,7 +479,7 @@
 
 </aside><!-- End Sidebar-->
 
-<main id="main" class="main px-md-5 px-sm-0">
+<main id="main" class="bg-light">
     {{$slot}}
 </main><!-- End #main -->
 
