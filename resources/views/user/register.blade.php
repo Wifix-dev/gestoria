@@ -42,101 +42,112 @@
 </style>
 <form id="upload-form" class="" method="POST" action="/denouncement/save" enctype="multipart/form-data">
     @csrf
-    <div class="pagetitle  py-3 px-4 px-md-5  bg-white shadow-sm">
+    <div class="  py-4 px-4 px-md-5 bg-white shadow-sm">
         <div class=" px-md-5 d-flex justify-content-between">
-        <h1 class=" fw-bold"><span class=" fs-6 text-uppercase">Crear
-                solicitud</span></h1><div><a href="/dashboard" class="btn btn-secondary rounded-1" >Atras</a>
-                <a type="button" class="btn btn-primary rounded-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enviar</a></div>
-
-</div>
-    </div><!-- End Page Title -->
+            <div class="my-auto flex">
+            <h6 class=" fw-bold text-uppercase my-auto">Crear solicitud</h6>
+            <nav class="my-auto flex">
+                <ol class="breadcrumb my-auto">
+                  <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                  <li class="breadcrumb-item"><a href="#">Denuncia</a></li>
+                  <li class="breadcrumb-item active">Crear</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="my-auto">
+                <a href="/dashboard" class="btn btn-link text-decoration-none rounded-1">Atras</a>
+                <a type="button" class="btn btn-primary rounded-1" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Enviar</a>
+            </div>
+        </div>
+    </div>
     <div class="m-0 px-sm-0 px-md-5">
-
-
-    <section class="section pb-md-3 px-4 px-md-5 pt-4">
-
-        <div class="row ">
-            <div class="col-lg-8 pr-md-2 ">
-                <div class="card shadow-sm  rounded-2 border p-2 ">
-                    <div class="card-body ">
-                        <div class="pagetitle pt-2">
-                            <h1 class="fs-6 fw-bold ">Redacta tu solicitud</h1>
-                        </div>
-                        <div class="row pt-1 pb-3">
-                            <x-label for="id_type_denouncement"
-                                class="col-sm-2 col-form-label fs-6 fw-normal text-muted" :value="__('Tipo')" />
-                            <div class="col-sm-10">
-                                <select id="id_type_denouncement" class="form-select text-muted bg-light "
-                                    aria-label="Default select example " name="id_type_denouncement"
-                                    :value="old('id_type_denouncement')">
-                                    <option selected>Denuncias</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+        <section class="section pb-md-3 px-4 px-md-5 pt-4">
+            <div class="row ">
+                <div class="col-lg-8 pr-md-2 ">
+                    <div class="row p-0">
+                        <div class="card shadow-sm p-0 border m-0 rounded-0 rounded-top ">
+                            <div class="card-header pb-1 pt-3 bg-light ">
+                                <div class="pagetitle ">
+                                    <h3 class="fs-6 fw-bold text-uppercase">Redacta tu solicitud</h3>
+                                </div>
+                            </div>
+                            <div class="card-body p-4 pt-3">
+                                <div class="row pt-1 pb-3">
+                                    <x-label for="id_type_denouncement"
+                                        class="col-sm-2 col-form-label fs-6 fw-normal text-muted" :value="__('Tipo')" />
+                                    <div class="col-sm-10">
+                                        <select id="id_type_denouncement" class="form-select text-muted bg-light "
+                                            aria-label="Default select example " name="id_type_denouncement"
+                                            :value="old('id_type_denouncement')">
+                                            <option selected>Denuncias</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="outline-primary ">
+                                    <div id="quill-editor" class="relative rounded-bottom border"
+                                        style="height: 250px; background-color:#fff; "></div>
+                                    <textarea class="form-control bg-light" placeholder="Descripcion de tu caso"
+                                        id="description" style="height: 320px;" name="description"
+                                        :value="old('description')" hidden></textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="outline-primary ">
-                            <div id="quill-editor" class="relative rounded-bottom border"
-                                style="height: 250px; background-color:#fff; "></div>
-                            <textarea class="form-control bg-light" placeholder="Descripcion de tu caso"
-                                id="description" style="height: 320px;" name="description" :value="old('description')"
-                                hidden></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="card shadow-sm border border-top-0 p-0 rounded-0 rounded-bottom ">
+                            <div class="card-header pb-1 pt-3 bg-light ">
+                                <div class="pagetitle ">
+                                    <h3 class="fs-6 fw-bold text-uppercase">Fotografias</h3>
+                                </div>
+                            </div>
+                            <div class="card-body p-md-4 ">
+                                <div class="row ">
+                                    <x-label for="initial_evidence" class="col-sm-2 col-form-label fs-6 fw-normal text-muted" :value="__('Evidencia')" />
+                                    <div class="col-md-10">
+                                        <div id="" class="rounded-3 d-flex justify-content-between align-items-center p-3 border"
+                                            style=" background:#f8f9fa;">
+                                            <p class="my-auto text-muted" style="">Subir evidencia.</p>
+                                            <div class="">
+                                                <input class="form-control" type="file" id="initial_evidence"
+                                                    name="initial_evidence[]" multiple accept="image/*" hidden>
+                                                <a id="btn-logo-img" class="btn btn-dark">
+                                                    Explorar
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 w-100 d-flex overflow-auto" id="preview"
+                                            style="width: 500px; height:120px"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                 </div>
-                <div class="card shadow-sm  rounded-2 border p-2 ">
-                    <div class="card-body ">
-
-                        <div class="row pt-md-4 ">
-                        <div class="pagetitle pt-4 col-md-2 col-form-label ">
-                            <h1 class="fs-6 fw-bold ">Evidencia </h1>
-                        </div>
-                            <div class="col-md-10">
-                                <div id="" class="rounded-3 d-flex justify-content-between align-items-center p-3 border"
-                                    style=" background:#f8f9fa;">
-
-                                    <p class="my-auto text-muted" style="">Subir evidencia.</p>
-                                    <div class="">
-                                        <input class="form-control" type="file" id="initial_evidence"
-                                            name="initial_evidence[]" multiple accept="image/*" hidden>
-                                        <a id="btn-logo-img" class="btn btn-dark">
-                                            Explorar
-                                        </a>
-                                    </div>
-
-                                </div>
-                                <div class="mt-3 w-100 d-flex overflow-auto" id="preview" style="width: 500px; height:120px"></div>
-
-                            </div>
-                        </div>
-                    </div>
+        </section>
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <span class="fw-bold">¿Está seguro de que desea enviar su caso?</span><br> Tenga en cuenta que no
+                    podrá realizar modificaciones posteriormente.
+                </div>
+                <div class="modal-footer border-0 flex justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atras</button>
+                    <button class="btn btn-dark rounded-1" type="submit">Registrar</button>
                 </div>
             </div>
-    </section>
+        </div>
     </div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header border-0">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-      <span class="fw-bold">¿Está seguro de que desea enviar su caso?</span><br> Tenga en cuenta que no podrá realizar modificaciones posteriormente.
-    </div>
-      <div class="modal-footer border-0 flex justify-content-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atras</button>
-        <button class="btn btn-dark rounded-1" type="submit">Registrar</button>
-      </div>
-    </div>
-  </div>
-</div>
 </form>
-
 <script>
 $(document).ready(function() {
     var selectedFiles = [];

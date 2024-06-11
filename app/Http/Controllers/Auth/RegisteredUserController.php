@@ -38,6 +38,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -45,6 +46,7 @@ class RegisteredUserController extends Controller
         Storage::disk('public')->makeDirectory('imagenes/'.$folder_name);
         $user = User::create([
             'name' => $request->name,
+            'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
             'folder_name' => $folder_name,
