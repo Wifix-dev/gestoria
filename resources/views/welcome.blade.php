@@ -31,6 +31,8 @@
                             Dashboard</a>
                     @elseif(Auth::user()->role == 'user')
                         <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                    @elseif(Auth::user()->role == 'manager')
+                        <a href="{{ url('/manager/denouncements') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
                     @else
 
                     @endif

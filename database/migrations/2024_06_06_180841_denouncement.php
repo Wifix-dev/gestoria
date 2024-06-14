@@ -15,18 +15,24 @@ return new class extends Migration
     {
         Schema::create('denouncements',function(Blueprint $table){
             $table->id();
-            $table->string('description');
+            $table->string('case_name');
+            $table->longText('description');
             $table->integer('id_type_denouncement');
             $table->json('initial_evidence')->nullable();
             $table->enum('status', ['En espera','Revisada','Aceptada','Rechazada','En proceso','Terminada','Pendiente a comentarios','Cerrada'])->default('En espera');
             $table->json('final_evidence')->nullable();
+            $table->longText('final_comments')->nullable();
             $table->timestamps();
             //columnas
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('manager_id')->nullable();
+            $table->unsignedBigInteger('contact_id')->nullable();
+
             //referencias llaves foraneas
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('manager_id')->references('id')->on('users');
+
+            $table->foreign('contact_id')->references('id')->on('contacts');
         });
     }
 
@@ -37,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('denouncement');
+        Schema::dropIfExists('denouncements');
     }
 };
