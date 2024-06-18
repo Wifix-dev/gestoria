@@ -47,14 +47,25 @@ class ManagerController extends Controller
         if($request->final_comments){
             $affectedRows = Denouncement::where('id', $request->id)->update([
                 'status' => $request->status,
-                'final_comments'=> $request->final_comments
+                'final_comments'=> $request->final_comments,
+                'manager_id'=>Auth::user()->id
             ]);
         }else{
             $affectedRows = Denouncement::where('id', $request->id)->update([
                 'status' => $request->status,
+                'final_comments'=> '',
+                'manager_id'=>Auth::user()->id
             ]);
         }
 
+        return redirect()->route('manager.denunciationsdetail', ['id' => $request->id]);
+    }
+
+    public function FinalComments(Request $request){
+        $affectedRows = Denouncement::where('id', $request->id)->update([
+            'status' => $request->status,
+            'final_comments'=> $request->final_comments
+        ]);
         return redirect()->route('manager.denunciationsdetail', ['id' => $request->id]);
     }
 
@@ -74,12 +85,28 @@ class ManagerController extends Controller
             return redirect()->back()->with('error', 'Denuncia no encontrada.');
         }
 
-        $initial_evidence_images = json_decode($denouncement->initial_evidence, true);
-        $imagePaths = [];
+
+
         $nombre=$user->name.' '.$user->last_name;
-        foreach ($initial_evidence_images as $image) {
-            $imagePaths[] = asset('storage/' . $image);
-        }
-        return view('manager.denouncement', compact('denouncement','imagePaths','nombre','contact'));
+
+        $denouncement = Denouncement::find($id);
+if (!$denouncement) {
+    return redirect()->back()->with('error', 'Denuncia no encontrada.');
+}
+
+$contact = Contact::find($denouncement->contact_id);
+
+$initial_evidence_images = $denouncement->initial_evidence ? json_decode($denouncement->initial_evidence, true) : [];
+$imagePaths = array_map(fn($image) => asset('storage/' . $image), $initial_evidence_images);
+
+$finalImagePaths = [];
+if ($denouncement->final_evidence) {
+    $final_evidence_images = json_decode($denouncement->final_evidence, true);
+    $finalImagePaths = array_map(fn($image) => asset('storage/' . $image), $final_evidence_images);
+}
+
+// Pasar las variables a la vista
+return view('manager.denouncement', compact('denouncement', 'imagePaths', 'contact','nombre','finalImagePaths'));
+
     }
 }

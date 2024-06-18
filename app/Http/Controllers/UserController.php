@@ -13,18 +13,36 @@ class UserController extends Controller
     }
     public function GetDenouncement($id){
         $denouncement = Denouncement::find($id);
-        if (!$denouncement) {
-            return redirect()->back()->with('error', 'Denuncia no encontrada.');
-        }
-        $contact =  Contact::find($denouncement->contact_id);
-        $initial_evidence_images = json_decode($denouncement->initial_evidence, true);
-        $imagePaths = [];
+if (!$denouncement) {
+    return redirect()->back()->with('error', 'Denuncia no encontrada.');
+}
 
-        foreach ($initial_evidence_images as $image) {
-            $imagePaths[] = asset('storage/' . $image);
-        }
-        return view('user.denouncement', compact('denouncement','imagePaths','contact'));
+$contact = Contact::find($denouncement->contact_id);
+
+// Procesar la evidencia inicial
+$initial_evidence_images = $denouncement->initial_evidence ? json_decode($denouncement->initial_evidence, true) : [];
+$imagePaths = array_map(fn($image) => asset('storage/' . $image), $initial_evidence_images);
+
+// Procesar la evidencia final
+$finalImagePaths = [];
+if ($denouncement->final_evidence) {
+    $final_evidence_images = json_decode($denouncement->final_evidence, true);
+    $finalImagePaths = array_map(fn($image) => asset('storage/' . $image), $final_evidence_images);
+}
+
+// Pasar las variables a la vista
+return view('user.denouncement', compact('denouncement', 'imagePaths', 'contact', 'finalImagePaths'));
+
     }
+
+    public function FinalComments(Request $request){
+        $affectedRows = Denouncement::where('id', $request->id)->update([
+            'status' => 'Cerrada',
+            'final_comments'=> $request->final_comments
+        ]);
+        return redirect()->route('denouncement.info', ['id' => $request->id]);
+    }
+
     public function SaveDenouncement(Request $request){
         $request->validate([
             'case_name' => 'required|string',

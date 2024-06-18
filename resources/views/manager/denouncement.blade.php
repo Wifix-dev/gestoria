@@ -32,6 +32,25 @@
 
 <div class="m-0 px-sm-0 px-md-5">
     <section class="section pb-md-3 px-4 px-md-5 pt-4">
+        @if ($denouncement->status == "Rechazada")
+        <div class="row">
+            <div class="alert alert-danger mx-0" role="alert">
+                Su solicitud ha sido rechazada verifique los comentarios al final de la pagina.
+            </div>
+        </div>
+        @elseif($denouncement->status == "Terminada")
+        <div class="row">
+            <div class="alert alert-info  mx-0" role="alert">
+                Pendiente a comentarios finales y agradecimientos adicionales.
+            </div>
+        </div>
+        @elseif($denouncement->status == "Cerrada")
+            <div class="row">
+                <div class="alert alert-primary" role="alert">
+                    La peticion ha sido atendida
+                </div>
+            </div>
+        @endif
         <div class="row ">
             <div class="col-lg-5 pr-md-2 ">
                 <div class="row p-0">
@@ -53,63 +72,81 @@
                                                 </div>
                                             </div>
                                             <span class="text-muted">
-                                                @if($denouncement->status == 'En espera')
+                                                @switch($denouncement->status)
+                                                @case('En espera')
                                                 <span class="text-secondary"><i class="bi bi-hourglass-split me-1"></i>
                                                     En espera</span>
-                                                @elseif($denouncement->status == 'Revisada')
+                                                @break
+
+                                                @case('Revisada')
+                                                @default
                                                 <span class="text-success"><i class="bi bi-patch-check-fill me-1"></i>
                                                     Revisada</span>
-                                                @else
-                                                <span class="text-success"><i class="bi bi-patch-check-fill me-1"></i>
-                                                    Revisada</span>
-                                                @endif
+                                                @endswitch
                                             </span>
+
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-start">
                                             <div class="ms-2 me-auto">
                                                 <div class="fw-light text-secondary">Recepcion de solicitud</div>
                                             </div>
                                             <span class="text-muted">
-                                                @if($denouncement->status == 'Revisada')
+                                                @switch($denouncement->status)
+                                                @case('Revisada')
                                                 <span class="text-secondary"><i class="bi bi-hourglass-split me-1"></i>
                                                     En espera</span>
-                                                @elseif($denouncement->status == 'Aceptada')
+                                                @break
+
+                                                @case('Aceptada')
+                                                @case('En proceso')
+                                                @case('Terminada')
+                                                @case('Pendiente a comentarios')
+                                                @case('Cerrada')
                                                 <span class="text-success"><i class="bi bi-patch-check-fill me-2"></i>
                                                     Aceptada</span>
-                                                @elseif($denouncement->status == 'Rechazada')
-                                                <span class="text-danger"><i
-                                                        class="bi bi-clipboard-x me-2"></i>Rechazada</span>
-                                                @elseif($denouncement->status == 'En proceso' || $denouncement->status
-                                                == 'Terminada' ||
-                                                $denouncement->status == "Pendiente a comentarios")
-                                                <span class="text-success"><i class="bi bi-patch-check-fill me-2"></i>
-                                                    Aceptada</span>
-                                                @else
-                                                <span class="text-secondary"><i
-                                                        class="bi bi-square me-2"></i>Pendiente</span>
-                                                @endif
+                                                @break
+
+                                                @case('Rechazada')
+                                                <span class="text-danger"><i class="bi bi-clipboard-x me-2"></i>
+                                                    Rechazada</span>
+                                                @break
+
+                                                @default
+                                                <span class="text-secondary"><i class="bi bi-square me-2"></i>
+                                                    Pendiente</span>
+                                                @endswitch
                                             </span>
+
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-start">
                                             <div class="ms-2 me-auto">
                                                 <div class="fw-light text-secondary">Solucion</div>
                                             </div>
                                             <span class="text-muted">
-                                                @if($denouncement->status == 'Terminada' || $denouncement->status ==
-                                                "Pendiente a comentarios")
-                                                <span class="text-success"><i
-                                                        class="bi bi-patch-check-fill me-2"></i>Terminada</span>
-                                                @elseif($denouncement->status == 'En proceso')
+                                                @switch($denouncement->status)
+                                                @case('Terminada')
+                                                @case('Pendiente a comentarios')
+                                                @case('Cerrada')
+                                                <span class="text-success"><i class="bi bi-patch-check-fill me-2"></i>
+                                                    Terminada</span>
+                                                @break
+
+                                                @case('En proceso')
                                                 <span class="text-secondary"><i class="bi bi-gear-fill me-2"></i> En
                                                     proceso</span>
-                                                @elseif($denouncement->status == 'Rechazada')
-                                                <span class="text-danger"><i
-                                                        class="bi bi-clipboard-x me-2"></i>Rechazada</span>
-                                                @else
-                                                <span class="text-secondary"><i
-                                                        class="bi bi-square me-2"></i>Pendiente</span>
-                                                @endif
+                                                @break
+
+                                                @case('Rechazada')
+                                                <span class="text-danger"><i class="bi bi-clipboard-x me-2"></i>
+                                                    Rechazada</span>
+                                                @break
+
+                                                @default
+                                                <span class="text-secondary"><i class="bi bi-square me-2"></i>
+                                                    Pendiente</span>
+                                                @endswitch
                                             </span>
+
                                         </li>
                                     </ol>
                                 </div>
@@ -129,7 +166,8 @@
                                 @if(!empty($imagePaths))
                                 @foreach($imagePaths as $image)
                                 <div class=" m-0 pe-3 mt-sm-3 mt-md-0" style="margin-right: 10px;">
-                                    <img src="{{ $image }}" alt="Evidencia Inicial" style="height: 250px;">
+                                    <img src="{{ $image }}" alt="Evidencia Inicial" style="height: 250px;"
+                                        class="rounded">
                                 </div>
                                 @endforeach
                                 @else
@@ -167,8 +205,8 @@
                         </div>
                     </div>
                 </div>
-                @if($denouncement->status != "En proceso" && $denouncement->status != "Terminada" &&
-                $denouncement->status != "Pendiente a comentarios" && $denouncement->status != "Cerrada")
+                @if($denouncement->status=="En espera" || $denouncement->status=="Revisada" ||
+                $denouncement->status=="Rechazada")
                 <div class="row">
                     <div class="card shadow-sm border p-0 rounded ">
                         <div class="card-header pb-1 pt-3 bg-light ">
@@ -211,7 +249,8 @@
                 </div>
                 @endif
                 @if($denouncement->status == "En proceso")
-                <form id="upload-form" class="" method="POST" action="/denouncements/update" enctype="multipart/form-data">
+                <form id="upload-form" class="" method="POST" action="/denouncements/update"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="card shadow-sm border p-0 rounded ">
@@ -231,7 +270,8 @@
                                             style=" background:#f8f9fa;">
                                             <p class="my-auto text-muted" style="">Subir evidencia final del caso.</p>
                                             <div class="">
-                                                <input class="form-control" type="text" value="{{$denouncement->id}}" name="id" hidden>
+                                                <input class="form-control" type="text" value="{{$denouncement->id}}"
+                                                    name="id" hidden>
                                                 <input class="form-control" type="file" id="final_evidence"
                                                     name="final_evidence[]" multiple accept="image/*" hidden>
                                                 <a id="btn-logo-img" class="btn btn-primary">
@@ -244,16 +284,41 @@
                                     </div>
                                 </div>
                                 <div class=" d-flex justify-content-end">
-                                <button type="submit" class="btn btn-dark rounded-1" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">Guardar Evidencia</>
+                                    <button type="submit" class="btn btn-dark rounded-1" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop">Guardar Evidencia</>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
                 @endif
+                @if($denouncement->status == "Terminada" || $denouncement->status == "Cerrada")
+                <div class="row">
+                    <div class="card shadow-sm border p-0">
+                        <div class="card-header pb-1 pt-3 bg-light ">
+                            <div class="pagetitle ">
+                                <h3 class="fs-6 fw-bold text-uppercase">Evidencia Final</h3>
+                            </div>
+                        </div>
+                        <div class="card-body p-md-4 ">
+                            <div class="d-flex flex-row overflow-auto p-0 m-0">
+                                @if(!empty($finalImagePaths))
+                                @foreach($finalImagePaths as $imagen)
+                                <div class=" m-0 pe-3 mt-sm-3 mt-md-0" style="margin-right: 10px;">
+                                    <img src="{{ $imagen }}" alt="Evidencia Inicial" style="height: 250px;"
+                                        class="rounded">
+                                </div>
+                                @endforeach
+                                @else
+                                <p>No hay evidencia inicial.</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
-            <div class="col-lg-7 ps-xl-5 ">
+            <div class="col-lg-7 ps-xl-4 ">
                 <div class="row p-0 ">
                     <div class="card shadow-sm p-0 border m-0 rounded-0 rounded-top  ">
                         <div class="card-header pb-1 pt-3 bg-light ">
@@ -281,7 +346,7 @@
                                     </p>
                                     <div class="col-12">
                                         <div class="px-md-3 ">
-                                        <div id="quill-editor" class="quill-editor-default rounded-bottom"
+                                            <div id="quill-editor" class="quill-editor-default rounded-bottom"
                                                 style="height:250px;" disabled>
                                                 {!! $denouncement->description !!}
                                             </div>
@@ -309,16 +374,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="card shadow-sm border border-top-0 p-0 rounded-0 rounded-bottom ">
+                @if(($denouncement->status=="Terminada" || $denouncement->status=="Cerrada") && $denouncement->final_comments != '')
+                <div class="row pt-4">
+                    <div class="card shadow-sm border p-0 rounded ">
+                        <div class="card-header pb-1 pt-3 bg-light ">
+                            <div class="pagetitle ">
+                                <h3 class="fs-6 fw-bold text-uppercase">Comentarios Finales.</h3>
+                            </div>
+                        </div>
+                        <div class="card-body p-md-4 ">
+                                <div class="row g-3">
+                                    <input class="form-control" type="text" value="{{$denouncement->id}}" name="id"
+                                        hidden>
+                                    <div class="col-md-12 ">
+                                        <textarea type="text" class="form-control text-muted disabled"
+                                            id="final_comments" name="final_comments" style="height:150px;"
+                                            disabled>{{$denouncement->final_comments}}</textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
+                @endif
             </div>
     </section>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
 
     var quill = new Quill('#quill-editor', {
         theme: 'snow',
@@ -328,7 +412,7 @@
         }
     });
     quill.root.innerHTML = `{!! $denouncement->description !!}`;
-    });
+});
 
 $(document).ready(function() {
     var selectedFiles = [];
@@ -402,8 +486,5 @@ document.getElementById('inputState').addEventListener('change', function() {
         div.style.display = 'none';
     }
 });
-
-
-
 </script>
 @endsection
