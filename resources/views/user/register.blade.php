@@ -19,7 +19,7 @@
                 <h2 class="text-white ">Crear Solicitud</h2>
             </div>
             <div class="my-auto">
-                <a href="/dashboard" class="btn btn-link text-decoration-none rounded-1">Atras</a>
+                <a href="/dashboard" class="btn btn-link text-decoration-none rounded-1 text-dark">Atras</a>
                 <a type="button" class="btn btn-dark rounded-1" data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop">Enviar</a>
             </div>
@@ -71,7 +71,7 @@
                         <div class="card shadow-none p-0 border border-bottom-0 m-0 rounded-0 rounded-top ">
                             <div class="card-header pb-1 pt-3 bg-light border-0 ">
                                 <div class="pagetitle ">
-                                    <h3 class="fs-6 fw-bold text-uppercase">Informacion</h3>
+                                    <h3 class="fs-6 fw-normal">Informacion de la denuncia.</h3>
                                 </div>
                             </div>
                             <div class="card-body p-4 pt-3">
@@ -104,10 +104,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="card shadow-sm border border-top-0 p-0 rounded-0 rounded-bottom ">
-                            <div class="card-header pb-1 pt-3 bg-light rounded-0 border-0">
+                        <div class="card shadow-sm border border-top-0 p-0 mb-3 rounded-0 rounded-bottom ">
+                            <div class="card-header pb-1 pt-3  bg-light rounded-0 border-0">
                                 <div class="pagetitle ">
-                                    <h3 class="fs-6 fw-bold text-uppercase">Fotografias</h3>
+                                    <h3 class="fs-6 fw-normal">Fotografias</h3>
                                 </div>
                             </div>
                             <div class="card-body p-md-4 ">
@@ -137,10 +137,10 @@
                     </div>
 
                     <div class="row">
-                        <div class="card shadow-sm border p-0 rounded ">
+                        <div class="card shadow-sm border p-0  rounded ">
                             <div class="card-header pb-1 pt-3 bg-light ">
                                 <div class="pagetitle ">
-                                    <h3 class="fs-6 fw-bold text-uppercase">Contacto</h3>
+                                    <h3 class="fs-6 fw-normal">Contacto</h3>
                                 </div>
                             </div>
                             <div class="card-body ">
@@ -165,17 +165,12 @@
                 </div>
                 <div class="col-lg-7 ps-xl-4 ">
                     <div class="row p-0 ">
-                        <div class="card shadow-sm p-0 border m-0 rounded-0 rounded-top ">
-                            <div class="card-header pb-1 pt-3 bg-light ">
-                                <div class="pagetitle ">
-                                    <h3 class="fs-6 fw-bold text-uppercase">Denuncia</h3>
-                                </div>
-                            </div>
+                        <div class="card shadow-sm p-0 border m-0 ">
                             <div class="card-body p-4 pt-3">
                                 <div class="row pt-1 pb-3 mx-auto">
                                     <div class="col-6 col-md-4 px-0"><img class="w-100"
                                             src="{{asset('storage/rsc/cnt.png')}}"></img></div>
-                                    <div class="col-6 col-md-8 d-flex justify-content-end px-0"><span
+                                    <div class="col-6 col-md-8 d-flex justify-content-end"><span
                                             class="fw-light mt-md-3 fs-6">H. Matamoros Tamaulipas a
                                             <span id="fecha"></span></div>
                                 </div>
@@ -187,7 +182,7 @@
                                 <p class="text-center pt-1 fw-bold"></p>
                                 <div class="row">
                                     <div class="col-12">
-                                        <p class="pt-3 ms-md-3">Me dirijo a usted para solicitar su apoyo y asistencia
+                                        <p class="pt-3 ms-md-3 fs-6">Me dirijo a usted para solicitar su apoyo y asistencia
                                             en:
                                         </p>
                                         <div class="col-12">
@@ -206,7 +201,7 @@
                                 </div>
                                 <div class="row pt-0">
                                     <div class="col-12">
-                                        <p class="pt-3 ms-md-3">Agradezco su consideracion y cualquier apoyo que me
+                                        <p class="pt-3 ms-md-3 fs-6">Agradezco su consideracion y cualquier apoyo que me
                                             pueda
                                             brindar.
                                             Estoy disponible para discutir esta solicitud con mas detalladamente y para

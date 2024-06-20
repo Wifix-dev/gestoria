@@ -40,7 +40,34 @@
     background-color: #f1f1f1;
 }
 
-#preview {
+#previewphoto{
+    border-radius: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f1f1f1;
+}
+
+#previewphoto {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+#previewphoto::-webkit-scrollbar {
+    height: 12px;
+    border-radius: 10px;
+
+}
+
+#previewphoto::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+#previewphoto::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f1f1f1;
+}
+
+#previewphoto{
     border-radius: 10px;
     scrollbar-width: thin;
     scrollbar-color: #ccc #f1f1f1;
@@ -193,7 +220,7 @@
                             </div>
                         </div>
                         <div class="card-body p-md-4 ">
-                            <div id="preview"class="d-flex flex-row overflow-auto p-0 m-0">
+                            <div id="previewphoto" class="d-flex flex-row overflow-auto p-0 m-0">
                                 @if(!empty($imagePaths))
                                 @foreach($imagePaths as $image)
                                 <div class=" m-0 pe-3 mt-sm-3 mt-md-0" style="margin-right: 10px;">

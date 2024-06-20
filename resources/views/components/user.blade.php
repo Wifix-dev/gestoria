@@ -47,26 +47,68 @@ https://templatemo.com/tm-590-topic-listing
 <body id="top">
 
     <main>
-        <nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
+        <nav class="navbar navbar-light navbar-expand-lg border-0 sticky-top shadow-sm"
+            style="background-color: #ffffff;">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <i class="bi-back"></i>
                     <span>Topic</span>
                 </a>
 
-                <div class="d-lg-none ms-auto me-4">
-                    <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
-                </div>
+                <div class="nav-item dropdown me-4 ms-auto d-lg-none">
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        <div class="nav-link nav-profile d-flex align-items-center " data-bs-toggle="dropdown">
+                            <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"
+                                style="width:35px;height:35px;">
+                            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+                        </div><!-- End Profile Iamge Icon -->
+
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow  p-3 mt-2">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
+                                    <i class="bi bi-person"></i>
+                                    <span>Perfil</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
+                                    <i class="bi bi-gear"></i>
+                                    <span>Configuracion</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center rounded-3" href="pages-faq.html">
+                                    <i class="bi bi-question-circle"></i>
+                                    <span>Need Help?</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center rounded-3" href="#">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+
+                                        <span :href="route('logout')" onclick="event.preventDefault();
+            this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </span>
+                                    </form>
+                                </a>
+                            </li>
+
+                        </ul><!-- End Profile Dropdown Items -->
+                    </div>
+
+                <button class="navbar-toggler bg-dark p-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon text-dark"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-5 me-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_1">Home</a>
+                            <a class="nav-link click-scroll" href="index.html#section_1">Inicio</a>
                         </li>
 
                         <li class="nav-item">
@@ -83,22 +125,66 @@ https://templatemo.com/tm-590-topic-listing
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="index.html#section_5">Contact</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow shadow-none" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
+
+
+
                     </ul>
 
-                    <div class="d-none d-lg-block">
-                        <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
-                    </div>
+                    <div class="nav-item dropdown pe-3 d-none d-lg-block">
+
+                        <div class="nav-link nav-profile d-flex align-items-center " data-bs-toggle="dropdown">
+                            <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"
+                                style="width:30px;height:30px;">
+                            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+                        </div><!-- End Profile Iamge Icon -->
+
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow p-3 mt-3">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
+                                    <i class="bi bi-person"></i>
+                                    <span>Perfil</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
+                                    <i class="bi bi-gear"></i>
+                                    <span>Configuracion</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center rounded-3" href="pages-faq.html">
+                                    <i class="bi bi-question-circle"></i>
+                                    <span>Need Help?</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center rounded-3" href="#">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+
+                                        <span :href="route('logout')" onclick="event.preventDefault();
+            this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </span>
+                                    </form>
+                                </a>
+                            </li>
+
+                        </ul><!-- End Profile Dropdown Items -->
+                    </div><!-- End Profile Nav -->
                 </div>
             </div>
         </nav>
