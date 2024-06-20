@@ -13,10 +13,42 @@
     border-bottom: 0px !important;
     border-radius: .25rem .25rem 0 0;
 }
+#preview {
+    border-radius: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f1f1f1;
+}
+
+#preview {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+#preview::-webkit-scrollbar {
+    height: 12px;
+    border-radius: 10px;
+
+}
+
+#preview::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+#preview::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f1f1f1;
+}
+
+#preview {
+    border-radius: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f1f1f1;
+}
 </style>
 
-<div class="  py-4 px-4 px-md-5 bg-white shadow-sm">
-    <div class=" px-md-5 d-flex justify-content-between">
+<div class="section  pt-4 px-0 px-md-2">
+    <div class="px-4 px-md-5 d-flex justify-content-between">
         <div class="my-auto flex">
             <h6 class=" fw-bold text-uppercase my-auto">Crear solicitud</h6>
             <nav class="my-auto flex">
@@ -30,7 +62,7 @@
     </div>
 </div>
 
-<div class="m-0 px-sm-0 px-md-5">
+<div class="m-0 px-sm-0 px-md-2">
     <section class="section pb-md-3 px-4 px-md-5 pt-4">
         @if ($denouncement->status == "Rechazada")
         <div class="row">
@@ -52,8 +84,8 @@
             </div>
         @endif
         <div class="row ">
-            <div class="col-lg-5 pr-md-2 ">
-                <div class="row p-0">
+            <div class="col-lg-5 pr-md-2">
+                <div class="row">
                     <div class="card shadow-sm p-0 border m-0 rounded-0 rounded-top ">
                         <div class="card-header pb-1 pt-3 bg-light ">
                             <div class="pagetitle ">
@@ -62,8 +94,7 @@
                         </div>
                         <div class="card-body p-4 pt-3">
                             <div class="row pt-1 pb-3">
-                                <span class="col-sm-3 col-form-label fs-6 fw-normal text-muted">Estado</span>
-                                <div class="col-sm-9">
+                                <div class="col-sm-12">
                                     <ol class="list-group">
                                         <li class="list-group-item d-flex justify-content-between align-items-start">
                                             <div class="ms-2 me-auto">
@@ -71,7 +102,7 @@
                                                     En espera a revisión
                                                 </div>
                                             </div>
-                                            <span class="text-muted">
+                                            <span class="text-muted fs-6">
                                                 @switch($denouncement->status)
                                                 @case('En espera')
                                                 <span class="text-secondary"><i class="bi bi-hourglass-split me-1"></i>
@@ -154,15 +185,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="card shadow-sm border border-top-0 p-0 rounded-0 rounded-bottom ">
+                <div class="row" >
+                    <div class="card shadow-sm border border-top-0 p-0 mb-3 rounded-0 rounded-bottom ">
                         <div class="card-header pb-1 pt-3 bg-light ">
                             <div class="pagetitle ">
                                 <h3 class="fs-6 fw-bold text-uppercase">Evidencia</h3>
                             </div>
                         </div>
                         <div class="card-body p-md-4 ">
-                            <div class="d-flex flex-row overflow-auto p-0 m-0">
+                            <div id="preview"class="d-flex flex-row overflow-auto p-0 m-0">
                                 @if(!empty($imagePaths))
                                 @foreach($imagePaths as $image)
                                 <div class=" m-0 pe-3 mt-sm-3 mt-md-0" style="margin-right: 10px;">
@@ -178,7 +209,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="card shadow-sm border p-0 rounded ">
+                    <div class="card shadow-sm border p-0 mb-3 rounded ">
                         <div class="card-header pb-1 pt-3 bg-light ">
                             <div class="pagetitle ">
                                 <h3 class="fs-6 fw-bold text-uppercase">Contacto</h3>
@@ -208,7 +239,7 @@
                 @if($denouncement->status=="En espera" || $denouncement->status=="Revisada" ||
                 $denouncement->status=="Rechazada")
                 <div class="row">
-                    <div class="card shadow-sm border p-0 rounded ">
+                    <div class="card shadow-sm border p-0 mb-3 rounded ">
                         <div class="card-header pb-1 pt-3 bg-light ">
                             <div class="pagetitle ">
                                 <h3 class="fs-6 fw-bold text-uppercase">Acciones</h3>
@@ -252,7 +283,7 @@
                 <form id="upload-form" class="" method="POST" action="/denouncements/update"
                     enctype="multipart/form-data">
                     @csrf
-                    <div class="row">
+                    <div class="row ">
                         <div class="card shadow-sm border p-0 rounded ">
                             <div class="card-header pb-1 pt-3 bg-light ">
                                 <div class="pagetitle ">

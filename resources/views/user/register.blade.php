@@ -42,7 +42,7 @@
 </style>
 <form id="upload-form" class="" method="POST" action="/denouncement/save" enctype="multipart/form-data">
     @csrf
-    <div class="  py-4 px-4 px-md-5 bg-white shadow-sm">
+    <div class=" py-4 px-4 px-md-5 bg-white shadow-sm">
         <div class=" px-md-5 d-flex justify-content-between">
             <div class="my-auto flex">
                 <h6 class=" fw-bold text-uppercase my-auto">Crear solicitud</h6>
@@ -61,7 +61,7 @@
             </div>
         </div>
     </div>
-    <div class="m-0 px-sm-0 px-md-5">
+    <div class="m-0 px-sm-0 px-md-2">
         <section class="section pb-md-3 px-4 px-md-5 pt-4">
             <div class="row ">
                 <div class="col-lg-5 pr-md-2 ">
@@ -75,9 +75,9 @@
                             </div>
                             <div class="card-body p-4 pt-3">
                                 <div class="row pt-1 pb-3">
-                                    <x-label for="case_name" class="col-sm-2 col-form-label fs-6 fw-normal text-muted"
+                                    <x-label for="case_name" class="col-sm-3 col-form-label fs-6 fw-normal text-muted"
                                         :value="__('Asunto')" />
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-9">
                                         <input id="case_name" class="form-control text-muted bg-light "
                                             aria-label="Default select example " name="case_name"
                                             :value="old('case_name')">
@@ -86,8 +86,8 @@
                                 </div>
                                 <div class="row pt-1 pb-3">
                                     <x-label for="id_type_denouncement"
-                                        class="col-sm-2 col-form-label fs-6 fw-normal text-muted" :value="__('Tipo')" />
-                                    <div class="col-sm-10">
+                                        class="col-sm-3 col-form-label fs-6 fw-normal text-muted" :value="__('Tipo')" />
+                                    <div class="col-sm-9">
                                         <select id="id_type_denouncement" class="form-select text-muted bg-light "
                                             aria-label="Default select example " name="id_type_denouncement"
                                             :value="old('id_type_denouncement')">
@@ -112,9 +112,9 @@
                             <div class="card-body p-md-4 ">
                                 <div class="row ">
                                     <x-label for="initial_evidence"
-                                        class="col-sm-2 col-form-label fs-6 fw-normal text-muted"
+                                        class="col-sm-3 col-form-label fs-6 fw-normal text-muted"
                                         :value="__('Evidencia')" />
-                                    <div class="col-md-10">
+                                    <div class="col-md-9">
                                         <div id=""
                                             class="rounded-3 d-flex justify-content-between align-items-center p-3 border"
                                             style=" background:#f8f9fa;">
@@ -246,9 +246,10 @@
     </div>
 </form>
 <script>
+    var month=['Enero','Febrero','Marzo', 'Abril','Mayo', 'Junio', 'Julio','Agosto', 'Septiembre','Octubre', 'Noviembre', 'Diciembre']
 var date = new Date()
 let fecha = document.getElementById('fecha');
-fecha.textContent = 'date';
+fecha.textContent = date.getDate()+" de "+month[date.getMonth()]+" del "+date.getFullYear();
 $(document).ready(function() {
     var selectedFiles = [];
 

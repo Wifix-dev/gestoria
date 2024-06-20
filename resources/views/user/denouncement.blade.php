@@ -60,7 +60,7 @@
         </div>
     </div>
 </div>
-<div class="m-0 px-sm-0 px-md-5">
+<div class="m-0 px-sm-0 px-md-2">
     <section class="section pb-md-3 px-4 px-md-5 pt-4">
         @if ($denouncement->status == "Rechazada")
         <div class="row">
@@ -91,11 +91,10 @@
                             </div>
                         </div>
                         <div class="card-body p-4 pt-3">
-                            <div class="row pt-1 pb-3">
-                                <span class="col-sm-3 col-form-label fs-6 fw-normal text-muted">Estado</span>
-                                <div class="col-sm-9">
+                            <div class="row pt-1">
+                                <div class="col-sm-12">
                                     <ol class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <li class="list-group-item d-flex flex-rows justify-content-between align-items-start">
                                             <div class="ms-2 me-auto">
                                                 <div class="fw-light text-secondary ">
                                                     En espera a revisión

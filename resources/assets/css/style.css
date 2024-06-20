@@ -231,7 +231,9 @@ h6 {
   color: #798eb3;
   padding: 15px;
 }
-
+.nav-link>ul>li>a:hover{
+  background: #000;
+}
 .card-title {
   padding: 20px 0 15px 0;
   font-size: 18px;
