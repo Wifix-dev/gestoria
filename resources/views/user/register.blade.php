@@ -1,8 +1,31 @@
-@extends('components.layout')
+@extends('components.user')
 
 @section('title', 'Detalle de la Denuncia')
 
 @section('content')
+<form id="upload-form" class="" method="POST" action="/denouncement/save" enctype="multipart/form-data">
+    @csrf
+<header class="site-header d-flex flex-column justify-content-center align-items-center">
+    <div class="container">
+        <div class=" d-flex justify-content-between">
+            <div class="">
+                <nav aria-label="breadcrumb" class="-mb-2">
+                    <ol class="breadcrumb p-0">
+                        <li class="breadcrumb-item "><a class="text-dark" href="index.html">Inicio</a></li>
+
+                        <li class="breadcrumb-item active text-white" aria-current="page">Denuncia</li>
+                    </ol>
+                </nav>
+                <h2 class="text-white ">Crear Solicitud</h2>
+            </div>
+            <div class="my-auto">
+                <a href="/dashboard" class="btn btn-link text-decoration-none rounded-1">Atras</a>
+                <a type="button" class="btn btn-dark rounded-1" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Enviar</a>
+            </div>
+        </div>
+    </div>
+</header>
 <style>
 #preview {
     width: 500px;
@@ -40,37 +63,15 @@
     scrollbar-color: #ccc #f1f1f1;
 }
 </style>
-<form id="upload-form" class="" method="POST" action="/denouncement/save" enctype="multipart/form-data">
-    @csrf
-    <div class=" py-4 px-4 px-md-5 bg-white shadow-sm">
-        <div class=" px-md-5 d-flex justify-content-between">
-            <div class="my-auto flex">
-                <h6 class=" fw-bold text-uppercase my-auto">Crear solicitud</h6>
-                <nav class="my-auto flex">
-                    <ol class="breadcrumb my-auto">
-                        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="#">Denuncia</a></li>
-                        <li class="breadcrumb-item active">Crear</li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="my-auto">
-                <a href="/dashboard" class="btn btn-link text-decoration-none rounded-1">Atras</a>
-                <a type="button" class="btn btn-dark rounded-1" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop">Enviar</a>
-            </div>
-        </div>
-    </div>
-    <div class="m-0 px-sm-0 px-md-2">
-        <section class="section pb-md-3 px-4 px-md-5 pt-4">
+    <div class="container px-0">
+        <section class="section pb-md-3 px-3 pt-4">
             <div class="row ">
                 <div class="col-lg-5 pr-md-2 ">
-
                     <div class="row p-0">
-                        <div class="card shadow-sm p-0 border m-0 rounded-0 rounded-top ">
-                            <div class="card-header pb-1 pt-3 bg-light ">
+                        <div class="card shadow-none p-0 border border-bottom-0 m-0 rounded-0 rounded-top ">
+                            <div class="card-header pb-1 pt-3 bg-light border-0 ">
                                 <div class="pagetitle ">
-                                    <h3 class="fs-6 fw-bold text-uppercase">Redacta tu solicitud</h3>
+                                    <h3 class="fs-6 fw-bold text-uppercase">Informacion</h3>
                                 </div>
                             </div>
                             <div class="card-body p-4 pt-3">
@@ -104,7 +105,7 @@
                     </div>
                     <div class="row">
                         <div class="card shadow-sm border border-top-0 p-0 rounded-0 rounded-bottom ">
-                            <div class="card-header pb-1 pt-3 bg-light ">
+                            <div class="card-header pb-1 pt-3 bg-light rounded-0 border-0">
                                 <div class="pagetitle ">
                                     <h3 class="fs-6 fw-bold text-uppercase">Fotografias</h3>
                                 </div>
@@ -154,14 +155,15 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="contact_schedule" class="form-label">Horario de Contacto</label>
-                                        <input type="text" class="form-control" id="contact_schedule" name="contact_schedule">
+                                        <input type="text" class="form-control" id="contact_schedule"
+                                            name="contact_schedule">
                                     </div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 ps-xl-5 ">
+                <div class="col-lg-7 ps-xl-4 ">
                     <div class="row p-0 ">
                         <div class="card shadow-sm p-0 border m-0 rounded-0 rounded-top ">
                             <div class="card-header pb-1 pt-3 bg-light ">
@@ -246,10 +248,12 @@
     </div>
 </form>
 <script>
-    var month=['Enero','Febrero','Marzo', 'Abril','Mayo', 'Junio', 'Julio','Agosto', 'Septiembre','Octubre', 'Noviembre', 'Diciembre']
+var month = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre',
+    'Noviembre', 'Diciembre'
+]
 var date = new Date()
 let fecha = document.getElementById('fecha');
-fecha.textContent = date.getDate()+" de "+month[date.getMonth()]+" del "+date.getFullYear();
+fecha.textContent = date.getDate() + " de " + month[date.getMonth()] + " del " + date.getFullYear();
 $(document).ready(function() {
     var selectedFiles = [];
 
