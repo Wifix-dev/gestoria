@@ -54,6 +54,7 @@ https://templatemo.com/tm-590-topic-listing
                     <i class="bi-back"></i>
                     <span>Topic</span>
                 </a>
+                @auth
 
                 <div class="nav-item dropdown me-4 ms-auto d-lg-none">
 
@@ -99,7 +100,7 @@ https://templatemo.com/tm-590-topic-listing
 
                         </ul><!-- End Profile Dropdown Items -->
                     </div>
-
+                @endauth
                 <button class="navbar-toggler bg-dark p-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon text-dark"></span>
@@ -140,7 +141,7 @@ https://templatemo.com/tm-590-topic-listing
 
 
                     </ul>
-
+                    @auth
                     <div class="nav-item dropdown pe-3 d-none d-lg-block">
 
                         <div class="nav-link nav-profile d-flex align-items-center " data-bs-toggle="dropdown">
@@ -185,6 +186,7 @@ https://templatemo.com/tm-590-topic-listing
 
                         </ul><!-- End Profile Dropdown Items -->
                     </div><!-- End Profile Nav -->
+                    @endauth
                 </div>
             </div>
         </nav>

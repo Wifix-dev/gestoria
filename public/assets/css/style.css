@@ -548,7 +548,47 @@ h6 {
   margin-bottom: 5px;
   color: #444444;
 }
+.decoration {
+    border-bottom: 10px solid #0077B6;
+    position: relative;
+}
 
+.decoration::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 120px 200px;
+    border-color: transparent transparent #0077B6 transparent;
+    pointer-events: none;
+}
+
+.decorations {
+    height: 10px;
+    width: 100%;
+    border-top: 10px solid #0077B6;
+    border-bottom: 120px solid transparent;
+    border-left: 200px solid #0077B6;
+    position: absolute;
+    z-index: 0;
+}
+
+.decorations::after {
+    content: "";
+    z-index: 0;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 200px 0px 0px 200px;
+    border-color: transparent transparent #0077B6 transparent;
+    pointer-events: none;
+}
 .header-nav .messages .message-item p {
   font-size: 13px;
   margin-bottom: 3px;

@@ -34,4 +34,8 @@ class Denouncement extends Model
 {
     return $this->belongsTo(Contact::class);
 }
+public function TypeDenouncement()
+{
+    return $this->belongsTo(Contact::class);
+}
 }

@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Denouncement;
+use App\Models\TypeDenouncements;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function UserDenunciation(){
-        return view('user.register');
+        $list = TypeDenouncements::all();
+        return view('user.register',compact('list'));
     }
     public function GetDenouncement($id){
         $denouncement = Denouncement::find($id);
@@ -30,7 +32,6 @@ if ($denouncement->final_evidence) {
     $finalImagePaths = array_map(fn($image) => asset('storage/' . $image), $final_evidence_images);
 }
 
-// Pasar las variables a la vista
 return view('user.denouncement', compact('denouncement', 'imagePaths', 'contact', 'finalImagePaths'));
 
     }

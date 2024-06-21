@@ -28,7 +28,7 @@
     <style>
     .sub:hover {
         color: #007bff;
-        background:rgba(0, 0, 0, .1) !important;
+        background: rgba(0, 0, 0, .1) !important;
     }
     </style>
 </head>
@@ -200,7 +200,7 @@
                     </ul><!-- End Messages Dropdown Items -->
 
                 </li><!-- End Messages Nav -->
-
+                @auth
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -244,7 +244,7 @@
 
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
-
+                @endauth
             </ul>
         </nav><!-- End Icons Navigation -->
 
@@ -263,8 +263,10 @@
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link bg-dark sub collapsed text-white" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text text-white"></i><span>Reportes</span><i class="bi bi-chevron-down ms-auto text-white"></i>
+                <a class="nav-link bg-dark sub collapsed text-white" data-bs-target="#forms-nav"
+                    data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text text-white"></i><span>Reportes</span><i
+                        class="bi bi-chevron-down ms-auto text-white"></i>
                 </a>
                 <ul id="forms-nav" class="nav-content collapse text-white" data-bs-parent="#sidebar-nav">
                     <li>
