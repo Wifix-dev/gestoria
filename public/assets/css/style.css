@@ -575,7 +575,9 @@ h6 {
     position: absolute;
     z-index: 0;
 }
-
+#top{
+    padding-right:0px !important;
+}
 .decorations::after {
     content: "";
     z-index: 0;

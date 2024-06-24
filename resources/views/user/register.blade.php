@@ -63,16 +63,70 @@
         scrollbar-color: #ccc #f1f1f1;
     }
 
+    nav {
+        position: relative;
+        width: 100%;
+    }
 
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        /* Sub Menu */
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        text: #000 !important;
+        -webkit-transition: 0.2s linear;
+        -moz-transition: 0.2s linear;
+        -ms-transition: 0.2s linear;
+        -o-transition: 0.2s linear;
+        transition: 0.2s linear;
+    }
+
+    nav ul li a .fa {
+        width: 16px;
+        text-align: center;
+        margin-right: 5px;
+        float: right;
+    }
+
+    nav ul ul {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul li ul li a {
+
+        border-left: 4px solid transparent;
+        padding: 10px 20px;
+    }
+
+    nav ul li:hover {
+        border: 1px solid #9ec5fe;
+        background: rgba(207, 226, 255, .7);
+        border-radius: 5px;
+    }
     </style>
-    <main>
-        <div class="container px-0">
-            <section class="section pb-md-3 px-3 pt-4">
-                <div class="row">
-                    <div class="col-lg-3">
 
+        <div class="container px-0 pt-4">
+            <section class="section pb-md-3 px-3">
+                <div class="row p-0">
+                    <div class="col-lg-3 p-lg-0 p-0 pb-4">
+                        <nav class='animated bounceInDown bg-white rounded-1 border text-dark p-2'>
+                            <ul>
+                                <li><a class=" fs-6" href='#profile'>Crear Denuncia</a></li>
+                                <li><a class=" fs-6" href='#message'>Mis Denuncias</a></li>
+                                <li><a class=" fs-6" href='#message'>Logout</a></li>
+                            </ul>
+                        </nav>
                     </div>
-                    <div class="col-lg-9 p-1">
+                    <div class="col-lg-9 p-0 ps-0 ps-lg-3">
                         <div class="card shadow-none border">
                             <div class="card-header bg-light"><span class="pagetitle fs-5 ">Peticion o
                                     Denuncia.</span></div>
@@ -119,8 +173,10 @@
 
                                     <div class="card-body p-3 p-lg-4 pt-3 ">
                                         <div class="row pt-1 pb-3 position-relative" style="z-index:0;">
-                                            <div class="col-6 col-md-4 px-0 "><img class="w-100" src="{{asset('storage/rsc/cnt.png')}}"></img></div>
-                                            <div class="col-6 col-md-8 d-flex justify-content-end"><span class="fw-light mt-md-3 fs-6">H. Matamoros Tamaulipas a
+                                            <div class="col-6 col-md-4 px-0 "><img class="w-100"
+                                                    src="{{asset('storage/rsc/cnt.png')}}"></img></div>
+                                            <div class="col-6 col-md-8 d-flex justify-content-end"><span
+                                                    class="fw-light mt-md-3 fs-6">H. Matamoros Tamaulipas a
                                                     <span id="fecha"></span></div>
                                         </div>
                                         <div class="row pt-1 pb-3 position-relative">
@@ -239,32 +295,9 @@
                 </div>
             </section>
         </div>
-    </main>
-    <div class="container px-0">
-        <section class="section pb-md-3 px-3 pt-4">
-            <div class="row ">
-                <div class="col-lg-5 pr-md-2 ">
-                    <div class="row p-0">
-
-                    </div>
-                    <div class="row">
-
-                    </div>
-
-                    <div class="row">
-
-                    </div>
-                </div>
-                <div class="col-lg-7 ps-xl-4 ">
-                    <div class="row p-0 ">
-
-                    </div>
-                </div>
-        </section>
-    </div>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade overflow-hidden h-100 position-fixed" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered h-100 position-relative">
             <div class="modal-content">
                 <div class="modal-header border-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

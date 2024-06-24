@@ -1,0 +1,58 @@
+RewriteEngine On
+
+# Redirigir tráfico de HTTP a HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Evitar que el archivo .htaccess sea visto desde el navegador
+<Files .htaccess>
+    Require all denied
+</Files>
+
+# Deshabilitar el listado de directorios
+Options -Indexes
+
+# Activar compresión gzip
+<IfModule mod_deflate.c>
+    # HTML, CSS, JavaScript, Texto, XML y JSON
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+    AddOutputFilterByType DEFLATE application/x-font
+    AddOutputFilterByType DEFLATE application/x-font-opentype
+    AddOutputFilterByType DEFLATE application/x-font-otf
+    AddOutputFilterByType DEFLATE application/x-font-truetype
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+
+    # Archivos comprimidos ya no necesitan ser comprimidos por el servidor
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+</IfModule>
+
+# Configuración de seguridad adicional (opcional)
+<IfModule mod_headers.c>
+    # Evitar ataques de inyección de contenido
+    Header set X-Content-Type-Options "nosniff"
+    # Impedir la ejecución de scripts en ciertas carpetas
+    <FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp)|~)$">
+        Require all denied
+    </FilesMatch>
+    # Desactivar el seguimiento de referencias cruzadas
+    Header always set X-Frame-Options "SAMEORIGIN"
+    # Activar protección contra ataques XSS
+    Header set X-XSS-Protection "1; mode=block"
+    # Habilite la política de seguridad de contenido e informe solo
+    # Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
+</IfModule>

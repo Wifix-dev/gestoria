@@ -18,9 +18,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
         rel="stylesheet">
 
-    <link href="{{asset('assets/user/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="public/assets/user/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="{{asset('assets/user/css/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="public/assets/user/css/bootstrap-icons.css" rel="stylesheet">
 
     <link href="{{asset('assets/user/css/templatemo-topic-listing.css')}}" rel="stylesheet">
 
@@ -33,7 +33,7 @@
     <link href="{{ asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="public/assets/css/style.css" rel="stylesheet">
 
     <!--
 
@@ -45,9 +45,13 @@ https://templatemo.com/tm-590-topic-listing
 </head>
 
 <body id="top">
-
+<style>
+    .men{
+        padding-right:0px !important;margin-right:0px !important;
+    }
+</style>
     <main>
-        <nav class="navbar navbar-light navbar-expand-lg border-0 sticky-top shadow-sm"
+        <nav class="men navbar navbar-light navbar-expand-lg border-0 sticky-top shadow-sm"
             style="background-color: #ffffff;">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
@@ -269,15 +273,12 @@ https://templatemo.com/tm-590-topic-listing
     </footer>
 
 
-    <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/quill/quill.js')}}"></script>
-    <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
-    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
+    <script src="public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="public/assets/vendor/quill/quill.js"></script>
+    <script src="public/assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="{{ asset('assets/js/main.js')}}"></script>
+    <script src="public/assets/user/js/main.js"></script>
 
 </body>
 
