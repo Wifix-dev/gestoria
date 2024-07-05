@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full bg-white">
+<html lang="en" class="h-full w-full bg-white fixed overflow-auto">
 
 <head>
     <meta charset="utf-8">
@@ -38,7 +38,7 @@
 -->
 </head>
 
-<body class="h-full">
+<body class="h-full overflow-auto overflow-x-hidden		 ">
     <style>
     .men {
         padding-right: 0px !important;
@@ -114,8 +114,9 @@
     </div>
 </nav>
 
-        <!-- component -->
+        <div class="relative">
         @yield('content')
+        </div>
 
     </div>
 
@@ -230,38 +231,7 @@
                     <span class="navbar-toggler-icon text-dark"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_1">Inicio</a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_2">Browse Topics</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_3">How it works</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_4">FAQs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_5">Contact</a>
-                        </li>
-                        <li class="nav-item dropdown ">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow shadow-none"
-                                aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
 
 
 
@@ -315,7 +285,6 @@
                 </div>
             </div>
         </nav>
-        @yield('content')
     </main>
 
     <footer class="site-footer section-padding">
@@ -403,6 +372,8 @@
 
     <script src="public/assets/js/main.js"></script>-->
     <script src="public/assets/vendor/quill/quill.js"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+
     </script>
 
 </body>
