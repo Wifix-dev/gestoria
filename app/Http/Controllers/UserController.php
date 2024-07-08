@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Denouncement;
 use App\Models\TypeDenouncements;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -15,25 +16,22 @@ class UserController extends Controller
     }
     public function GetDenouncement($id){
         $denouncement = Denouncement::find($id);
-if (!$denouncement) {
-    return redirect()->back()->with('error', 'Denuncia no encontrada.');
-}
+        if (!$denouncement) {
+            return redirect()->back()->with('error', 'Denuncia no encontrada.');
+        }
 
-$contact = Contact::find($denouncement->contact_id);
+        $contact = Contact::find($denouncement->contact_id);
 
-// Procesar la evidencia inicial
-$initial_evidence_images = $denouncement->initial_evidence ? json_decode($denouncement->initial_evidence, true) : [];
-$imagePaths = array_map(fn($image) => asset('storage/' . $image), $initial_evidence_images);
+        $initial_evidence_images = $denouncement->initial_evidence ? json_decode($denouncement->initial_evidence, true) : [];
+        $imagePaths = array_map(fn($image) => asset('public/' . $image), $initial_evidence_images);
 
-// Procesar la evidencia final
-$finalImagePaths = [];
-if ($denouncement->final_evidence) {
-    $final_evidence_images = json_decode($denouncement->final_evidence, true);
-    $finalImagePaths = array_map(fn($image) => asset('storage/' . $image), $final_evidence_images);
-}
+        $finalImagePaths = [];
+        if ($denouncement->final_evidence) {
+            $final_evidence_images = json_decode($denouncement->final_evidence, true);
+            $finalImagePaths = array_map(fn($image) => asset('public/' . $image), $final_evidence_images);
+        }
 
-return view('user.denouncement', compact('denouncement', 'imagePaths', 'contact', 'finalImagePaths'));
-
+        return view('user.denouncement', compact('denouncement', 'imagePaths', 'contact', 'finalImagePaths'));
     }
 
     public function FinalComments(Request $request){
@@ -45,23 +43,42 @@ return view('user.denouncement', compact('denouncement', 'imagePaths', 'contact'
     }
 
     public function SaveDenouncement(Request $request){
-        $request->validate([
+        $rules = [
             'case_name' => 'required|string',
             'description' => 'required|string',
             'id_type_denouncement' => 'required|integer',
             'initial_evidence' => 'required',
-            'initial_evidence.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'initial_evidence.*' => 'image|mimes:jpeg,png,jpg|max:2048',
             'address'=>'required|string',
             'phone'=>'required|numeric',
             'contact_schedule'=>'required|string'
-        ]);
+        ];
+
+        $messages = [
+            'case_name.required' => 'El campo Asunto es obligatorio.',
+            'case_name.string' => 'El campo Asunto debe ser texto.',
+            'description.required' => 'Es necesario que nos detalle su caso.',
+            'id_type_denouncement.required' => 'Es necesario seleccionar el tipo de petición o denuncia.',
+            'id_type_denouncement.integer' => 'El tipo de petición o denuncia debe ser un número entero.',
+            'initial_evidence.required' => 'Es necesario subir evidencia del caso.',
+            'initial_evidence.*.image' => 'Cada elemento de la evidencia debe ser una imagen válida.',
+            'initial_evidence.*.mimes' => 'El formato de la imagen debe ser jpeg, png, jpg.',
+            'initial_evidence.*.max' => 'El tamaño máximo permitido para cada imagen es 2MB.',
+            'address.required' => 'Es necesaria su dirección en caso de no poder contactarlo.',
+            'phone.required' => 'Es necesario un número telefónico para poder mantener contacto.',
+            'phone.numeric' => 'El campo de número telefónico solo debe contener números.',
+            'contact_schedule.required' => 'Es necesario especificar un horario de contacto para no ser inoportunos.',
+        ];
+
+        $this->validate($request, $rules, $messages);
 
         $imagenes = [];
 
         if ($request->hasFile('initial_evidence')) {
             foreach ($request->file('initial_evidence') as $file) {
-                $path = $file->store('imagenes/'.Auth::user()->folder_name , 'public');
-                $imagenes[] = $path;
+                $fileName = Str::random(20) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('imagenes/' . Auth::user()->folder_name), $fileName);
+                $imagenes[] = 'imagenes/' . Auth::user()->folder_name . '/' . $fileName;
             }
         }
 

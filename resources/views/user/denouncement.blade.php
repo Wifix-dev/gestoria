@@ -4,6 +4,152 @@
 
 @section('content')
 
+<div class="h-48 lg:h-56  relative overflow-hidden bg-indigo-950 z-0  ">
+    <x-fondo class="max-w-full "></x-fondo>
+</div>
+<div class="w-full max-w-6xl mt-24 absolute  mx-auto z-0 inset-x-0 top-0 pb-12">
+    <div class="flex items-center pb-6 overflow-x-auto whitespace-nowrap px-5 pt-2 lg:pt-6 lg:px-0 ">
+        <a href="#" class="text-white ">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+            </svg>
+        </a>
+
+        <span class="mx-5 text-white ">
+            /
+        </span>
+
+        <a href="#" class="text-white ">
+            Denuncia o Peticion
+        </a>
+
+        <span class="mx-5 text-white ">
+            /
+        </span>
+        <a href="#" class=" text-blue-400 ">
+            Crear
+        </a>
+    </div>
+    <div class="mx-2 lg:mx-0 bg-white p-6 lg:p-12 rounded shadow">
+        <div class="relative">
+            <div class="flex flex-col space-y-3 lg:space-y-0 lg:grid lg:gap-4 lg:grid-cols-3">
+                <!-- component -->
+                <!-- Created By Joker Banny -->
+                <div class="flex items-center justify-center bg-white px-6     relative">
+                    <div class="space-y-5 border-l-2 border-dashed sticky top-0">
+                        <div class="relative w-full">
+                            <p class="ml-6 text-base font-semibold">En espera a revision</p>
+                            @switch($denouncement->status)
+                            @case('En espera')
+                            <div class="relative w-full">
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-500">
+                                    <i class="bi bi-hourglass-split"></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-gray-500">Pendiente</h4>
+                                </div>
+                            </div>
+                            @break
+                            @case('Revisada')
+                            @default
+                            <div class="relative w-full">
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-blue-500">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-blue-500">Revisada</h4>
+                                </div>
+                            </div>
+                            @endswitch
+                        </div>
+                        <div class="relative w-full">
+
+                        </div>
+                        <div class="relative w-full">
+                            <p class="ml-6 text-base font-semibold">Recepcion de solicitud</p>
+                            @switch($denouncement->status)
+                            @case('Revisada')
+                            <div class="relative w-full">
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-500">
+                                    <i class="bi bi-hourglass-split"></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-gray-500">En espera</h4>
+                                </div>
+                            </div>
+                            @break
+                            @case('Aceptada')
+                            @case('En proceso')
+                            @case('Terminada')
+                            @case('Pendiente a comentarios')
+                            @case('Cerrada')
+                            <div class="relative w-full">
+
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-blue-500">
+                                    <i class="bi bi-patch-check-fill "></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-blue-500">Aceptada</h4>
+                                </div>
+                            </div>
+                            @break
+                            @case('Rechazada')
+                            <div class="relative w-full">
+
+                                <span class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-red-500">
+                                    <i class="bi bi-clipboard-x"></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-red-500">Rechazada</h4>
+                                </div>
+                            </div>
+                            @break
+                            @default
+                            <div class="relative w-full">
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-500">
+                                    <i class="bi bi-square"></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-gray-500">Pendiente</h4>
+                                </div>
+                            </div>
+                            @endswitch
+                        </div>
+                        <div class="relative w-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
+                                <path fill-rule="evenodd"
+                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <div class="ml-6">
+                                <h4 class="font-bold text-blue-500">Lead Ui/Ux Designer.</h4>
+                            </div>
+                        </div>
+                        <div class="relative w-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
+                                <path fill-rule="evenodd"
+                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <div class="ml-6">
+                                <h4 class="font-bold text-blue-500">Lead Ui/Ux Designer.</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
 .ql-toolbar {
     background: #f8f9fa;
@@ -57,48 +203,53 @@
 }
 
 nav {
-	position: relative;
-	width: 100%;
+    position: relative;
+    width: 100%;
 }
+
 nav ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
+
 nav ul li {
-  /* Sub Menu */
+    /* Sub Menu */
 }
+
 nav ul li a {
-	display: block;
-	padding: 10px 15px;
-	text-decoration: none;
-    text:#000 !important;
-	-webkit-transition: 0.2s linear;
-	-moz-transition: 0.2s linear;
-	-ms-transition: 0.2s linear;
-	-o-transition: 0.2s linear;
-	transition: 0.2s linear;
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    text: #000 !important;
+    -webkit-transition: 0.2s linear;
+    -moz-transition: 0.2s linear;
+    -ms-transition: 0.2s linear;
+    -o-transition: 0.2s linear;
+    transition: 0.2s linear;
 }
 
 nav ul li a .fa {
-	width: 16px;
-	text-align: center;
-	margin-right: 5px;
-	float:right;
+    width: 16px;
+    text-align: center;
+    margin-right: 5px;
+    float: right;
 }
+
 nav ul ul {
-	background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
 }
+
 nav ul li ul li a {
 
-	border-left: 4px solid transparent;
-	padding: 10px 20px;
+    border-left: 4px solid transparent;
+    padding: 10px 20px;
 }
 
 nav ul li:hover {
-    border:1px solid #9ec5fe;
-    background:rgba(207, 226, 255,.7);
-    border-radius:5px;
+    border: 1px solid #9ec5fe;
+    background: rgba(207, 226, 255, .7);
+    border-radius: 5px;
 }
 </style>
 
@@ -146,15 +297,6 @@ nav ul li:hover {
 <div class="container px-0 ">
     <section class="section pb-md-3 px-3">
         <div class="row p-0">
-            <div class="col-lg-3 p-lg-0 p-0 pb-4">
-                <nav class='animated bounceInDown bg-white rounded-1 border text-dark p-2'>
-                    <ul>
-                        <li><a class=" fs-6" href='#profile'>Crear Denuncia</a></li>
-                        <li><a class=" fs-6"  href='#message'>Mis Denuncias</a></li>
-                        <li><a class=" fs-6"  href='#message'>Logout</a></li>
-                    </ul>
-                </nav>
-            </div>
             <div class="col-lg-9 p-0 ps-0 ps-lg-3">
                 @if($denouncement->status=="Terminada" || $denouncement->status=="Cerrada")
                 <div class="card shadow-none border p-0 rounded ">
@@ -235,19 +377,7 @@ nav ul li:hover {
                                                     </div>
                                                 </div>
                                                 <span class="text-muted">
-                                                    @switch($denouncement->status)
-                                                    @case('En espera')
-                                                    <span class="text-secondary"><i
-                                                            class="bi bi-hourglass-split me-1"></i>
-                                                        En espera</span>
-                                                    @break
 
-                                                    @case('Revisada')
-                                                    @default
-                                                    <span class="text-success"><i
-                                                            class="bi bi-patch-check-fill me-1"></i>
-                                                        Revisada</span>
-                                                    @endswitch
                                                 </span>
 
                                             </li>
@@ -257,32 +387,7 @@ nav ul li:hover {
                                                     <div class="fw-light text-secondary">Recepcion de solicitud</div>
                                                 </div>
                                                 <span class="text-muted">
-                                                    @switch($denouncement->status)
-                                                    @case('Revisada')
-                                                    <span class="text-secondary"><i
-                                                            class="bi bi-hourglass-split me-1"></i>
-                                                        En espera</span>
-                                                    @break
 
-                                                    @case('Aceptada')
-                                                    @case('En proceso')
-                                                    @case('Terminada')
-                                                    @case('Pendiente a comentarios')
-                                                    @case('Cerrada')
-                                                    <span class="text-success"><i
-                                                            class="bi bi-patch-check-fill me-2"></i>
-                                                        Aceptada</span>
-                                                    @break
-
-                                                    @case('Rechazada')
-                                                    <span class="text-danger"><i class="bi bi-clipboard-x me-2"></i>
-                                                        Rechazada</span>
-                                                    @break
-
-                                                    @default
-                                                    <span class="text-secondary"><i class="bi bi-square me-2"></i>
-                                                        Pendiente</span>
-                                                    @endswitch
                                                 </span>
 
                                             </li>
@@ -389,11 +494,12 @@ nav ul li:hover {
                                     @if(!empty($imagePaths))
                                     @foreach($imagePaths as $image)
                                     <div class="m-0 pe-3 mt-sm-3 mt-md-0 position-relative" style="margin-right: 10px;">
-                                        <a href="{{ $image }}" download class="btn btn-dark m-2 position-absolute"><i
-                                                class="bi bi-download"></i> </a>
-                                        <img src="{{ $image }}" alt="Evidencia Inicial" style="height: 200px;"
+                                        <a href="{{ asset($image)}}" download
+                                            class="btn btn-dark m-2 position-absolute"><i class="bi bi-download"></i>
+                                        </a>
+                                        <img src="{{ asset($image)}}" alt="Evidencia Inicial" style="height: 200px;"
                                             class="rounded-3 " data-bs-toggle="modal" data-bs-target="#imageModal"
-                                            onclick="showImageModal('{{ $image }}')">
+                                            onclick="showImageModal('{{ asset($image)}}')">
                                     </div>
                                     @endforeach
                                     @else
@@ -486,9 +592,9 @@ function showImageModal(imageSrc) {
     document.getElementById('down').href = imageSrc;
 }
 $('.sub-menu ul').hide();
-$(".sub-menu a").click(function () {
-	$(this).parent(".sub-menu").children("ul").slideToggle("100");
-	$(this).find(".right").toggleClass("fa-caret-up fa-caret-down");
+$(".sub-menu a").click(function() {
+    $(this).parent(".sub-menu").children("ul").slideToggle("100");
+    $(this).find(".right").toggleClass("fa-caret-up fa-caret-down");
 });
 document.addEventListener('DOMContentLoaded', function() {
     var quill = new Quill('#quill-editor', {

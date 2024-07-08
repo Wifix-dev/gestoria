@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class RegisteredUserController extends Controller
 {
@@ -42,8 +43,11 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        $folder_name=Str::random(10);
-        Storage::disk('public')->makeDirectory('imagenes/'.$folder_name);
+        $folder_name = Str::random(10);
+        $path = public_path('imagenes/' . $folder_name);
+        if (!File::exists($path)) {
+            File::makeDirectory($path, 0755, true);
+        }
         $user = User::create([
             'name' => $request->name,
             'last_name' => $request->last_name,

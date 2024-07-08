@@ -18,9 +18,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="public/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="public/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="{{asset('public/assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+    <link href="{{asset('public/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="{{asset('public/assets/user/css/bootstrap-icons.css')}}" rel="stylesheet">
 
     <!--
     <link href="public/build/assets/app-CCo-TTxN.css" rel="stylesheet">
@@ -38,7 +39,7 @@
 -->
 </head>
 
-<body class="h-full overflow-auto overflow-x-hidden		 ">
+<body class="h-full overflow-auto overflow-x-hidden	bg-gray-50 ">
     <style>
     .men {
         padding-right: 0px !important;
@@ -47,11 +48,11 @@
     </style>
 
     <div class="w-full">
-    <nav class="  bg-white shadow px-4 py-3 sticky top-0 z-20">
+    <nav class="w-full  bg-white shadow px-4 py-3 absolute top-0 z-20">
     <div class="container flex items-center justify-between flex-wrap mx-auto">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
-            <img src="public/assets/img/SOS2.png" alt="App screenshot" width="54" height="54"
-                class="fill-current h-12 w-12 mr-2">
+        <img src="{{ asset('public/assets/img/SOS2.png') }}" alt="App screenshot" width="54" height="54"
+        class="fill-current h-12 w-12 mr-2">
             <span class="font-bold text-3xl tracking-tight text-blue-950 ">S.0.S</span>
         </div>
         <div class="block lg:hidden">
@@ -112,9 +113,9 @@
             </div>
         </div>
     </div>
-</nav>
+    </nav>
 
-        <div class="relative">
+        <div class="relative ">
         @yield('content')
         </div>
 
@@ -371,7 +372,7 @@
 
 
     <script src="public/assets/js/main.js"></script>-->
-    <script src="public/assets/vendor/quill/quill.js"></script>
+    <script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
 
     </script>
