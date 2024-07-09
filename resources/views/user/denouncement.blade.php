@@ -4,6 +4,7 @@
 
 @section('content')
 
+
 <div class="h-48 lg:h-56  relative overflow-hidden bg-indigo-950 z-0  ">
     <x-fondo class="max-w-full "></x-fondo>
 </div>
@@ -16,39 +17,46 @@
             </svg>
         </a>
 
-        <span class="mx-5 text-white ">
+        <span class="mx-3 text-white ">
             /
         </span>
 
         <a href="#" class="text-white ">
             Denuncia o Peticion
         </a>
-
-        <span class="mx-5 text-white ">
+        <span class="mx-3 text-white ">
+            /
+        </span>
+        <a href="#" class="text-white ">
+            Detalles
+        </a>
+        <span class="mx-3 text-white ">
             /
         </span>
         <a href="#" class=" text-blue-400 ">
-            Crear
+            {{$denouncement->id}}
         </a>
     </div>
     <div class="mx-2 lg:mx-0 bg-white p-6 lg:p-12 rounded shadow">
         <div class="relative">
             <div class="flex flex-col space-y-3 lg:space-y-0 lg:grid lg:gap-4 lg:grid-cols-3">
-                <!-- component -->
-                <!-- Created By Joker Banny -->
-                <div class="flex items-center justify-center bg-white px-6     relative">
-                    <div class="space-y-5 border-l-2 border-dashed sticky top-0">
-                        <div class="relative w-full">
-                            <p class="ml-6 text-base font-semibold">En espera a revision</p>
+                <!-- Status Report -->
+                <div class="font-bold bg-white px-6  ">
+                    <div class="space-y-5 border-l-2 border-dashed sticky top-24">
+                        <div class="-ml-3.5">
+                            <h4 class="text-xl text-gray-900 font-bold">Estado de la Denuncia</h4>
+                        </div>
+                        <div class="relative w-full pt-0 mt-0">
+                            <p class="ml-6 text-base font-semibold  mt-0">En espera a revision</p>
                             @switch($denouncement->status)
                             @case('En espera')
                             <div class="relative w-full">
                                 <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-500">
-                                    <i class="bi bi-hourglass-split"></i>
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-400 animate-rotate-x-infinite ">
+                                    <i class="bi bi-hourglass "></i>
                                 </span>
                                 <div class="ml-6">
-                                    <h4 class="text-md text-gray-500">Pendiente</h4>
+                                    <h4 class="text-md text-gray-400">Pendiente</h4>
                                 </div>
                             </div>
                             @break
@@ -66,17 +74,15 @@
                             @endswitch
                         </div>
                         <div class="relative w-full">
-
-                        </div>
-                        <div class="relative w-full">
                             <p class="ml-6 text-base font-semibold">Recepcion de solicitud</p>
                             @switch($denouncement->status)
                             @case('Revisada')
                             <div class="relative w-full">
                                 <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-500">
-                                    <i class="bi bi-hourglass-split"></i>
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-500 animate-rotate-x-infinite">
+                                    <i class="bi bi-hourglass"></i>
                                 </span>
+
                                 <div class="ml-6">
                                     <h4 class="text-md text-gray-500">En espera</h4>
                                 </div>
@@ -88,7 +94,6 @@
                             @case('Pendiente a comentarios')
                             @case('Cerrada')
                             <div class="relative w-full">
-
                                 <span
                                     class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-blue-500">
                                     <i class="bi bi-patch-check-fill "></i>
@@ -100,9 +105,9 @@
                             @break
                             @case('Rechazada')
                             <div class="relative w-full">
-
-                                <span class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-red-500">
-                                    <i class="bi bi-clipboard-x"></i>
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-red-500 animate-bounce ">
+                                    <i class="bi bi-clipboard-x-fill"></i>
                                 </span>
                                 <div class="ml-6">
                                     <h4 class="text-md text-red-500">Rechazada</h4>
@@ -112,497 +117,496 @@
                             @default
                             <div class="relative w-full">
                                 <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-500">
-                                    <i class="bi bi-square"></i>
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-400">
+                                    <i class="bi bi-stopwatch-fill"></i>
                                 </span>
                                 <div class="ml-6">
-                                    <h4 class="text-md text-gray-500">Pendiente</h4>
+                                    <h4 class="text-md text-gray-400">Pendiente</h4>
                                 </div>
                             </div>
                             @endswitch
                         </div>
                         <div class="relative w-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
-                                <path fill-rule="evenodd"
-                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <div class="ml-6">
-                                <h4 class="font-bold text-blue-500">Lead Ui/Ux Designer.</h4>
+                            <p class="ml-6 text-base font-semibold">Solucion</p>
+                            @switch($denouncement->status)
+                            @case('Terminada')
+                            @case('Pendiente a comentarios')
+                            @case('Cerrada')
+                            <div class="relative w-full">
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-blue-500">
+                                    <i class="bi bi-patch-check-fill "></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-blue-500">Terminada</h4>
+                                </div>
+                            </div>
+                            @break
+
+                            @case('En proceso')
+                            <div class="relative w-full">
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-blue-400  animate-bounce ">
+                                    <i class="bi bi-gear-fill animate-bounce  "></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-blue-400">En proceso</h4>
+                                </div>
+                            </div>
+                            @break
+                            @case('Rechazada')
+                            <div class="relative w-full">
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-red-500  ">
+                                    <i class="bi bi-clipboard-x-fill"></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-red-500">Rechazada</h4>
+                                </div>
+                            </div>
+                            @break
+
+                            @default
+                            <div class="relative w-full">
+                                <span
+                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-400">
+                                    <i class="bi bi-stopwatch-fill"></i>
+                                </span>
+                                <div class="ml-6">
+                                    <h4 class="text-md text-gray-400">Pendiente</h4>
+                                </div>
+                            </div>
+                            @endswitch
+                        </div>
+                    </div>
+                </div>
+                <!-- Status Report -->
+                <div class="min-h-24 w-full col-span-2 rounded  lg:mt-0">
+                    <section>
+                        @if ($denouncement->status == "Rechazada")
+                        <div
+                            class="lg:mt-0 mt-3 hover:red-yellow-500 w-full mb-2 select-none border-l-4 border-red-400 bg-red-100 p-3 font-medium">
+                            Su solicitud ha sido rechazada verifique los comentarios.</div>
+                        @elseif($denouncement->status == "Terminada")
+                        <div
+                            class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-orange-400 bg-orange-100 p-4 font-medium hover:border-orange-500">
+                            Pendiente a comentarios finales y agradecimientos adicionales.</div>
+                        @elseif($denouncement->status == "Cerrada")
+                        <div
+                            class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-blue-400 bg-blue-100 p-4 font-medium hover:border-blue-500">
+                            Su peticion ha sido cumplida.</div>
+                        @elseif(session('success'))
+                        <div
+                            class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-indigo-400 bg-indigo-100 p-4 font-medium hover:border-indigo-500">
+                            {{ session('success') }}</div>
+                        @endif
+                    </section>
+
+                    @if ($denouncement->status == "Rechazada")
+                    <div class="mt-4">
+                        <x-label for="final_comments" class="block text-sm font-medium text-gray-700"
+                            :value="__('Razones de rechazo')" />
+                        <textarea type="text"
+                            class="mt-1 p-2 w-full border rounded-md text-sm text-gray-700 capitalize  "
+                            id="final_comments" name="final_comments" style="height:150px;"
+                            disabled>{{$denouncement->final_comments}}</textarea>
+                    </div>
+                    @endif
+
+                    @if($denouncement->status=="Terminada" || $denouncement->status=="Cerrada")
+                    <form id="upload-form" class="" method="POST" action="{{ route('user.closecase') }}">
+                        @csrf
+                        <div class="row g-3">
+                            <input class="form-control" type="text" value="{{$denouncement->id}}" name="id" hidden>
+                            <div class="col-md-12 ">
+                                @if($denouncement->status=="Cerrada" && $denouncement->final_comments!="")
+                                <x-label for="final_comments" class="block text-sm font-medium text-gray-700"
+                                    :value="__('Comentarios Finales')" />
+                                <textarea type="text"
+                                    class="mt-1 p-2 w-full border rounded-md disabled text-sm text-gray-700"
+                                    id="final_comments" name="final_comments" style="height:150px;"
+                                    disabled>{{$denouncement->final_comments}}</textarea>
+                                @else
+                                <x-label for="final_comments" class="block text-sm font-medium text-gray-700"
+                                    :value="__('Comentarios o Agradecimientos')" />
+                                <textarea type="text"
+                                    class="mt-1 p-2 w-full border rounded-md text-sm font-light text-gray-700"
+                                    id="final_comments" name="final_comments" style="height:150px;"></textarea>
+                                @endif
+                            </div>
+                            @if($denouncement->status!="Cerrada")
+
+                            <div class=" flex justify-end">
+                                <button type="submit"
+                                    class=" bg-slate-950 text-white rounded border-0 py-2 px-5 hover:bg-slate-800"
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enviar</button>
+                            </div>
+                            @endif
+                        </div>
+                    </form>
+                    @endif
+
+                    <div class="flex flex-col space-y-5">
+                        <div>
+                            <x-label for="case_name" class="block text-sm font-medium text-gray-700"
+                                :value="__('Asunto')" />
+                            <input id="case_name" class="mt-1 p-2 w-full border rounded-md disabled text-gray-500"
+                                aria-label="Default select example " name="case_name"
+                                value="{{$denouncement->case_name}}" disabled></input>
+                        </div>
+                        <div>
+                            <x-label for="id_type_denouncement" class="block text-sm font-medium text-gray-700 bg-white"
+                                :value="__('Tipo de peticion')" />
+                            <div class="relative">
+                                <select id="id_type_denouncement" name="id_type_denouncement"
+                                    class="mt-1 p-2 w-full border rounded-md appearance-none disabled"
+                                    aria-label="Default select example" disabled>
+                                    <option value="">Selecciona una opción</option>
+                                    @foreach($list as $option)
+                                    <option value="{{ $option->id }}"
+                                        {{ old('id_type_denouncement', $denouncement->id_type_denouncement) == $option->id ? 'selected' : '' }}>
+                                        {{ $option->type_service }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                <svg class="pointer-events-none absolute right-3 top-0 h-full w-6 text-gray-400 mt-1"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                        clip-rule="evenodd" />
+                                </svg>
                             </div>
                         </div>
-                        <div class="relative w-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
-                                <path fill-rule="evenodd"
-                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <div class="ml-6">
-                                <h4 class="font-bold text-blue-500">Lead Ui/Ux Designer.</h4>
+                        <div>
+                            <x-label for="quill-editor" class="block text-sm font-medium text-gray-700 mb-1"
+                                :value="__('Contenido de la peticion')" />
+                            <div id="quill-editor"
+                                class="quill-editor-default p-2 w-full border rounded-b-md border-slate-300 "
+                                style="height: 250px; background-color:#fff; "></div>
+                        </div>
+                        <div class="grid grid-col-1 lg:grid-cols-2 gap-3">
+                            <div class="lg:col-span-2">
+                                <x-label for="address" class="block text-sm font-medium text-gray-700"
+                                    :value="__('Direccion')" />
+                                <input id="address" class="mt-1 p-2 w-full border rounded-md text-gray-500"
+                                    aria-label="Default select example " name="address"
+                                    value="{{$contact->address}}"></input>
+                            </div>
+                            <div>
+                                <x-label for="phone" class="block text-sm font-medium text-gray-700"
+                                    :value="__('Telefono')" />
+                                <input id="phone" class="mt-1 p-2 w-full border rounded-md text-gray-500 "
+                                    aria-label="Default select example " name="phone"
+                                    value="{{$contact->phone}}"></input>
+                            </div>
+                            <div>
+                                <x-label for="contact_schedule" class="block text-sm font-medium text-gray-700"
+                                    :value="__('Horario de contacto')" />
+                                <input id="contact_schedule" class="mt-1 p-2 w-full border rounded-md text-gray-500 "
+                                    aria-label="Default select example " name="contact_schedule"
+                                    value="{{$contact->contact_schedule}}"></input>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- component -->
+<div
+  class="relative flex h-64 w-96 cursor-pointer flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 shadow-md transition-opacity hover:opacity-90"
+  data-dialog-target="image-dialog"
+>
+  <img
+    alt="nature"
+    class="h-full w-full object-cover object-center"
+    src="https://images.unsplash.com/photo-1485470733090-0aae1788d5af?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2717&amp;q=80"
+  />
+</div>
+<div
+  data-dialog-backdrop="image-dialog"
+  data-dialog-backdrop-close="true"
+  class="pointer-events-none fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black bg-opacity-60 opacity-0 backdrop-blur-sm transition-opacity duration-300"
+>
+  <div
+    class="relative m-4 w-3/4 min-w-[75%] max-w-[75%] rounded-lg bg-white font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased shadow-2xl"
+    role="dialog"
+    data-dialog="image-dialog"
+  >
+    <div class="flex shrink-0 items-center justify-between p-4 font-sans text-2xl font-semibold leading-snug text-blue-gray-900 antialiased">
+      <div class="flex items-center gap-3">
+        <img
+          alt="tania andrew"
+          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+          class="relative inline-block h-9 w-9 rounded-full object-cover object-center"
+        />
+        <div class="-mt-px flex flex-col">
+          <p class="block font-sans text-sm font-medium leading-normal text-blue-gray-900 antialiased">
+            Tania Andrew
+          </p>
+          <p class="block font-sans text-xs font-normal text-gray-700 antialiased">
+            @canwu
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-blue-gray-500 transition-all hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button"
+          data-ripple-dark="true"
+        >
+          <span class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              class="h-5 w-5"
+            >
+              <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
+            </svg>
+          </span>
+        </button>
+        <button
+          class="select-none rounded-lg bg-green-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button"
+          data-ripple-light="true"
+        >
+          Free Download
+        </button>
+      </div>
+    </div>
+    <div class="relative border-t border-b border-t-blue-gray-100 border-b-blue-gray-100 p-0 font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased">
+      <img
+        alt="nature"
+        class="h-[48rem] w-full object-cover object-center"
+        src="https://images.unsplash.com/photo-1485470733090-0aae1788d5af?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2717&amp;q=80"
+      />
+    </div>
+    <div class="flex shrink-0 flex-wrap items-center justify-between p-4 text-blue-gray-500">
+      <div class="flex items-center gap-16">
+        <div>
+          <p class="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased">
+            Views
+          </p>
+          <p class="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
+            44,082,044
+          </p>
+        </div>
+        <div>
+          <p class="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased">
+            Downloads
+          </p>
+          <p class="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
+            553,031
+          </p>
+        </div>
+      </div>
+      <button
+        class="flex select-none items-center gap-3 rounded-lg border border-blue-gray-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-500 transition-all hover:opacity-75 focus:ring focus:ring-blue-gray-200 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        type="button"
+        data-ripple-dark="true"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+          class="h-4 w-4"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        Share
+      </button>
+    </div>
+  </div>
+</div>
+<div class="w-full pt-5 px-4 mb-8 mx-auto ">
+    <div class="text-sm text-gray-700 py-1">
+        Made with <a class="text-gray-700 font-semibold" href="https://www.material-tailwind.com/docs/html/dialog?ref=tailwindcomponents" target="_blank">Material Tailwind</a> by <a href="https://www.creative-tim.com?ref=tailwindcomponents" class="text-gray-700 font-semibold" target="_blank"> Creative Tim</a>.
+    </div>
+</div>
+
+<!-- from cdn -->
+<script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dialog.js"></script>
+
+<!-- stylesheet -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
+/>
+
+                    <div data-dialog-backdrop="image-dialog" data-dialog-backdrop-close="true"
+                        class="pointer-events-none fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black bg-opacity-60 opacity-0 backdrop-blur-sm transition-opacity duration-300">
+                        <div class="relative m-4 w-3/4 min-w-[75%] max-w-[75%] rounded-lg bg-white font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased shadow-2xl"
+                            role="dialog" data-dialog="image-dialog">
+                            <div
+                                class="flex shrink-0 items-center justify-between p-4 font-sans text-2xl font-semibold leading-snug text-blue-gray-900 antialiased">
+                                <div class="flex items-center gap-3">
+                                    <img alt="tania andrew"
+                                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+                                        class="relative inline-block h-9 w-9 rounded-full object-cover object-center" />
+                                    <div class="-mt-px flex flex-col">
+                                        <p
+                                            class="block font-sans text-sm font-medium leading-normal text-blue-gray-900 antialiased">
+                                            Tania Andrew
+                                        </p>
+                                        <p class="block font-sans text-xs font-normal text-gray-700 antialiased">
+                                            @canwu
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button
+                                        class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-blue-gray-500 transition-all hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                        type="button" data-ripple-dark="true">
+                                        <span
+                                            class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor" aria-hidden="true" class="h-5 w-5">
+                                                <path
+                                                    d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                    <button
+                                        class="select-none rounded-lg bg-green-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                        type="button" data-ripple-light="true">
+                                        Free Download
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                class="relative border-t border-b border-t-blue-gray-100 border-b-blue-gray-100 p-0 font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased">
+                                <img id="ImageModal" alt="nature" class="h-[32rem] w-auto mx-auto object-cover object-center" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-auto  w-full mt-6 p-3 bg-gray-50 ">
+                        @if(!empty($imagePaths))
+                        @foreach($imagePaths as $image)
+                        <div class="h-24 w-44 relative group" data-dialog-target="image-dialog">
+                            <img src="{{ asset($image)}}" alt="Evidencia Inicial"
+                                class="w-full h-full object-cover rounded-md relative z-0" data-bs-toggle="modal"
+                                data-bs-target="#imageModal" onclick="showImageModal('{{ asset($image)}}')">
+                        </div>
+                        <diV class="h-24 w-44 relative group " style="margin-right: 10px;">
+                            <div
+                                class="w-full hidden group-hover:block h-full bg-transparent rounded-md transition ease-in delay-150 hover:bg-slate-950 z-10 hover:bg-opacity-50 absolute ">
+                                <a href="{{ asset($image) }}" download
+                                    class="transition ease-in delay-300 px-2 py-1 text-white bg-black m-2 rounded absolute opacity-0 group-hover:opacity-100">
+                                    <i class="bi bi-download"></i>
+                                </a>
+                            </div>
+                            <img src="{{ asset($image)}}" alt="Evidencia Inicial"
+                                class="w-full h-full object-cover rounded-md relative z-0" data-bs-toggle="modal"
+                                data-bs-target="#imageModal" onclick="showImageModal('{{ asset($image)}}')">
+                        </div>
+                        @endforeach
+                        @else
+                        <p>No hay evidencia inicial.</p>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+<div class="card-body p-3 pt-0">
+    <div id="preview" class="d-flex flex-row overflow-auto m-0 rounded">
 
+    </div>
+</div>
 <style>
-.ql-toolbar {
-    background: #f8f9fa;
-    border: 1px solid rgba(0, 0, 0, .125) !important;
-    border-bottom: 0px !important;
-    border-radius: .25rem .25rem 0 0;
+@keyframes rotate-x {
+    0% {
+        transform: rotateX(0deg);
+    }
+
+    50% {
+        transform: rotateX(180deg);
+    }
+
+    100% {
+        transform: rotateX(360deg);
+    }
 }
 
-.ql-editor {
-    font-size: 16px !important;
+.animate-rotate-x-infinite {
+    animation-name: rotate-x;
+    animation-iteration-count: infinite;
+    animation-duration: 4000ms;
 }
 
-#preview {
-    border-radius: 10px;
-    scrollbar-width: thin;
-    scrollbar-color: #ccc #f1f1f1;
+.ql-toolbar.ql-snow {
+    border-radius: 0.375rem 0.375rem 0 0 !important;
+    border-width: 1px !important;
+    box-sizing: border-box !important;
+    border-style: solid !important;
+    border-color: #e5e7eb !important;
 }
 
-#preview {
-    overflow-x: auto;
-    white-space: nowrap;
-}
+#quill-editor {
+    border-radius: 0 0 0.375rem 0.375rem !important;
 
-#preview::-webkit-scrollbar {
-    height: 12px;
-}
-
-#preview::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 10px;
-}
-
-#preview::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #f1f1f1;
-}
-
-#preview {
-    border-radius: 10px;
-    scrollbar-width: thin;
-    scrollbar-color: #ccc #f1f1f1;
-}
-
-#parallelogram {
-    width: 150px;
-    height: 100px;
-    -webkit-transform: skew(20deg);
-    -moz-transform: skew(20deg);
-    -o-transform: skew(20deg);
-    background: red;
-}
-
-nav {
-    position: relative;
-    width: 100%;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    /* Sub Menu */
-}
-
-nav ul li a {
-    display: block;
-    padding: 10px 15px;
-    text-decoration: none;
-    text: #000 !important;
-    -webkit-transition: 0.2s linear;
-    -moz-transition: 0.2s linear;
-    -ms-transition: 0.2s linear;
-    -o-transition: 0.2s linear;
-    transition: 0.2s linear;
-}
-
-nav ul li a .fa {
-    width: 16px;
-    text-align: center;
-    margin-right: 5px;
-    float: right;
-}
-
-nav ul ul {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-nav ul li ul li a {
-
-    border-left: 4px solid transparent;
-    padding: 10px 20px;
-}
-
-nav ul li:hover {
-    border: 1px solid #9ec5fe;
-    background: rgba(207, 226, 255, .7);
-    border-radius: 5px;
+    border-width: 1px !important;
+    box-sizing: border-box !important;
+    border-style: solid !important;
+    border-top: 0 !important;
+    border-color: #e5e7eb !important;
 }
 </style>
 
-<header class="site-header d-flex flex-column justify-content-center align-items-center">
-    <div class="container">
-        <div class=" d-flex justify-content-between">
-            <div class="">
-                <nav aria-label="breadcrumb" class="-mb-2 bg-transparent">
-                    <ol class="breadcrumb p-0">
-                        <li class="breadcrumb-item "><a class="text-dark" href="#">Inicio</a></li>
-                        <li class="breadcrumb-item " aria-current="page"><a class="text-dark" href="#">Denuncia</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">{{ $denouncement->id }}</li>
-                    </ol>
-                </nav>
-                <h2 class="text-white ">Detalle de la solicitud</h2>
-            </div>
+
+
+@if($denouncement->status == "Terminada" || $denouncement->status == "Cerrada")
+<div class="card shadow-none border p-0">
+    <div class="card-header pb-1 pt-3 bg-light ">
+        <div class="pagetitle ">
+            <h3 class="fs-6 fw-normal">Evidencia Final</h3>
         </div>
     </div>
-</header>
-<div class="container px-0 px-lg-0 pb-0 ">
-    <section class="section pb-0 px-3 pt-4">
-        @if ($denouncement->status == "Rechazada")
-        <div class="row">
-            <div class="alert alert-danger" role="alert">
-                Su solicitud ha sido rechazada verifique los comentarios al final de la pagina.
+    <div class="card-body p-md-4 pt-3 ">
+        <div class="d-flex flex-row p-0 m-0">
+            @if(!empty($finalImagePaths))
+            @foreach($finalImagePaths as $imagen)
+
+            <div class="m-0 pe-3 mt-sm-3 mt-md-0 position-relative" style="margin-right: 10px;">
+                <a href="{{ $imagen }}" download class="btn btn-dark m-2 position-absolute"><i
+                        class="bi bi-download"></i> </a>
+                <img src="{{ $imagen }}" alt="Evidencia Inicial" style="height: 200px;" class="rounded-3 "
+                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImageModal('{{ $imagen }}')">
             </div>
-        </div>
-        @elseif($denouncement->status == "Terminada")
-        <div class="row">
-            <div class="alert alert-info" role="alert">
-                Pendiente a comentarios finales y agradecimientos adicionales.
-            </div>
-        </div>
-        @elseif($denouncement->status == "Cerrada")
-        <div class="row">
-            <div class="alert alert-primary" role="alert">
-                Su peticion ha sido cumplida
-            </div>
-        </div>
-        @elseif(session('success'))
-        <div class="alert alert-primary" role="alert">{{ session('success') }}</div>
-        @endif
-    </section>
-</div>
-<div class="container px-0 ">
-    <section class="section pb-md-3 px-3">
-        <div class="row p-0">
-            <div class="col-lg-9 p-0 ps-0 ps-lg-3">
-                @if($denouncement->status=="Terminada" || $denouncement->status=="Cerrada")
-                <div class="card shadow-none border p-0 rounded ">
-                    <div class="card-header pb-1 pt-3 bg-light ">
-                        <div class="pagetitle ">
-                            <h3 class="fs-6 fw-normal ">Comentarios Finales.</h3>
-                        </div>
-                    </div>
-                    <div class="card-body p-md-4 p-3">
-                        <form id="upload-form" class="" method="POST" action="/denouncement/close">
-                            @csrf
-
-                            <div class="row g-3">
-                                <input class="form-control" type="text" value="{{$denouncement->id}}" name="id" hidden>
-                                <div class="col-md-12 ">
-                                    @if($denouncement->status=="Cerrada" && $denouncement->final_comments!="")
-
-                                    <textarea type="text" class="form-control text-muted disabled" id="final_comments"
-                                        name="final_comments" style="height:150px;"
-                                        disabled>{{$denouncement->final_comments}}</textarea>
-                                    @else
-                                    <textarea type="text" class="form-control text-muted disabled" id="final_comments"
-                                        name="final_comments" style="height:150px;"></textarea>
-                                    @endif
-                                </div>
-                                @if($denouncement->status!="Cerrada")
-
-                                <div class="col-md-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary rounded-1 w-full mt-sm-2 mt-md-0"
-                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enviar</button>
-                                </div>
-                                @endif
-
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                @endif
-                @if ($denouncement->status == "Rechazada")
-                <div class="card shadow-sm border p-0 rounded shadow-none ">
-                    <div class="card-header pb-1 pt-3 bg-light ">
-                        <div class="pagetitle ">
-                            <h3 class="fs-6 fw-normal">Comentarios</h3>
-                        </div>
-                    </div>
-                    <div class="card-body p-md-4 ">
-                        <div class="row g-3">
-                            <div class="col-md-12 " id="conditionalDiv">
-                                <label for="final_comments" class="form-label text-muted">Razones de
-                                    rechazo</label>
-                                <textarea type="text" class="form-control text-muted disabled bg-light"
-                                    id="final_comments" name="final_comments" style="height:100px;"
-                                    disabled>{{$denouncement->final_comments}}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                <div class="card shadow-none border">
-                    <div class="card-header bg-light"><span class="pagetitle fs-6 ">Peticion o
-                            Denuncia.</span></div>
-                    <div class="card-body p-2 p-lg-4">
-                        <div class="card shadow-none border-none mb-3 rounded bg-light">
-                            <div class="card-header pb-1 pt-3 bg-light border-0 ">
-                                <div class="pagetitle ">
-                                    <h3 class="fs-6 fw-normal">Estado de la Denuncia</h3>
-                                </div>
-                            </div>
-                            <div class="card-body p-3 pt-3">
-                                <div class="row pt-1">
-                                    <div class="col-sm-12">
-                                        <ol class="list-group">
-                                            <li
-                                                class="list-group-item d-flex flex-rows justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-light text-secondary ">
-                                                        En espera a revisión
-                                                    </div>
-                                                </div>
-                                                <span class="text-muted">
-
-                                                </span>
-
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-light text-secondary">Recepcion de solicitud</div>
-                                                </div>
-                                                <span class="text-muted">
-
-                                                </span>
-
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-light text-secondary">Solucion</div>
-                                                </div>
-                                                <span class="text-muted">
-                                                    @switch($denouncement->status)
-                                                    @case('Terminada')
-                                                    @case('Pendiente a comentarios')
-                                                    @case('Cerrada')
-                                                    <span class="text-success"><i
-                                                            class="bi bi-patch-check-fill me-2"></i>
-                                                        Terminada</span>
-                                                    @break
-
-                                                    @case('En proceso')
-                                                    <span class="text-secondary"><i class="bi bi-gear-fill me-2"></i> En
-                                                        proceso</span>
-                                                    @break
-
-                                                    @case('Rechazada')
-                                                    <span class="text-danger"><i class="bi bi-clipboard-x me-2"></i>
-                                                        Rechazada</span>
-                                                    @break
-
-                                                    @default
-                                                    <span class="text-secondary"><i class="bi bi-square me-2"></i>
-                                                        Pendiente</span>
-                                                    @endswitch
-                                                </span>
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card shadow-sm p-0 mb-3  rounded-0 ">
-                            <div class="decorations"></div>
-                            <div class="card-body p-4 pt-3">
-                                <div class="row pt-1 pb-3 mx-auto position-relative">
-                                    <div class="col-6 col-md-4 px-0"><img class="w-100"
-                                            src="{{asset('storage/rsc/cnt.png')}}"></img></div>
-                                    <div class="col-6 col-md-8 d-flex justify-content-end px-0"><span
-                                            class="fw-light mt-md-3 fs-6">H. Matamoros Tamaulipas a
-                                            {{$denouncement->created_at->format('Y-m-d')}}</span></div>
-                                </div>
-                                <div class="row pt-1 pb-3">
-                                    <div class="col-12 pt-3"><span class="pt-5 ms-md-3">A quien corresponda</span></div>
-                                    <div class="col-12 "><span class="fw-bold pt-2 ms-md-3">Central Noticias
-                                            Tamaulipas</span></div>
-                                </div>
-                                <p class="text-center pt-1 fw-bold " style="font: size 16px !important; ">
-                                    {{$denouncement->case_name}}</p>
-
-                                <div class="row pt-2">
-                                    <div class="col-12">
-                                        <p class="pt-3 ms-md-3 fs-6">Me dirijo a usted para solicitar su apoyo y
-                                            asistencia
-                                            en:
-                                        </p>
-                                        <div class="col-12">
-                                            <div class="px-md-3 ">
-                                                <div id="quill-editor"
-                                                    class="quill-editor-default rounded-bottom fw-normal "
-                                                    style="height:250px;   font-size: 40px !important; " disabled>
-                                                    {!! $denouncement->description !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row pt-0">
-                                    <div class="col-12">
-                                        <p class="pt-3 ms-md-3 fs-6">Agradezco su consideracion y cualquier apoyo que me
-                                            pueda
-                                            brindar.
-                                            Estoy disponible para discutir esta solicitud con mas detalladamente y para
-                                            cualquier informacion adiconal que requiera
-                                        </p>
-                                        <div class="col-12">
-                                            <div class="px-md-3 ">
-                                                <div class=" rounded-bottom text-capitalize" style="height:200px;">
-                                                    <p class="fw-bold">Atentamente</p>
-                                                    {{Auth::user()->name }} {{Auth::user()->last_name }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="decoration"></div>
-                        </div>
-                        <div class="card shadow-none border-none mb-3 rounded bg-light">
-                            <div class="card-header bg-light border-0">
-                                <div class="pagetitle ">
-                                    <h3 class="fs-6 fw-normal">Evidencia</h3>
-                                </div>
-                            </div>
-                            <div class="card-body p-3 pt-0">
-                                <div id="preview" class="d-flex flex-row overflow-auto m-0 rounded">
-                                    @if(!empty($imagePaths))
-                                    @foreach($imagePaths as $image)
-                                    <div class="m-0 pe-3 mt-sm-3 mt-md-0 position-relative" style="margin-right: 10px;">
-                                        <a href="{{ asset($image)}}" download
-                                            class="btn btn-dark m-2 position-absolute"><i class="bi bi-download"></i>
-                                        </a>
-                                        <img src="{{ asset($image)}}" alt="Evidencia Inicial" style="height: 200px;"
-                                            class="rounded-3 " data-bs-toggle="modal" data-bs-target="#imageModal"
-                                            onclick="showImageModal('{{ asset($image)}}')">
-                                    </div>
-                                    @endforeach
-                                    @else
-                                    <p>No hay evidencia inicial.</p>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card shadow-none border-none rounded bg-light">
-                            <div class="card-header bg-light border-0">
-                                <div class="pagetitle ">
-                                    <h3 class="fs-6 fw-normal">Contacto</h3>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="row g-3 pt-0 text-muted">
-                                    <div class="col-md-12">
-                                        <label for="address" class="form-label">Direccion</label>
-                                        <input type="text" class="form-control text-muted" id="address" name="address"
-                                            value="{{$contact->address}}" disabled>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="phone" class="form-label">Numero de Telefono</label>
-                                        <input type="numeric" class="form-control text-muted" id="phone" name="phone"
-                                            value="{{$contact->phone}}" disabled>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="contact_schedule" class="form-label">Horario de Contacto</label>
-                                        <input type="text" class="form-control text-muted" id="contact_schedule"
-                                            name="contact_schedule" value="{{$contact->contact_schedule}}" disabled>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @if($denouncement->status == "Terminada" || $denouncement->status == "Cerrada")
-                <div class="card shadow-none border p-0">
-                    <div class="card-header pb-1 pt-3 bg-light ">
-                        <div class="pagetitle ">
-                            <h3 class="fs-6 fw-normal">Evidencia Final</h3>
-                        </div>
-                    </div>
-                    <div class="card-body p-md-4 pt-3 ">
-                        <div class="d-flex flex-row p-0 m-0">
-                            @if(!empty($finalImagePaths))
-                            @foreach($finalImagePaths as $imagen)
-
-                            <div class="m-0 pe-3 mt-sm-3 mt-md-0 position-relative" style="margin-right: 10px;">
-                                <a href="{{ $imagen }}" download class="btn btn-dark m-2 position-absolute"><i
-                                        class="bi bi-download"></i> </a>
-                                <img src="{{ $imagen }}" alt="Evidencia Inicial" style="height: 200px;"
-                                    class="rounded-3 " data-bs-toggle="modal" data-bs-target="#imageModal"
-                                    onclick="showImageModal('{{ $imagen }}')">
-                            </div>
-                            @endforeach
-                            @else
-                            <p>No hay evidencia inicial.</p>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                @endif
-            </div>
-        </div>
-    </section>
-</div>
-
-<div class="modal fade " id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 rounded-1">
-            <div class="modal-header border-0">
-                <h5 class="modal-title" id="imageModalLabel">Evidencia</h5>
-                <button type="button" class="btn btn-dark" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-            </div>
-            <div class="modal-body d-flex justify-content-center ">
-                <img id="modalImage" src="" alt="Evidencia Inicial" class="img-fluid rounded">
-            </div>
-            <div class="modal-footer border-0">
-                <a id="down" href="#" download class="btn btn-outline-primary ms-2 p-1 px-2">
-                    <i class="bi bi-download"></i><span class="ms-2">Descargar</span>
-                </a>
-            </div>
+            @endforeach
+            @else
+            <p>No hay evidencia inicial.</p>
+            @endif
         </div>
     </div>
 </div>
+@endif
+
+
+<script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dialog.js"></script>
+
+
+<script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
+
 <script>
-function showImageModal(imageSrc) {
-    document.getElementById('modalImage').src = imageSrc;
-    document.getElementById('down').href = imageSrc;
+function showImageModal(imagen) {
+    let im = document.getElementById("ImageModal");
+    im.src = imagen;
 }
-$('.sub-menu ul').hide();
-$(".sub-menu a").click(function() {
-    $(this).parent(".sub-menu").children("ul").slideToggle("100");
-    $(this).find(".right").toggleClass("fa-caret-up fa-caret-down");
-});
-document.addEventListener('DOMContentLoaded', function() {
+
+$(document).ready(function() {
+    var selectedFiles = [];
+
     var quill = new Quill('#quill-editor', {
         theme: 'snow',
         readOnly: true,
-        modules: {
-            toolbar: false // Oculta la barra de herramientas
-        }
     });
     quill.root.innerHTML = `{!! $denouncement->description !!}`;
 });

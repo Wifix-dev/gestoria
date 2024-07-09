@@ -15,6 +15,7 @@ class UserController extends Controller
         return view('user.register',compact('list'));
     }
     public function GetDenouncement($id){
+        $list = TypeDenouncements::all();
         $denouncement = Denouncement::find($id);
         if (!$denouncement) {
             return redirect()->back()->with('error', 'Denuncia no encontrada.');
@@ -31,7 +32,7 @@ class UserController extends Controller
             $finalImagePaths = array_map(fn($image) => asset('public/' . $image), $final_evidence_images);
         }
 
-        return view('user.denouncement', compact('denouncement', 'imagePaths', 'contact', 'finalImagePaths'));
+        return view('user.denouncement', compact('denouncement', 'imagePaths', 'contact', 'finalImagePaths','list'));
     }
 
     public function FinalComments(Request $request){

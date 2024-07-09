@@ -172,7 +172,6 @@
                             class="group w-full h-full rounded-md focus:outline-none focus:shadow-outline elative bg-gray-100 cursor-pointer relative shadow-sm">
                             <img alt="upload preview"
                                 class="img-preview hidden w-full h-full object-cover rounded-md bg-fixed" />
-
                             <section
                                 class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
                                 <h1 class="flex-1 group-hover:text-blue-800"></h1>
@@ -208,7 +207,6 @@
                             class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white shadow-sm">
                             <img alt="upload preview"
                                 class="img-preview w-full h-full object-cover rounded-md bg-fixed" />
-
                             <section
                                 class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
                                 <h1 class="flex-1"></h1>
@@ -428,64 +426,6 @@
         border-style: solid !important;
         border-top: 0 !important;
         border-color: #e5e7eb !important;
-    }
-
-    .send {
-        font-family: inherit;
-        font-size: 16px;
-        background: linear-gradient(to bottom, #4dc7d9 0%, #66a6ff 100%);
-        color: white;
-        padding: 0.8em 1.2em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s;
-    }
-
-    .send:hover {
-        transform: translateY(-3px);
-        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .send:active {
-        transform: scale(0.95);
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .send span {
-        display: block;
-        margin-left: 0.4em;
-        transition: all 0.3s;
-    }
-
-    .send svg {
-        width: 18px;
-        height: 18px;
-        fill: white;
-        transition: all 0.3s;
-    }
-
-    .send .svg-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.2);
-        margin-right: 0.5em;
-        transition: all 0.3s;
-    }
-
-    .send:hover .svg-wrapper {
-        background-color: rgba(255, 255, 255, 0.5);
-    }
-
-    .send:hover svg {
-        transform: rotate(45deg);
     }
     </style>
 
