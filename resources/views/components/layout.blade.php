@@ -1,307 +1,333 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100 ">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Admin Template</title>
+    <meta name="author" content="David Grzyb">
+    <meta name="description" content="">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="{{asset('public/assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+    <link href="{{asset('public/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+    <link href="{{asset('public/assets/user/css/bootstrap-icons.css')}}" rel="stylesheet">
 
     <style>
-    .sub:hover {
-        color: #007bff;
-        background: rgba(0, 0, 0, .1) !important;
-    }
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+        .font-family-karla { font-family: karla; }
+        .bg-sidebar { background: #3d68ff; }
+        .cta-btn { color: #3d68ff; }
+        .upgrade-btn { background: #1947ee; }
+        .upgrade-btn:hover { background: #0038fd; }
+        .active-nav-link { background: #1947ee; }
+        .nav-item:hover { background: #1947ee; }
+        .account-link:hover { background: #3d68ff; }
     </style>
 </head>
+<body class="bg-gray-100 font-family-karla flex">
 
-<body class="font-sans" style="padding-right:0px !important;">
-    <header id="header" class="header fixed-top  d-flex align-items-center">
-
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-                <img src="assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">NiceAdmin</span>
+    <aside class="relative bg-sidebar h-screen w-96 hidden lg:block shadow-xl">
+        <div class="p-6">
+            <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+            <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-plus mr-3"></i> New Report
+            </button>
+        </div>
+        <nav class="text-white text-base font-semibold pt-3">
+            <a href="index.html" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                Dashboard
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
+            <a href="blank.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-sticky-note mr-3"></i>
+                Blank Page
+            </a>
+            <a href="tables.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-table mr-3"></i>
+                Tables
+            </a>
+            <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-align-left mr-3"></i>
+                Forms
+            </a>
+            <a href="tabs.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-tablet-alt mr-3"></i>
+                Tabbed Content
+            </a>
+            <a href="calendar.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-calendar mr-3"></i>
+                Calendar
+            </a>
+        </nav>
+        <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
+            <i class="fas fa-arrow-circle-up mr-3"></i>
+            Upgrade to Pro!
+        </a>
+    </aside>
 
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
+    <div class="w-full flex flex-col h-screen overflow-y-hidden">
+        <!-- Desktop Header -->
+        <header class="w-full items-center bg-white py-2 px-6 hidden lg:flex">
+            <div class="w-1/2"></div>
+            <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
+                    <img src="https://source.unsplash.com/uJ8LNVCBjFQ/400x400">
+                </button>
+                <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
+                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                </div>
+            </div>
+        </header>
 
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
+        <!-- Mobile Header & Nav -->
+        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 lg:hidden">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+                <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
+                    <i x-show="!isOpen" class="fas fa-bars"></i>
+                    <i x-show="isOpen" class="fas fa-times"></i>
+                </button>
+            </div>
 
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-bell"></i>
-                        <span class="badge bg-primary badge-number">4</span>
-                    </a><!-- End Notification Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <li class="dropdown-header">
-                            You have 4 new notifications
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-exclamation-circle text-warning"></i>
-                            <div>
-                                <h4>Lorem Ipsum</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>30 min. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-x-circle text-danger"></i>
-                            <div>
-                                <h4>Atque rerum nesciunt</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>1 hr. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-check-circle text-success"></i>
-                            <div>
-                                <h4>Sit rerum fuga</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>2 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-info-circle text-primary"></i>
-                            <div>
-                                <h4>Dicta reprehenderit</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li class="dropdown-footer">
-                            <a href="#">Show all notifications</a>
-                        </li>
-
-                    </ul><!-- End Notification Dropdown Items -->
-
-                </li><!-- End Notification Nav -->
-
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-chat-left-text"></i>
-                        <span class="badge bg-success badge-number">3</span>
-                    </a><!-- End Messages Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                        <li class="dropdown-header">
-                            You have 3 new messages
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/messages-1.jpg')}}" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>Maria Hudson</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>4 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/messages-2.jpg')}}" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>Anna Nelson</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>6 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>David Muldon</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>8 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="dropdown-footer">
-                            <a href="#">Show all messages</a>
-                        </li>
-
-                    </ul><!-- End Messages Dropdown Items -->
-
-                </li><!-- End Messages Nav -->
-                @auth
-                <li class="nav-item dropdown pe-3">
-
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
-                    </a><!-- End Profile Iamge Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile p-3">
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>Perfil</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Configuracion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center rounded-3" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center rounded-3" href="#">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-
-                                    <span :href="route('logout')" onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </span>
-                                </form>
-                            </a>
-                        </li>
-
-                    </ul><!-- End Profile Dropdown Items -->
-                </li><!-- End Profile Nav -->
-                @endauth
-            </ul>
-        </nav><!-- End Icons Navigation -->
-
-    </header><!-- End Header -->
-
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar sidebar-dark bg-dark">
-
-        <ul class="sidebar-nav" id="sidebar-nav">
-
-            <li class="nav-item">
-                <a class="nav-link sub bg-dark text-white " href="index.html">
-                    <i class="bi bi-grid text-white"></i>
-                    <span>Inicio</span>
+            <!-- Dropdown Nav -->
+            <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
+                <a href="index.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
                 </a>
-            </li><!-- End Dashboard Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link bg-dark sub collapsed text-white" data-bs-target="#forms-nav"
-                    data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text text-white"></i><span>Reportes</span><i
-                        class="bi bi-chevron-down ms-auto text-white"></i>
+                <a href="blank.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-sticky-note mr-3"></i>
+                    Blank Page
                 </a>
-                <ul id="forms-nav" class="nav-content collapse text-white" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="forms-elements.html" class="text-white">
-                            <i class="bi bi-circle text-white"></i><span>Registros</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-layouts.html" class="text-white">
-                            <i class="bi bi-circle"></i><span>Registrar</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-editors.html" class="text-white">
-                            <i class="bi bi-circle"></i><span>Form Editors</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-validation.html" class="text-white">
-                            <i class="bi bi-circle"></i><span>Form Validation</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Forms Nav -->
+                <a href="tables.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-table mr-3"></i>
+                    Tables
+                </a>
+                <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-align-left mr-3"></i>
+                    Forms
+                </a>
+                <a href="tabs.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-tablet-alt mr-3"></i>
+                    Tabbed Content
+                </a>
+                <a href="calendar.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-calendar mr-3"></i>
+                    Calendar
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-cogs mr-3"></i>
+                    Support
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-user mr-3"></i>
+                    My Account
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    Sign Out
+                </a>
+                <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                    <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
+                </button>
+            </nav>
+            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-plus mr-3"></i> New Report
+            </button> -->
+        </header>
 
+        <div class="w-full overflow-x-hidden border-t flex flex-col">
+            <main class="w-full flex-grow p-3 pt-4 lg:p-6">
+                @yield('content')
 
-        </ul>
+                <h1 class="text-3xl text-black pb-6">Dashboard</h1>
 
-    </aside><!-- End Sidebar-->
+                <div class="flex flex-wrap mt-6">
+                    <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
+                        <p class="text-xl pb-3 flex items-center">
+                            <i class="fas fa-plus mr-3"></i> Monthly Reports
+                        </p>
+                        <div class="p-6 bg-white">
+                            <canvas id="chartOne" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-12 lg:mt-0">
+                        <p class="text-xl pb-3 flex items-center">
+                            <i class="fas fa-check mr-3"></i> Resolved Reports
+                        </p>
+                        <div class="p-6 bg-white">
+                            <canvas id="chartTwo" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
 
-    <main id="main" class=" ">
-        @yield('content')
+                <div class="w-full mt-12">
+                    <p class="text-xl pb-3 flex items-center">
+                        <i class="fas fa-list mr-3"></i> Latest Reports
+                    </p>
+                    <div class="bg-white overflow-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-gray-800 text-white">
+                                <tr>
+                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
+                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Last name</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <tr>
+                                    <td class="w-1/3 text-left py-3 px-4">Lian</td>
+                                    <td class="w-1/3 text-left py-3 px-4">Smith</td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                </tr>
+                                <tr class="bg-gray-200">
+                                    <td class="w-1/3 text-left py-3 px-4">Emma</td>
+                                    <td class="w-1/3 text-left py-3 px-4">Johnson</td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="w-1/3 text-left py-3 px-4">Oliver</td>
+                                    <td class="w-1/3 text-left py-3 px-4">Williams</td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                </tr>
+                                <tr class="bg-gray-200">
+                                    <td class="w-1/3 text-left py-3 px-4">Isabella</td>
+                                    <td class="w-1/3 text-left py-3 px-4">Brown</td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="w-1/3 text-left py-3 px-4">Lian</td>
+                                    <td class="w-1/3 text-left py-3 px-4">Smith</td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                </tr>
+                                <tr class="bg-gray-200">
+                                    <td class="w-1/3 text-left py-3 px-4">Emma</td>
+                                    <td class="w-1/3 text-left py-3 px-4">Johnson</td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="w-1/3 text-left py-3 px-4">Oliver</td>
+                                    <td class="w-1/3 text-left py-3 px-4">Williams</td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                </tr>
+                                <tr class="bg-gray-200">
+                                    <td class="w-1/3 text-left py-3 px-4">Isabella</td>
+                                    <td class="w-1/3 text-left py-3 px-4">Brown</td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
 
-    </main><!-- End #main -->
+            <footer class="w-full bg-white text-right p-4">
+                Built by <a target="_blank" href="https://davidgrzyb.com" class="underline">David Grzyb</a>.
+            </footer>
+        </div>
 
+    </div>
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-    <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/chart.js/chart.umd.js')}}"></script>
-    <script src="{{ asset('assets/vendor/echarts/echarts.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/quill/quill.js')}}"></script>
-    <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
-    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
-    <!-- Template Main JS File -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
 
-    <script src="{{ asset('assets/js/main.js')}}"></script>
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <!-- ChartJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+
+    <script>
+        var chartOne = document.getElementById('chartOne');
+        var myChart = new Chart(chartOne, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var chartTwo = document.getElementById('chartTwo');
+        var myLineChart = new Chart(chartTwo, {
+            type: 'line',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
 </body>
-
 </html>
+

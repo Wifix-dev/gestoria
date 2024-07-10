@@ -408,8 +408,6 @@
         -o-appearance: none;
         appearance: none;
     }
-    </style>
-    <style>
     .ql-toolbar.ql-snow {
         border-radius: 0.375rem 0.375rem 0 0 !important;
         border-width: 1px !important;
@@ -428,8 +426,6 @@
         border-color: #e5e7eb !important;
     }
     </style>
-
-
     <script>
     $(document).ready(function() {
         var selectedFiles = [];

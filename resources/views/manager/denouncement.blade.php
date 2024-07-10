@@ -13,6 +13,7 @@
     border-bottom: 0px !important;
     border-radius: .25rem .25rem 0 0;
 }
+
 #preview {
     border-radius: 10px;
     scrollbar-width: thin;
@@ -40,7 +41,7 @@
     background-color: #f1f1f1;
 }
 
-#previewphoto{
+#previewphoto {
     border-radius: 10px;
     scrollbar-width: thin;
     scrollbar-color: #ccc #f1f1f1;
@@ -55,6 +56,7 @@
     height: 12px;
     border-radius: 10px;
 
+
 }
 
 #previewphoto::-webkit-scrollbar-thumb {
@@ -67,49 +69,275 @@
     background-color: #f1f1f1;
 }
 
-#previewphoto{
+#previewphoto {
     border-radius: 10px;
     scrollbar-width: thin;
     scrollbar-color: #ccc #f1f1f1;
 }
 </style>
 
-<div class="section  pt-4 px-0 px-md-2">
-    <div class="px-4 px-md-5 d-flex justify-content-between">
-        <div class="my-auto flex">
-            <h6 class=" fw-bold text-uppercase my-auto">Crear solicitud</h6>
-            <nav class="my-auto flex">
-                <ol class="breadcrumb my-auto">
-                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="#">Denuncia</a></li>
-                    <li class="breadcrumb-item active">{{ $denouncement->id }}</li>
-                </ol>
-            </nav>
+<div class="flex items-center pb-4 overflow-x-auto whitespace-nowrap lg:px-0 ">
+    <a href="#" class="text-slate-900 ">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+            <path
+                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+        </svg>
+    </a>
+
+    <span class="mx-5 text-slate-900 ">
+        /
+    </span>
+
+    <a href="#" class="text-slate-900 ">
+        Denuncia o Peticion
+    </a>
+
+    <span class="mx-5 text-slate-900 ">
+        /
+    </span>
+    <a href="#" class=" text-slate-900 ">
+        Detalles
+    </a>
+    <span class="mx-5 text-slate-900 ">
+        /
+    </span>
+    <a href="#" class=" text-slate-900 ">
+        {{ $denouncement->id }}
+    </a>
+</div>
+
+<div class="w-full min-h-96 shadow rounded-lg bg-white">
+    <div class="flex flex-col space-y-3 lg:space-y-0 lg:grid lg:gap-4 lg:grid-cols-3 p-6 lg:p-12">
+        <div class="font-bold bg-white p-3">
+            <div class="space-y-5 sticky top-12 ">
+                <div class="">
+                    <h4 class="text-xl text-gray-900 font-bold">Estado de la Denuncia</h4>
+                </div>
+                <div class="border-l-2 border-dashed border-left flex flex-col gap-3 pl-2">
+                    <div class="relative w-full pt-0 mt-0 ">
+                        <p class="text-base font-semibold  mt-0">En espera a revision</p>
+                        @switch($denouncement->status)
+                        @case('En espera')
+                        <div class="relative w-full">
+                            <span
+                                class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300 animate-rotate-x-infinite ">
+                                <i class="bi bi-hourglass "></i>
+                            </span>
+                            <div class="ml-6">
+                                <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
+                            </div>
+                        </div>
+                        @break
+                        @case('Revisada')
+                        @default
+                        <div class="relative w-full">
+                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5  text-2xl rounded-full text-blue-500">
+                                <i class="bi bi-patch-check-fill"></i>
+                            </span>
+                            <div class="ml-6">
+                                <h4 class="text-md text-blue-500 -ml-3 pt-1">Revisada</h4>
+                            </div>
+                        </div>
+                        @endswitch
+                    </div>
+                    <div class="relative w-full">
+                        <p class="text-base font-semibold">Recepcion de solicitud</p>
+                        @switch($denouncement->status)
+                        @case('Revisada')
+                        <div class="relative w-full">
+                            <span
+                                class="absolute -top-0.5 z-10 h-9 w-9 text-2xl -ml-5 rounded-full text-gray-500 animate-rotate-x-infinite">
+                                <i class="bi bi-hourglass"></i>
+                            </span>
+
+                            <div class="ml-6">
+                                <h4 class="text-md text-gray-500 -ml-3 pt-1">En espera</h4>
+                            </div>
+                        </div>
+                        @break
+                        @case('Aceptada')
+                        @case('En proceso')
+                        @case('Terminada')
+                        @case('Pendiente a comentarios')
+                        @case('Cerrada')
+                        <div class="relative w-full">
+                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
+                                <i class="bi bi-patch-check-fill "></i>
+                            </span>
+                            <div class="ml-6">
+                                <h4 class="text-md text-blue-500 -ml-3 pt-1">Aceptada</h4>
+                            </div>
+                        </div>
+                        @break
+                        @case('Rechazada')
+                        <div class="relative w-full">
+                            <span
+                                class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500 animate-bounce ">
+                                <i class="bi bi-clipboard-x-fill"></i>
+                            </span>
+                            <div class="ml-6">
+                                <h4 class="text-md text-red-500 -ml-3 pt-1">Rechazada</h4>
+                            </div>
+                        </div>
+                        @break
+                        @default
+                        <div class="relative w-full">
+                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
+                                <i class="bi bi-stopwatch-fill"></i>
+                            </span>
+                            <div class="ml-6">
+                                <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
+                            </div>
+                        </div>
+                        @endswitch
+                    </div>
+                    <div class="relative w-full">
+                        <p class="text-base font-semibold">Solucion</p>
+                        @switch($denouncement->status)
+                        @case('Terminada')
+                        @case('Pendiente a comentarios')
+                        @case('Cerrada')
+                        <div class="relative w-full">
+                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
+                                <i class="bi bi-patch-check-fill "></i>
+                            </span>
+                            <div class="ml-6">
+                                <h4 class="text-md text-blue-500 -ml-3 pt-1">Terminada</h4>
+                            </div>
+                        </div>
+                        @break
+
+                        @case('En proceso')
+                        <div class="relative w-full">
+                            <span
+                                class="absolute -top-0.5 z-10 h-9 w-9 text-2xl -ml-5 rounded-full text-blue-400  animate-bounce ">
+                                <i class="bi bi-gear-fill"></i>
+                            </span>
+                            <div class="ml-6">
+                                <h4 class="text-md text-blue-400 -ml-3 pt-1">En proceso</h4>
+                            </div>
+                        </div>
+                        @break
+                        @case('Rechazada')
+                        <div class="relative w-full">
+                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500  ">
+                                <i class="bi bi-clipboard-x-fill"></i>
+                            </span>
+                            <div class="ml-6">
+                                <h4 class="text-md text-red-500 -ml-3 pt-1">Rechazada</h4>
+                            </div>
+                        </div>
+                        @break
+
+                        @default
+                        <div class="relative w-full">
+                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
+                                <i class="bi bi-stopwatch-fill"></i>
+                            </span>
+                            <div class="ml-6">
+                                <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
+                            </div>
+                        </div>
+                        @endswitch
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-2">
+            <h4 class="text-xl text-gray-900 font-bold pt-3">Peticion o denuncia</h4>
+            <section class="pt-2">
+                @if ($denouncement->status == "Rechazada")
+                <div
+                    class="lg:mt-0 mt-3 hover:red-yellow-500 w-full mb-2 select-none border-l-4 border-red-400 bg-red-100 p-3 font-medium">
+                    Estar a al pendiente en dado caso del contacto del ciudadano</div>
+                @elseif($denouncement->status == "Terminada")
+                <div
+                    class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-orange-400 bg-orange-100 p-4 font-medium hover:border-orange-500">
+                    Pendiente a comentarios finales y agradecimientos adicionales.</div>
+                @elseif($denouncement->status == "Cerrada")
+                <div
+                    class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-blue-400 bg-blue-100 p-4 font-medium hover:border-blue-500">
+                    La peticion ha sido atendida</div>
+                @elseif(session('success'))
+                <div
+                    class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-indigo-400 bg-indigo-100 p-4 font-medium hover:border-indigo-500">
+                    {{ session('success') }}</div>
+                @endif
+            </section>
+            @if($denouncement->status=="En espera" || $denouncement->status=="Revisada" ||
+            $denouncement->status=="Rechazada")
+            <div class="">
+                <div class="">
+                    <form id="upload-form" class="" method="POST" action="/denouncements/response">
+                        @csrf
+
+                        <div class="mt-12">
+                            <div>
+                                <div class="px-4 sm:px-0">
+                                    <h3 class="text-lg font-semibold text-gray-900">Acciones a tomar</h3>
+                                </div>
+                                <div class="mt-2 border-t border-gray-100">
+                                    <dl class="divide-y divide-gray-100">
+                                        <div class=" py-4 grid lg:grid-cols-3 gap-3 lg:px-0">
+                                            <dt>
+                                                <label for="inputState"
+                                                    class="block text-md text-gray-500 py-auto">¿Aceptará esta
+                                                    petición?</label>
+                                            </dt>
+                                            <dd class=" text-sm leading-6 text-gray-700 lg:col-span-2 lg:mt-0">
+                                                <input type="text" name="id" value="{{$denouncement->id}}" hidden>
+                                                <select id="inputState"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 "
+                                                    name="status">
+                                                    <option selected>Opciones</option>
+                                                    <option value="En proceso">Sí</option>
+                                                    <option value="Rechazada">No</option>
+                                                </select>
+                                            </dd>
+                                        </div>
+                                        <div id="conditionalDiv" class="hidden py-4 grid lg:grid-cols-3 gap-3 lg:px-0 " style="">
+                                            <dt class="col-span-1">
+                                                <label for="final_comments"
+                                                    class="block text-md text-gray-500 py-auto">Razones de
+                                                    rechazo</label>
+                                            </dt>
+                                            <dd class="col-span-2">
+                                                <textarea type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="final_comments" name="final_comments"
+                                                    style="height:150px;"></textarea>
+                                            </dd>
+                                        </div>
+
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row justify-start">
+
+
+                            </div>
+
+
+
+                            <div class="col-md-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary rounded-1 w-full mt-sm-2 mt-md-0"
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </div>
 
+
 <div class="m-0 px-sm-0 px-md-2">
     <section class="section pb-md-3 px-4 px-md-5 pt-4">
-        @if ($denouncement->status == "Rechazada")
-        <div class="row">
-            <div class="alert alert-danger mx-0" role="alert">
-                Su solicitud ha sido rechazada verifique los comentarios al final de la pagina.
-            </div>
-        </div>
-        @elseif($denouncement->status == "Terminada")
-        <div class="row">
-            <div class="alert alert-info  mx-0" role="alert">
-                Pendiente a comentarios finales y agradecimientos adicionales.
-            </div>
-        </div>
-        @elseif($denouncement->status == "Cerrada")
-            <div class="row">
-                <div class="alert alert-primary" role="alert">
-                    La peticion ha sido atendida
-                </div>
-            </div>
-        @endif
+
         <div class="row ">
             <div class="col-lg-5 pr-md-2">
                 <div class="row">
@@ -212,7 +440,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" >
+                <div class="row">
                     <div class="card shadow-sm border border-top-0 p-0 mb-3 rounded-0 rounded-bottom ">
                         <div class="card-header pb-1 pt-3 bg-light ">
                             <div class="pagetitle ">
@@ -263,49 +491,7 @@
                         </div>
                     </div>
                 </div>
-                @if($denouncement->status=="En espera" || $denouncement->status=="Revisada" ||
-                $denouncement->status=="Rechazada")
-                <div class="row">
-                    <div class="card shadow-sm border p-0 mb-3 rounded ">
-                        <div class="card-header pb-1 pt-3 bg-light ">
-                            <div class="pagetitle ">
-                                <h3 class="fs-6 fw-bold text-uppercase">Acciones</h3>
-                            </div>
-                        </div>
-                        <div class="card-body p-md-4 ">
-                            <form id="upload-form" class="" method="POST" action="/denouncements/response">
-                                @csrf
 
-                                <div class="row g-3">
-                                    <div class="col-md-12 ">
-                                        <label for="inputState" class="form-label text-muted mt-3 mt-sm-0">¿Aceptará
-                                            esta petición?</label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <input type="text" name="id" value="{{$denouncement->id}}" hidden>
-                                        <select id="inputState" class="form-select text-muted" name="status">
-                                            <option selected>Opciones</option>
-                                            <option value="En proceso">Sí</option>
-                                            <option value="Rechazada">No</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-12 " id="conditionalDiv" style="display: none;">
-                                        <label for="final_comments" class="form-label text-muted">Razones de
-                                            rechazo</label>
-                                        <textarea type="text" class="form-control text-muted disabled"
-                                            id="final_comments" name="final_comments" style="height:150px;"></textarea>
-                                    </div>
-
-                                    <div class="col-md-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary rounded-1 w-full mt-sm-2 mt-md-0"
-                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enviar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                @endif
                 @if($denouncement->status == "En proceso")
                 <form id="upload-form" class="" method="POST" action="/denouncements/update"
                     enctype="multipart/form-data">
@@ -432,7 +618,8 @@
                         </div>
                     </div>
                 </div>
-                @if(($denouncement->status=="Terminada" || $denouncement->status=="Cerrada") && $denouncement->final_comments != '')
+                @if(($denouncement->status=="Terminada" || $denouncement->status=="Cerrada") &&
+                $denouncement->final_comments != '')
                 <div class="row pt-4">
                     <div class="card shadow-sm border p-0 rounded ">
                         <div class="card-header pb-1 pt-3 bg-light ">
@@ -441,15 +628,14 @@
                             </div>
                         </div>
                         <div class="card-body p-md-4 ">
-                                <div class="row g-3">
-                                    <input class="form-control" type="text" value="{{$denouncement->id}}" name="id"
-                                        hidden>
-                                    <div class="col-md-12 ">
-                                        <textarea type="text" class="form-control text-muted disabled"
-                                            id="final_comments" name="final_comments" style="height:150px;"
-                                            disabled>{{$denouncement->final_comments}}</textarea>
-                                    </div>
+                            <div class="row g-3">
+                                <input class="form-control" type="text" value="{{$denouncement->id}}" name="id" hidden>
+                                <div class="col-md-12 ">
+                                    <textarea type="text" class="form-control text-muted disabled" id="final_comments"
+                                        name="final_comments" style="height:150px;"
+                                        disabled>{{$denouncement->final_comments}}</textarea>
                                 </div>
+                            </div>
                             </form>
                         </div>
                     </div>
@@ -539,9 +725,9 @@ document.getElementById('inputState').addEventListener('change', function() {
     var div = document.getElementById('conditionalDiv');
 
     if (selectedValue === 'Rechazada') {
-        div.style.display = 'block';
+        div.classList.remove('hidden');
     } else {
-        div.style.display = 'none';
+        div.classList.add('hidden');
     }
 });
 </script>

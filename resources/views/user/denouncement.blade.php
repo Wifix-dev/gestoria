@@ -41,147 +41,145 @@
         <div class="relative">
             <div class="flex flex-col space-y-3 lg:space-y-0 lg:grid lg:gap-4 lg:grid-cols-3">
                 <!-- Status Report -->
-                <div class="font-bold bg-white px-6  ">
-                    <div class="space-y-5 border-l-2 border-dashed sticky top-24">
-                        <div class="-ml-3.5">
+                <div class="font-bold bg-white p-3">
+                    <div class="space-y-5 sticky top-24 ">
+                        <div class="">
                             <h4 class="text-xl text-gray-900 font-bold">Estado de la Denuncia</h4>
                         </div>
-                        <div class="relative w-full pt-0 mt-0">
-                            <p class="ml-6 text-base font-semibold  mt-0">En espera a revision</p>
-                            @switch($denouncement->status)
-                            @case('En espera')
-                            <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-400 animate-rotate-x-infinite ">
-                                    <i class="bi bi-hourglass "></i>
-                                </span>
-                                <div class="ml-6">
-                                    <h4 class="text-md text-gray-400">Pendiente</h4>
+                        <div class="border-l-2 border-dashed border-left flex flex-col gap-3 pl-2">
+                            <div class="relative w-full pt-0 mt-0 ">
+                                <p class="text-base font-semibold  mt-0">En espera a revision</p>
+                                @switch($denouncement->status)
+                                @case('En espera')
+                                <div class="relative w-full">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300 animate-rotate-x-infinite ">
+                                        <i class="bi bi-hourglass "></i>
+                                    </span>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            @break
-                            @case('Revisada')
-                            @default
-                            <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-blue-500">
-                                    <i class="bi bi-patch-check-fill"></i>
-                                </span>
-                                <div class="ml-6">
-                                    <h4 class="text-md text-blue-500">Revisada</h4>
+                                @break
+                                @case('Revisada')
+                                @default
+                                <div class="relative w-full">
+                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5  text-2xl rounded-full text-blue-500">
+                                        <i class="bi bi-patch-check-fill"></i>
+                                    </span>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-blue-500 -ml-3 pt-1">Revisada</h4>
+                                    </div>
                                 </div>
+                                @endswitch
                             </div>
-                            @endswitch
-                        </div>
-                        <div class="relative w-full">
-                            <p class="ml-6 text-base font-semibold">Recepcion de solicitud</p>
-                            @switch($denouncement->status)
-                            @case('Revisada')
                             <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-500 animate-rotate-x-infinite">
-                                    <i class="bi bi-hourglass"></i>
-                                </span>
+                                <p class="text-base font-semibold">Recepcion de solicitud</p>
+                                @switch($denouncement->status)
+                                @case('Revisada')
+                                <div class="relative w-full">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 text-2xl -ml-5 rounded-full text-gray-500 animate-rotate-x-infinite">
+                                        <i class="bi bi-hourglass"></i>
+                                    </span>
 
-                                <div class="ml-6">
-                                    <h4 class="text-md text-gray-500">En espera</h4>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-gray-500 -ml-3 pt-1">En espera</h4>
+                                    </div>
                                 </div>
+                                @break
+                                @case('Aceptada')
+                                @case('En proceso')
+                                @case('Terminada')
+                                @case('Pendiente a comentarios')
+                                @case('Cerrada')
+                                <div class="relative w-full">
+                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
+                                        <i class="bi bi-patch-check-fill "></i>
+                                    </span>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-blue-500 -ml-3 pt-1">Aceptada</h4>
+                                    </div>
+                                </div>
+                                @break
+                                @case('Rechazada')
+                                <div class="relative w-full">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500 animate-bounce ">
+                                        <i class="bi bi-clipboard-x-fill"></i>
+                                    </span>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-red-500 -ml-3 pt-1">Rechazada</h4>
+                                    </div>
+                                </div>
+                                @break
+                                @default
+                                <div class="relative w-full">
+                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
+                                        <i class="bi bi-stopwatch-fill"></i>
+                                    </span>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
+                                    </div>
+                                </div>
+                                @endswitch
                             </div>
-                            @break
-                            @case('Aceptada')
-                            @case('En proceso')
-                            @case('Terminada')
-                            @case('Pendiente a comentarios')
-                            @case('Cerrada')
                             <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-blue-500">
-                                    <i class="bi bi-patch-check-fill "></i>
-                                </span>
-                                <div class="ml-6">
-                                    <h4 class="text-md text-blue-500">Aceptada</h4>
+                                <p class="text-base font-semibold">Solucion</p>
+                                @switch($denouncement->status)
+                                @case('Terminada')
+                                @case('Pendiente a comentarios')
+                                @case('Cerrada')
+                                <div class="relative w-full">
+                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
+                                        <i class="bi bi-patch-check-fill "></i>
+                                    </span>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-blue-500 -ml-3 pt-1">Terminada</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            @break
-                            @case('Rechazada')
-                            <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-red-500 animate-bounce ">
-                                    <i class="bi bi-clipboard-x-fill"></i>
-                                </span>
-                                <div class="ml-6">
-                                    <h4 class="text-md text-red-500">Rechazada</h4>
-                                </div>
-                            </div>
-                            @break
-                            @default
-                            <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-400">
-                                    <i class="bi bi-stopwatch-fill"></i>
-                                </span>
-                                <div class="ml-6">
-                                    <h4 class="text-md text-gray-400">Pendiente</h4>
-                                </div>
-                            </div>
-                            @endswitch
-                        </div>
-                        <div class="relative w-full">
-                            <p class="ml-6 text-base font-semibold">Solucion</p>
-                            @switch($denouncement->status)
-                            @case('Terminada')
-                            @case('Pendiente a comentarios')
-                            @case('Cerrada')
-                            <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-blue-500">
-                                    <i class="bi bi-patch-check-fill "></i>
-                                </span>
-                                <div class="ml-6">
-                                    <h4 class="text-md text-blue-500">Terminada</h4>
-                                </div>
-                            </div>
-                            @break
+                                @break
 
-                            @case('En proceso')
-                            <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-blue-400  animate-bounce ">
-                                    <i class="bi bi-gear-fill animate-bounce  "></i>
-                                </span>
-                                <div class="ml-6">
-                                    <h4 class="text-md text-blue-400">En proceso</h4>
+                                @case('En proceso')
+                                <div class="relative w-full">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 text-2xl -ml-5 rounded-full text-blue-400  animate-bounce ">
+                                        <i class="bi bi-gear-fill"></i>
+                                    </span>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-blue-400 -ml-3 pt-1">En proceso</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            @break
-                            @case('Rechazada')
-                            <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-red-500  ">
-                                    <i class="bi bi-clipboard-x-fill"></i>
-                                </span>
-                                <div class="ml-6">
-                                    <h4 class="text-md text-red-500">Rechazada</h4>
+                                @break
+                                @case('Rechazada')
+                                <div class="relative w-full">
+                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500  ">
+                                        <i class="bi bi-clipboard-x-fill"></i>
+                                    </span>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-red-500 -ml-3 pt-1">Rechazada</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            @break
+                                @break
 
-                            @default
-                            <div class="relative w-full">
-                                <span
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-9 w-9 text-2xl rounded-full text-gray-400">
-                                    <i class="bi bi-stopwatch-fill"></i>
-                                </span>
-                                <div class="ml-6">
-                                    <h4 class="text-md text-gray-400">Pendiente</h4>
+                                @default
+                                <div class="relative w-full">
+                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
+                                        <i class="bi bi-stopwatch-fill"></i>
+                                    </span>
+                                    <div class="ml-6">
+                                        <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
+                                    </div>
                                 </div>
+                                @endswitch
                             </div>
-                            @endswitch
                         </div>
                     </div>
+
                 </div>
                 <!-- Status Report -->
                 <div class="min-h-24 w-full col-span-2 rounded  lg:mt-0">
+                    <h4 class="text-xl text-gray-900 font-bold pt-3">Peticion o denincia</h4>
                     <section>
                         @if ($denouncement->status == "Rechazada")
                         <div
@@ -245,8 +243,7 @@
                         </div>
                     </form>
                     @endif
-
-                    <div class="flex flex-col space-y-5">
+                    <div class="flex flex-col space-y-5 mt-3 ">
                         <div>
                             <x-label for="case_name" class="block text-sm font-medium text-gray-700"
                                 :value="__('Asunto')" />
@@ -255,11 +252,11 @@
                                 value="{{$denouncement->case_name}}" disabled></input>
                         </div>
                         <div>
-                            <x-label for="id_type_denouncement" class="block text-sm font-medium text-gray-700 bg-white"
+                            <x-label for="id_type_denouncement" class="block text-sm font-medium text-gray-700"
                                 :value="__('Tipo de peticion')" />
                             <div class="relative">
                                 <select id="id_type_denouncement" name="id_type_denouncement"
-                                    class="mt-1 p-2 w-full border rounded-md appearance-none disabled"
+                                    class="mt-1 p-2 w-full border rounded-md appearance-none disabled "
                                     aria-label="Default select example" disabled>
                                     <option value="">Selecciona una opción</option>
                                     @foreach($list as $option)
@@ -282,46 +279,54 @@
                                 :value="__('Contenido de la peticion')" />
                             <div id="quill-editor"
                                 class="quill-editor-default p-2 w-full border rounded-b-md border-slate-300 "
-                                style="height: 250px; background-color:#fff; "></div>
+                                style="height: 250px; background-color:#fff; " disabled></div>
                         </div>
-                        <div class="grid grid-col-1 lg:grid-cols-2 gap-3">
+                        <div class="grid grid-col-1 lg:grid-cols-2 gap-3 ">
                             <div class="lg:col-span-2">
                                 <x-label for="address" class="block text-sm font-medium text-gray-700"
                                     :value="__('Direccion')" />
-                                <input id="address" class="mt-1 p-2 w-full border rounded-md text-gray-500"
-                                    aria-label="Default select example " name="address"
-                                    value="{{$contact->address}}"></input>
+                                <input id="address" class="mt-1 p-2 w-full border rounded-md text-gray-500 bg-white"
+                                    aria-label="Default select example " name="address" value="{{$contact->address}}"
+                                    disabled></input>
                             </div>
                             <div>
                                 <x-label for="phone" class="block text-sm font-medium text-gray-700"
                                     :value="__('Telefono')" />
-                                <input id="phone" class="mt-1 p-2 w-full border rounded-md text-gray-500 "
-                                    aria-label="Default select example " name="phone"
-                                    value="{{$contact->phone}}"></input>
+                                <input id="phone" class="mt-1 p-2 w-full border rounded-md text-gray-500 bg-white"
+                                    aria-label="Default select example " name="phone" value="{{$contact->phone}}"
+                                    disabled></input>
                             </div>
                             <div>
                                 <x-label for="contact_schedule" class="block text-sm font-medium text-gray-700"
                                     :value="__('Horario de contacto')" />
-                                <input id="contact_schedule" class="mt-1 p-2 w-full border rounded-md text-gray-500 "
+                                <input id="contact_schedule"
+                                    class="mt-1 p-2 w-full border rounded-md text-gray-500 bg-white "
                                     aria-label="Default select example " name="contact_schedule"
-                                    value="{{$contact->contact_schedule}}"></input>
+                                    value="{{$contact->contact_schedule}}" disabled></input>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- component -->
-                    <div class="overflow-auto  w-full mt-6 p-3 bg-gray-50 ">
-                        @if(!empty($imagePaths))
-                        @foreach($imagePaths as $image)
-                        <div class="h-24 w-44 relative group" data-dialog-target="image-dialog">
-                            <img src="{{ asset($image)}}" alt="Evidencia Inicial"
-                                class="w-full h-full object-cover rounded-md relative z-0" data-bs-toggle="modal"
-                                data-bs-target="#imageModal" onclick="showImageModal('{{ asset($image)}}')">
+                        <div class="pt-3">
+                            <p class="block text-sm font-medium text-gray-700">Evidencia</p>
+                            <div class="flex items-center pb-2 overflow-x-auto whitespace-nowrap px-5 lg:px-0 pt-1 se">
+                                @if(!empty($imagePaths))
+                                @foreach($imagePaths as $image)
+                                <div class="mr-3 cursor-pointer">
+                                    <div class="h-24 w-40 relative group bg-gray-50 rounded"
+                                        data-dialog-target="image-dialog">
+                                        <div onclick="openModal('{{ asset($image)}}')"
+                                            class="w-full h-full absolute z-10 rounded">
+                                        </div>
+                                        <img src="{{ asset($image)}}" alt="Evidencia Inicial"
+                                            class="w-full h-full object-cover rounded relative z-0"
+                                            data-bs-toggle="modal" data-bs-target="#imageModal">
+                                    </div>
+                                </div>
+                                @endforeach
+                                @else
+                                <p>No hay evidencia inicial.</p>
+                                @endif
+                            </div>
                         </div>
-                        @endforeach
-                        @else
-                        <p>No hay evidencia inicial.</p>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -329,45 +334,73 @@
     </div>
 </div>
 </div>
-<div class="card-body p-3 pt-0">
-    <div id="preview" class="d-flex flex-row overflow-auto m-0 rounded">
-
+<div
+    class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray-900 bg-opacity-50">
+    <div
+        class="border border-gray-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+        <div class="modal-content py-4 text-left px-6">
+            <!--Title-->
+            <div class="flex justify-between items-center pb-3">
+                <p class="text-2xl font-bold">Evidencia</p>
+                <div class="modal-close cursor-pointer z-50">
+                    <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                        viewBox="0 0 18 18">
+                        <path
+                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+            <!--Body-->
+            <div class="my-5">
+                <img id="ImageModal" alt="nature" class="h-96 w-96 mx-auto object-cover object-center" />
+            </div>
+            <!--Footer-->
+            <div class="flex justify-end pt-2">
+                <a
+                    class="focus:outline-none modal-close px-4 bg-gray-400 p-3 rounded-lg text-black hover:bg-gray-300 cursor-pointer">Atras</a>
+                <a id="down" download href=""
+                    class="focus:outline-none px-4 bg-slate-950 p-3 ml-3 rounded-lg text-white hover:bg-slate-800 cursor-pointer">Descargar</a>
+            </div>
+        </div>
     </div>
 </div>
 
-<div data-dialog-backdrop="image-dialog" data-dialog-backdrop-close="true"
-                        class="pointer-events-none fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black bg-opacity-60 opacity-0 backdrop-blur-sm transition-opacity duration-300">
-                        <div class="relative m-4 rounded-lg bg-white font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased shadow-2xl"
-                            role="dialog" data-dialog="image-dialog">
-                            <div
-                                class="flex shrink-0 items-center justify-between p-4 font-sans text-2xl font-semibold leading-snug text-blue-gray-900 antialiased">
-                                <div class="flex items-center gap-3">
-                                    <img alt="tania andrew"
-                                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-                                        class="relative inline-block h-9 w-9 rounded-full object-cover object-center" />
-                                    <div class="-mt-px flex flex-col">
-                                        <p
-                                            class="block font-sans text-sm font-medium leading-normal text-blue-gray-900 antialiased">
-                                            Tania Andrew
-                                        </p>
-                                        <p class="block font-sans text-xs font-normal text-gray-700 antialiased">
-                                            @canwu
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <a id="down" href="" download class="select-none rounded-lg bg-green-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                        Descargar
-                                    </a>
-                                </div>
-                            </div>
-                            <div
-                                class="relative border-t border-b border-t-blue-gray-100 border-b-blue-gray-100 p-0 font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased">
-                                <img id="ImageModal" alt="nature"
-                                    class="h-[32rem] w-auto mx-auto object-cover object-center" />
-                            </div>
-                        </div>
-                    </div>
+<script>
+const modal = document.querySelector('.main-modal');
+const closeButton = document.querySelectorAll('.modal-close');
+
+const modalClose = () => {
+    modal.classList.remove('fadeIn');
+    modal.classList.add('fadeOut');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 500);
+}
+
+const openModal = (imagen) => {
+    modal.classList.remove('fadeOut');
+    modal.classList.add('fadeIn');
+    modal.style.display = 'flex';
+    let im = document.getElementById("ImageModal");
+    let descargar = document.getElementById("down")
+    im.src = imagen;
+    descargar.href = imagen;
+}
+
+for (let i = 0; i < closeButton.length; i++) {
+
+    const elements = closeButton[i];
+
+    elements.onclick = (e) => modalClose();
+
+    modal.style.display = 'none';
+
+    window.onclick = function(event) {
+        if (event.target == modal) modalClose();
+    }
+}
+</script>
 <style>
 @keyframes rotate-x {
     0% {
@@ -387,6 +420,14 @@
     animation-name: rotate-x;
     animation-iteration-count: infinite;
     animation-duration: 4000ms;
+}
+
+.se {
+    --tw-bg-opacity: 1;
+    scrollbar-width: thin;
+    /* "auto" or "thin" */
+    scrollbar-color: rgb(209 213 219) rgb(249 250 251);
+    scrollbar-b
 }
 
 .ql-toolbar.ql-snow {
@@ -421,7 +462,6 @@
         <div class="d-flex flex-row p-0 m-0">
             @if(!empty($finalImagePaths))
             @foreach($finalImagePaths as $imagen)
-
             <div class="m-0 pe-3 mt-sm-3 mt-md-0 position-relative" style="margin-right: 10px;">
                 <a href="{{ $imagen }}" download class="btn btn-dark m-2 position-absolute"><i
                         class="bi bi-download"></i> </a>
@@ -436,21 +476,10 @@
     </div>
 </div>
 @endif
-
-
 <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dialog.js"></script>
-
-
 <script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
 
 <script>
-function showImageModal(imagen) {
-    let im = document.getElementById("ImageModal");
-    let descargar =document.getElementById("down")
-    im.src = imagen;
-    descargar.href =imagen;
-}
-
 $(document).ready(function() {
     var selectedFiles = [];
 
