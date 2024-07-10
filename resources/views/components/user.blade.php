@@ -35,7 +35,7 @@
 -->
 </head>
 
-<body class="h-full overflow-auto overflow-x-hidden	bg-gray-50 ">
+<body class="h-full overflow-auto overflow-x-hidden	bg-gray-100 ">
     <style>
     .men {
         padding-right: 0px !important;
