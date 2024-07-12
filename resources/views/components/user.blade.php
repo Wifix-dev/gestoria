@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full w-full bg-white fixed overflow-auto">
+<html lang="en" class="h-full w-full bg-white overflow-visible">
 
 <head>
     <meta charset="utf-8">
@@ -33,346 +33,277 @@
 
     <link href="public/assets/css/style.css" rel="stylesheet">
 -->
-</head>
-
-<body class="h-full overflow-auto overflow-x-hidden	bg-gray-100 ">
     <style>
-    .men {
-        padding-right: 0px !important;
-        margin-right: 0px !important;
+    @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
+    .font-family-karla {
+        font-family: karla;
+    }
+
+    .bg-sidebar {
+        background: #3d68ff;
+    }
+
+    .cta-btn {
+        color: #3d68ff;
+    }
+
+    .upgrade-btn {
+        background: #1947ee;
+    }
+
+    .upgrade-btn:hover {
+        background: #0038fd;
+    }
+
+    .active-nav-link {
+        background: #1947ee;
+    }
+
+    .nav-item:hover {
+        background: #1947ee;
+    }
+
+    .account-link:hover {
+        background: #3d68ff;
     }
     </style>
+</head>
 
-    <div class="w-full">
-    <nav class="w-full  bg-white shadow px-4 py-3 absolute top-0 z-20">
-    <div class="container flex items-center justify-between flex-wrap mx-auto">
-        <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <img src="{{ asset('public/assets/img/SOS2.png') }}" alt="App screenshot" width="54" height="54"
-        class="fill-current h-12 w-12 mr-2">
-            <span class="font-bold text-3xl tracking-tight text-blue-950 ">S.0.S</span>
-        </div>
-        <div class="block lg:hidden">
-            <button
-                class="flex items-center px-3 py-2 border rounded text-slate-900 border-slate-900 hover:text-slate-800 hover:border-slate-800">
-                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <title>Menu</title>
-                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                </svg>
-            </button>
-        </div>
-        <div class="w-full hidden lg:block flex-grow lg:flex lg:items-center lg:w-auto">
-            <div class="text-lg lg:flex-grow">
-                <a href="#responsive-header"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-slate-700 hover:text-white hover:bg-gray-900 mr-4 py-2 px-3 rounded">
-                    Docs
-                </a>
-                <a href="#responsive-header"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-slate-700 hover:text-white hover:bg-gray-900 mr-4 py-2 px-3 rounded ">
-                    Examples
-                </a>
-                <a href="#responsive-header"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-slate-700 hover:text-white hover:bg-gray-900 mr-4 py-2 px-3 rounded">
-                    Blog
-                </a>
-            </div>
-            <div class="flex justify-between space-x-2">
-                <div class=" flex justify-between space-x-3 mr-2">
-                    <svg class="cursor-pointer my-auto  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 "
-                        width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z"
-                            stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21"
-                            stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    <div
-                        class="relative cursor-pointer focus:outline-none my-auto focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 ">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z"
-                                stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <div
-                            class="animate-ping w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto duration-200">
+<body class="bg-gray-100 font-family-karla flex w-full h-full overflow-visible ">
+    <div class="w-full h-full flex flex-col h-screen overflow-y-hidden">
+        <!-- Desktop Header -->
+        <header class="w-full items-center bg-white py-2 px-6 hidden lg:flex lg:flex-col fixed z-10 top-0 shadow">
+            <div class="max-w-7xl w-full mx-auto flex flex-wrap flex-col md:flex-row justify-between">
+                <div class="lg:flex lg:items-center lg:justify-between w-full">
+                    <div class="flex items-center justify-between">
+                        <a href="{{route('home')}}" class="flex flex-row">
+                            <img class="w-auto h-[60px]" src="{{asset('public/assets/img/SOS2.png')}}" alt="">
+                            <span class="font-extrabold text-2xl my-auto pl-3 ">S.O.S</span>
+                        </a>
+
+                        <!-- Mobile menu button -->
+                        <div class="flex lg:hidden">
+                            <button x-cloak @click="isOpen = !isOpen" type="button"
+                                class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
+                                aria-label="toggle menu">
+                                <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+                                </svg>
+
+                                <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
                         </div>
-                        <div class=" w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto shadow-lg">
+                    </div>
+
+                    <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+                    <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
+                        class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
+                        <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
+                            <a href="#"
+                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Join
+                                Slack</a>
+                            <a href="#"
+                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Browse
+                                Topics</a>
+                            <a href="#"
+                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Random
+                                Item</a>
+                            <a href="#"
+                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Experts</a>
+                        </div>
+
+                        <div class="flex items-center mt-4 lg:mt-0">
+
+                            <div x-data="{ isOpen: false }" class="relative flex justify-end">
+
+                                <button @click="isOpen = !isOpen"
+                                    class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                        class="object-cover w-full h-full" alt="avatar">
+                                </button>
+                                <button x-show="isOpen" @click="isOpen = false"
+                                    class="h-full w-full fixed inset-0 cursor-default"></button>
+                                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-11 shadow-sm border border-gray-50">
+                                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
+                                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
+                                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <a href="register"
-                    class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20">Registrar</a>
-                <a href="login"
-                    class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">Inicia
-                    Sesion</a>
             </div>
-        </div>
-    </div>
-    </nav>
 
-        <div class="relative ">
-        @yield('content')
+
+            <div class="w-1/2"></div>
+
+        </header>
+
+        <!-- Mobile Header & Nav -->
+        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 fixed lg:hidden z-10">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+                <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
+                    <i x-show="!isOpen" class="fas fa-bars"></i>
+                    <i x-show="isOpen" class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Dropdown Nav -->
+            <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
+                <a href="index.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
+                </a>
+                <a href="blank.html"
+                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-sticky-note mr-3"></i>
+                    Blank Page
+                </a>
+                <a href="tables.html"
+                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-table mr-3"></i>
+                    Tables
+                </a>
+                <a href="forms.html"
+                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-align-left mr-3"></i>
+                    Forms
+                </a>
+                <a href="tabs.html"
+                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-tablet-alt mr-3"></i>
+                    Tabbed Content
+                </a>
+                <a href="calendar.html"
+                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-calendar mr-3"></i>
+                    Calendar
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-cogs mr-3"></i>
+                    Support
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-user mr-3"></i>
+                    My Account
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    Sign Out
+                </a>
+                <button
+                    class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                    <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
+                </button>
+            </nav>
+            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-plus mr-3"></i> New Report
+            </button> -->
+        </header>
+
+        <div class="w-full h-full overflow-x-hidden border-t fixed flex flex-col">
+            <main class="w-full h-full overflow-auto">
+                @yield('content')
+            </main>
+
         </div>
 
     </div>
+
+    <script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
+
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <!-- ChartJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+        integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
 
     <script>
-    function selected() {
-        var targeted = event.target;
-        var clicked = targeted.parentElement;
-
-        var child = clicked.children;
-        console.log(child);
-
-        for (let i = 0; i < child.length; i++) {
-            if (child[i].classList.contains("text-white")) {
-                console.log(child[i]);
-                child[i].classList.remove("text-white", "bg-indigo-600");
-                child[i].classList.add(
-                    "text-gray-600",
-                    "bg-gray-50",
-                    "border",
-                    "border-white"
-                );
+    var chartOne = document.getElementById('chartOne');
+    var myChart = new Chart(chartOne, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
             }
         }
+    });
 
-        targeted.classList.remove(
-            "text-gray-600",
-            "bg-gray-50",
-            "border",
-            "border-white"
-        );
-        targeted.classList.add("text-white", "bg-indigo-600");
-    }
-
-    function selectNew() {
-        var newL = document.getElementById("list");
-        newL.classList.toggle("hidden");
-
-        document.getElementById("ArrowSVG").classList.toggle("rotate-180");
-    }
-
-    function selectedSmall() {
-        var text = event.target.innerText;
-        var newL = document.getElementById("list");
-        var newText = document.getElementById("textClicked");
-        newL.classList.add("hidden");
-        document.getElementById("ArrowSVG").classList.toggle("rotate-180");
-        newText.innerText = text;
-
-        document.getElementById("s1").classList.remove("hidden");
-    }
+    var chartTwo = document.getElementById('chartTwo');
+    var myLineChart = new Chart(chartTwo, {
+        type: 'line',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
     </script>
-
-    <!--
-    <main>
-        <nav class="men navbar navbar-light navbar-expand-lg border-0 sticky-top shadow-sm"
-            style="background-color: #ffffff;">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <i class="bi-back"></i>
-                    <span>Topic</span>
-                </a>
-                @auth
-
-                <div class="nav-item dropdown me-4 ms-auto d-lg-none">
-
-                    <div class="nav-link nav-profile d-flex align-items-center " data-bs-toggle="dropdown">
-                        <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"
-                            style="width:35px;height:35px;">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
-                    </div>
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow  p-3 mt-2">
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>Perfil</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Configuracion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center rounded-3" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center rounded-3" href="#">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-
-                                    <span :href="route('logout')" onclick="event.preventDefault();
-            this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </span>
-                                </form>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-                @endauth
-                <button class="navbar-toggler bg-dark p-1" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon text-dark"></span>
-                </button>
-
-
-
-
-
-                    </ul>
-                    @auth
-                    <div class="nav-item dropdown pe-3 d-none d-lg-block">
-
-                        <div class="nav-link nav-profile d-flex align-items-center " data-bs-toggle="dropdown">
-                            <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"
-                                style="width:30px;height:30px;">
-                            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
-                        </div>
-
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow p-3 mt-3">
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
-                                    <i class="bi bi-person"></i>
-                                    <span>Perfil</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center rounded-3" href="users-profile.html">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Configuracion</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center rounded-3" href="pages-faq.html">
-                                    <i class="bi bi-question-circle"></i>
-                                    <span>Need Help?</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center rounded-3" href="#">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-
-                                        <span :href="route('logout')" onclick="event.preventDefault();
-            this.closest('form').submit();">
-                                            {{ __('Log Out') }}
-                                        </span>
-                                    </form>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                    @endauth
-                </div>
-            </div>
-        </nav>
-    </main>
-
-    <footer class="site-footer section-padding">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-3 col-12 mb-4 pb-2">
-                    <a class="navbar-brand mb-2" href="index.html">
-                        <i class="bi-back"></i>
-                        <span>Topic</span>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-6">
-                    <h6 class="site-footer-title mb-3">Resources</h6>
-
-                    <ul class="site-footer-links">
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Home</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">How it works</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">FAQs</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
-                    <h6 class="site-footer-title mb-3">Information</h6>
-
-                    <p class="text-white d-flex mb-1">
-                        <a href="tel: 305-240-9671" class="site-footer-link">
-                            305-240-9671
-                        </a>
-                    </p>
-
-                    <p class="text-white d-flex">
-                        <a href="mailto:info@company.com" class="site-footer-link">
-                            info@company.com
-                        </a>
-                    </p>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            English</button>
-
-                        <ul class="dropdown-menu">
-                            <li><button class="dropdown-item" type="button">Thai</button></li>
-
-                            <li><button class="dropdown-item" type="button">Myanmar</button></li>
-
-                            <li><button class="dropdown-item" type="button">Arabic</button></li>
-                        </ul>
-                    </div>
-
-                    <p class="copyright-text mt-lg-5 mt-4">Copyright © 2048 Topic Listing Center. All rights reserved.
-                        <br><br>Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a>
-                        Distribution <a href="https://themewagon.com">ThemeWagon</a>
-                    </p>
-
-                </div>
-
-            </div>
-        </div>
-    </footer>
--->
-    <!--
-    <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
-    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
-
-
-    <script src="public/assets/js/main.js"></script>-->
-    <script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
-    <script src="https://unpkg.com/alpinejs" defer></script>
-
-    </script>
-
 </body>
 
 </html>

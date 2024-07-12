@@ -48,7 +48,7 @@
                         </div>
                         <div class="border-l-2 border-dashed border-left flex flex-col gap-3 pl-2">
                             <div class="relative w-full pt-0 mt-0 ">
-                                <p class="text-base font-semibold  mt-0">En espera a revision</p>
+                                <p class="text-base font-normal  mt-0 ml-3">En espera a revision</p>
                                 @switch($denouncement->status)
                                 @case('En espera')
                                 <div class="relative w-full">
@@ -64,7 +64,8 @@
                                 @case('Revisada')
                                 @default
                                 <div class="relative w-full">
-                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5  text-2xl rounded-full text-blue-500">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5  text-2xl rounded-full text-blue-500">
                                         <i class="bi bi-patch-check-fill"></i>
                                     </span>
                                     <div class="ml-6">
@@ -74,7 +75,7 @@
                                 @endswitch
                             </div>
                             <div class="relative w-full">
-                                <p class="text-base font-semibold">Recepcion de solicitud</p>
+                                <p class="text-base font-normal ml-3">Recepcion de solicitud</p>
                                 @switch($denouncement->status)
                                 @case('Revisada')
                                 <div class="relative w-full">
@@ -94,7 +95,8 @@
                                 @case('Pendiente a comentarios')
                                 @case('Cerrada')
                                 <div class="relative w-full">
-                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
                                         <i class="bi bi-patch-check-fill "></i>
                                     </span>
                                     <div class="ml-6">
@@ -115,7 +117,8 @@
                                 @break
                                 @default
                                 <div class="relative w-full">
-                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
                                         <i class="bi bi-stopwatch-fill"></i>
                                     </span>
                                     <div class="ml-6">
@@ -125,13 +128,14 @@
                                 @endswitch
                             </div>
                             <div class="relative w-full">
-                                <p class="text-base font-semibold">Solucion</p>
+                                <p class="text-base font-normal ml-3">Solucion</p>
                                 @switch($denouncement->status)
                                 @case('Terminada')
                                 @case('Pendiente a comentarios')
                                 @case('Cerrada')
                                 <div class="relative w-full">
-                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
                                         <i class="bi bi-patch-check-fill "></i>
                                     </span>
                                     <div class="ml-6">
@@ -153,7 +157,8 @@
                                 @break
                                 @case('Rechazada')
                                 <div class="relative w-full">
-                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500  ">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500  ">
                                         <i class="bi bi-clipboard-x-fill"></i>
                                     </span>
                                     <div class="ml-6">
@@ -164,7 +169,8 @@
 
                                 @default
                                 <div class="relative w-full">
-                                    <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
+                                    <span
+                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
                                         <i class="bi bi-stopwatch-fill"></i>
                                     </span>
                                     <div class="ml-6">
@@ -305,28 +311,75 @@
                                     value="{{$contact->contact_schedule}}" disabled></input>
                             </div>
                         </div>
-                        <div class="pt-3">
-                            <p class="block text-sm font-medium text-gray-700">Evidencia</p>
-                            <div class="flex items-center pb-2 overflow-x-auto whitespace-nowrap px-5 lg:px-0 pt-1 se">
-                                @if(!empty($imagePaths))
-                                @foreach($imagePaths as $image)
-                                <div class="mr-3 cursor-pointer">
-                                    <div class="h-24 w-40 relative group bg-gray-50 rounded"
-                                        data-dialog-target="image-dialog">
-                                        <div onclick="openModal('{{ asset($image)}}')"
-                                            class="w-full h-full absolute z-10 rounded">
+                        <div class=" py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="block text-sm font-medium text-gray-700">Evidencia</dt>
+                            <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <ul role="list"
+                                    class="divide-y divide-gray-100 rounded-md border border-gray-200 h-72 overflow-y-auto">
+                                    @if(!empty($imagePaths))
+                                    @foreach($imagePaths as $image)
+                                    <li onclick="openModal('{{ asset($image)}}')"
+                                        class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6 hover:bg-blue-400 group">
+                                        <div class="flex w-0 flex-1 items-center">
+                                            <svg class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-white"
+                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                                                <span class="truncate font-medium group-hover:text-white">Evidencia
+                                                    {{ $loop->iteration }}</span>
+                                            </div>
                                         </div>
-                                        <img src="{{ asset($image)}}" alt="Evidencia Inicial"
-                                            class="w-full h-full object-cover rounded relative z-0"
-                                            data-bs-toggle="modal" data-bs-target="#imageModal">
-                                    </div>
-                                </div>
-                                @endforeach
-                                @else
-                                <p>No hay evidencia inicial.</p>
-                                @endif
-                            </div>
+                                        <div class="ml-4 flex-shrink-0">
+                                            <a href="{{$image}}" download
+                                                class="font-medium text-indigo-600 group-hover:text-indigo-50">Descagar</a>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                    @else
+                                    <p>No hay evidencia inicial.</p>
+                                    @endif
+                                </ul>
+                            </dd>
                         </div>
+                        @if($denouncement->status == "Terminada" || $denouncement->status == "Cerrada")
+
+                        <div class=" py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="block text-sm font-medium text-gray-700">Evidencia Final</dt>
+                            <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <ul role="list"
+                                    class="divide-y divide-gray-100 rounded-md border border-gray-200 h-72 overflow-y-auto">
+                                    @if(!empty($finalImagePaths))
+                                    @foreach($finalImagePaths as $imagen)
+                                    <li onclick="openModal('{{ asset($imagen)}}')"
+                                        class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6 hover:bg-blue-400 group">
+                                        <div class="flex w-0 flex-1 items-center">
+                                            <svg class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-white"
+                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                                                <span class="truncate font-medium group-hover:text-white">Evidencia
+                                                    {{ $loop->iteration }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="ml-4 flex-shrink-0">
+                                            <a href="{{$imagen}}" download
+                                                class="font-medium text-indigo-600 group-hover:text-indigo-50">Descagar</a>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                    @else
+                                    <p>No hay evidencia inicial.</p>
+                                    @endif
+                                </ul>
+                            </dd>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -447,35 +500,99 @@ for (let i = 0; i < closeButton.length; i++) {
     border-top: 0 !important;
     border-color: #e5e7eb !important;
 }
+
+.hasImage:hover section {
+    background-color: rgba(5, 5, 5, 0.4);
+}
+
+.hasImage:hover button:hover {
+    background: rgba(5, 5, 5, 0.45);
+}
+
+#overlay.draggedover {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+
+.group:hover .group-hover\:text-blue-800 {
+    color: #2b6cb0;
+}
+
+select {
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    color: black;
+    background: white;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+.ql-toolbar.ql-snow {
+    border-radius: 0.375rem 0.375rem 0 0 !important;
+    border-width: 1px !important;
+    box-sizing: border-box !important;
+    border-style: solid !important;
+    border-color: #e5e7eb !important;
+}
+
+#quill-editor {
+    border-radius: 0 0 0.375rem 0.375rem !important;
+
+    border-width: 1px !important;
+    box-sizing: border-box !important;
+    border-style: solid !important;
+    border-top: 0 !important;
+    border-color: #e5e7eb !important;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.animated.faster {
+    -webkit-animation-duration: 500ms;
+    animation-duration: 500ms;
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+.fadeOut {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+</style>
 </style>
 
 
-
-@if($denouncement->status == "Terminada" || $denouncement->status == "Cerrada")
-<div class="card shadow-none border p-0">
-    <div class="card-header pb-1 pt-3 bg-light ">
-        <div class="pagetitle ">
-            <h3 class="fs-6 fw-normal">Evidencia Final</h3>
-        </div>
-    </div>
-    <div class="card-body p-md-4 pt-3 ">
-        <div class="d-flex flex-row p-0 m-0">
-            @if(!empty($finalImagePaths))
-            @foreach($finalImagePaths as $imagen)
-            <div class="m-0 pe-3 mt-sm-3 mt-md-0 position-relative" style="margin-right: 10px;">
-                <a href="{{ $imagen }}" download class="btn btn-dark m-2 position-absolute"><i
-                        class="bi bi-download"></i> </a>
-                <img src="{{ $imagen }}" alt="Evidencia Inicial" style="height: 200px;" class="rounded-3 "
-                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImageModal('{{ $imagen }}')">
-            </div>
-            @endforeach
-            @else
-            <p>No hay evidencia inicial.</p>
-            @endif
-        </div>
-    </div>
-</div>
-@endif
 <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dialog.js"></script>
 <script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
 
