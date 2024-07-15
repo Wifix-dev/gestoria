@@ -105,16 +105,21 @@
                         class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
                         <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
                             <a href="#"
-                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Join
-                                Slack</a>
+                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Inicio</a>
+                            @if (auth()->check() && auth()->user()->role == 'admin')
                             <a href="#"
-                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Browse
-                                Topics</a>
-                            <a href="#"
-                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Random
-                                Item</a>
-                            <a href="#"
-                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Experts</a>
+                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Crear
+                                Denuncias</a>
+                            @elseif (auth()->check() && auth()->user()->role == 'user')
+                                <p>Bienvenido, Usuario!</p>
+                            @elseif (auth()->check() && auth()->user()->role == 'manager')
+                                <a href="{{route('manager.denunciationslist')}}"
+                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Crear
+                                Denuncias</a>
+                            @else
+                            <p>Por favor, inicia sesión.</p>
+                            @endif
+
                         </div>
 
                         <div class="flex items-center mt-4 lg:mt-0">
@@ -128,7 +133,8 @@
                                 </button>
                                 <button x-show="isOpen" @click="isOpen = false"
                                     class="h-full w-full fixed inset-0 cursor-default"></button>
-                                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-11 shadow-sm border border-gray-50">
+                                <div x-show="isOpen"
+                                    class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-11 shadow-sm border border-gray-50">
                                     <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
                                     <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
                                     <a href="#" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>

@@ -34,6 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $hidden = [
+        'id',
         'password',
         'remember_token',
     ];
@@ -51,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Denouncement::class, 'user_id');
     }
     public function manager(){
-        return $this->hasMany(Denouncement::class, 'manager_id');
+        return $this->hasMany(Denouncement::class, 'id');
     }
 
 }

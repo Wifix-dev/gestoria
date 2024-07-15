@@ -15,7 +15,7 @@ class TypeDenouncements extends Model
         'color',
     ];
 
-    public function denouncement()
+    public function denouncements()
     {
         return $this->hasMany(Denouncement::class);
     }

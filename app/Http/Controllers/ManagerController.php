@@ -11,8 +11,18 @@ use Illuminate\Support\Str;
 
 class ManagerController extends Controller
 {
-    public function ManagerDenunciation(){
-        return view('manager.list');
+    public function ManagerDenunciation(Request $request){
+       // En tu controlador
+       $status = $request->input('status');
+       $type = $request->input('type');
+       $tp = TypeDenouncements::all();
+       $denouncements = Denouncement::with(['user', 'type', 'manager']) ->when($status, function ($query, $status) {
+        return $query->where('status', $status); })
+        ->when($type, function ($query, $type) {
+            return $query->where('id_type_denouncement', $type);
+        })->paginate(2);
+
+       return view('manager.list', compact('denouncements','tp'));
     }
     public function FinalEvidence(Request $request){
         $request->validate([
@@ -91,35 +101,34 @@ class ManagerController extends Controller
         $nombre=$user->name.' '.$user->last_name;
 
         $denouncement = Denouncement::find($id);
-if (!$denouncement) {
-    return redirect()->back()->with('error', 'Denuncia no encontrada.');
-}
+        if (!$denouncement) {
+            return redirect()->back()->with('error', 'Denuncia no encontrada.');
+        }
 
-$contact = Contact::find($denouncement->contact_id);
+        $contact = Contact::find($denouncement->contact_id);
 
-$initial_evidence_images = $denouncement->initial_evidence ? json_decode($denouncement->initial_evidence, true) : [];
-$imagePaths = array_map(fn($image) => asset('public/' . $image), $initial_evidence_images);
+        $initial_evidence_images = $denouncement->initial_evidence ? json_decode($denouncement->initial_evidence, true) : [];
+        $imagePaths = array_map(fn($image) => asset('public/' . $image), $initial_evidence_images);
 
-$type =  TypeDenouncements::find($denouncement->id_type_denouncement)->pluck('type_service')->first();
+        $type =  TypeDenouncements::find($denouncement->id_type_denouncement)->pluck('type_service')->first();
 
 
 
-$finalImagePaths = [];
-if ($denouncement->final_evidence) {
-    $final_evidence_images = json_decode($denouncement->final_evidence, true);
-    $finalImagePaths = array_map(fn($image) => asset('public/' . $image), $final_evidence_images);
-}
+        $finalImagePaths = [];
+        if ($denouncement->final_evidence) {
+            $final_evidence_images = json_decode($denouncement->final_evidence, true);
+            $finalImagePaths = array_map(fn($image) => asset('public/' . $image), $final_evidence_images);
+        }
 
-    $data = [
-        'denouncement' => $denouncement,
-        'imagePaths' => $imagePaths,
-        'contact' => $contact,
-        'type' =>$type,
-        'nombre' => $nombre,
-        'finalImagePaths' => $finalImagePaths
-    ];
-// Pasar las variables a la vista
-    return view('manager.denouncement', $data);
+        $data = [
+            'denouncement' => $denouncement,
+            'imagePaths' => $imagePaths,
+            'contact' => $contact,
+            'type' =>$type,
+            'nombre' => $nombre,
+            'finalImagePaths' => $finalImagePaths
+        ];
+        return view('manager.denouncement', $data);
 
     }
 }

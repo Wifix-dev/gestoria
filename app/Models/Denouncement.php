@@ -19,23 +19,24 @@ class Denouncement extends Model
         'final_evidence',
         'created_at',
         'user_id',
+        'manager_id',
         'contact_id',
         'updated_at'
     ];
     public function user()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class);
     }
     public function manager()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'manager_id');
     }
     public function contact()
-{
-    return $this->belongsTo(Contact::class);
-}
-public function TypeDenouncement()
-{
-    return $this->belongsTo(Contact::class);
-}
+    {
+        return $this->belongsTo(Contact::class);
+    }
+    public function type()
+    {
+        return $this->belongsTo(TypeDenouncements::class,'id_type_denouncement');
+    }
 }
