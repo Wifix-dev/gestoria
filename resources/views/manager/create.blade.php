@@ -91,7 +91,7 @@ select {
         </div>
         <div>
             <div class="flex items-center gap-x-3">
-                <h2 class="sm:text-xl text-2xl font-bold uppercase title-font mb-1text-gray-900">Denuncias</h2>
+                <h2 class="sm:text-xl text-2xl font-bold uppercase title-font mb-1text-gray-900">Registro de Peticion</h2>
             </div>
             <p class="mb-2 text-sm text-gray-500 :text-gray-300">Estas son las peticiones realizadas por los ciudadanos
                 registrados en la plataforma.</p>
