@@ -23,7 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
+    Route::get('/denouncements/create',[ManagerController::class, 'Create'])->middleware('role:manager')->name('manage.create.denouncement');
     Route::get('/denouncement', [UserController::class, 'UserDenunciation'])->middleware('role:user')->name('denouncement');
     Route::get('/denouncement/{id}', [UserController::class, 'GetDenouncement'])->middleware('role:user')->name('denouncement.info');
     Route::post('/denouncement/save',  [UserController::class, 'SaveDenouncement'])->middleware('role:user')->name('denouncement.save');

@@ -6,41 +6,18 @@
 @if(session('success'))
 <div>{{ session('success') }}</div>
 @endif
-<section class=" mx-auto">
+<section class=" mx-auto ">
     <div class="sm:flex sm:items-center sm:justify-between">
         <div>
             <div class="flex items-center gap-x-3">
-                <h2 class="text-lg font-medium text-gray-800 :text-white">Denuncias</h2>
-
-                <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full :bg-gray-800 :text-blue-400">240
-                    vendors</span>
+                <h2 class="sm:text-xl text-2xl font-bold uppercase title-font mb-2 text-gray-900">Denuncias</h2>
             </div>
-
-            <p class="mt-1 text-sm text-gray-500 :text-gray-300">These companies have purchased in the last 12
-                months.</p>
+            <p class="mt-1 text-sm text-gray-500 :text-gray-300">Estas son las peticiones realizadas por los ciudadanos registrados en la plataforma.</p>
         </div>
 
         <div class="flex flex-col sm:flex-row items-center mt-4 gap-2">
-            <button
-                class="flex  w-full lg:w-auto  items-center justify-center px-5 py-3 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto :hover:bg-gray-800 :bg-gray-900 hover:bg-gray-100 :text-gray-200 :border-gray-700">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_3098_154395)">
-                        <path
-                            d="M13.3333 13.3332L9.99997 9.9999M9.99997 9.9999L6.66663 13.3332M9.99997 9.9999V17.4999M16.9916 15.3249C17.8044 14.8818 18.4465 14.1806 18.8165 13.3321C19.1866 12.4835 19.2635 11.5359 19.0351 10.6388C18.8068 9.7417 18.2862 8.94616 17.5555 8.37778C16.8248 7.80939 15.9257 7.50052 15 7.4999H13.95C13.6977 6.52427 13.2276 5.61852 12.5749 4.85073C11.9222 4.08295 11.104 3.47311 10.1817 3.06708C9.25943 2.66104 8.25709 2.46937 7.25006 2.50647C6.24304 2.54358 5.25752 2.80849 4.36761 3.28129C3.47771 3.7541 2.70656 4.42249 2.11215 5.23622C1.51774 6.04996 1.11554 6.98785 0.935783 7.9794C0.756025 8.97095 0.803388 9.99035 1.07431 10.961C1.34523 11.9316 1.83267 12.8281 2.49997 13.5832"
-                            stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_3098_154395">
-                            <rect width="20" height="20" fill="white" />
-                        </clipPath>
-                    </defs>
-                </svg>
-
-                <span>Import</span>
-            </button>
-
-            <button
-                class="flex items-center justify-center w-full lg:w-auto  px-5 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 :hover:bg-blue-500 :bg-blue-600">
+            <a href="{{route('manage.create.denouncement')}}"
+                class="flex items-center justify-center w-full lg:w-auto  px-5 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-950 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-900 ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -48,11 +25,11 @@
                 </svg>
 
                 <span>Registrar solicitud</span>
-            </button>
+            </a>
         </div>
     </div>
 
-    <div class="mt-6 w-full flex flex-col md:flex-row md:justify-between">
+    <div class="mt-3 w-full flex flex-col md:flex-row md:justify-between">
         <form method="GET" action="{{ route('manager.denouncements.list') }}">
 
             <div class="flex flex-col md:flex-row w-full gap-2 ">
@@ -107,7 +84,7 @@
 
                 <div class="relative bg-gray-100 w-full md:w-36	">
                     <div class="relative inline-block w-full flex justify-between">
-                        <input name="fdate" type="date"
+                        <input name="fdate" type="date" value="{{request('fdate')}}"
                             class="appearance-none p-2 text-sm font-medium text-gray-600 transition-colors duration-200 w-full rounded-lg bg-white border border-gray-200">
                     </div>
                 </div>
@@ -116,22 +93,9 @@
                     class="appearance-none p-2 text-sm font-medium text-gray-200 bg-slate-900 transition-colors duration-200 w-full md:w-auto rounded-lg border border-gray-200 hover:bg-slate-950 rounded-lg">Aplicar</button>
             </div>
         </form>
-
-        <div class="relative flex items-center mt-4 md:mt-0">
-            <span class="absolute">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-5 h-5 mx-3 text-gray-400 :text-gray-600">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                </svg>
-            </span>
-
-            <input type="text" placeholder="Search"
-                class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
-        </div>
     </div>
 
-    <div class="flex flex-col mt-6 ">
+    <div class="flex flex-col mt-3 ">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <div class="overflow-hidden border border-gray-200 rounded-lg">
@@ -187,7 +151,7 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 :divide-gray-700 :bg-gray-900">
                             @foreach ($denouncements as $list)
-                            <tr>
+                            <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                     <div>
                                         {{$list->case_name}}

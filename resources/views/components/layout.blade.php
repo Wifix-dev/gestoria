@@ -18,9 +18,10 @@
     <style>
     @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
 
-    .font-family-karla {
-        font-family: karla;
+    * {
+    font-family: 'ui-sans', sans-serif;
     }
+
 
     .bg-sidebar {
         background: #3d68ff;
@@ -188,8 +189,8 @@
             </button> -->
         </header>
 
-        <div class="w-full overflow-x-hidden border-t flex flex-col">
-            <main class="w-full flex-grow p-6">
+        <div class="w-full h-full overflow-x-hidden border-t flex flex-col">
+            <main class="w-full flex-grow p-3 lg:p-6 relative">
                 @yield('content')
             </main>
         </div>
@@ -197,7 +198,7 @@
     </div>
 
     <script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
-
+    <script src="{{asset('public/js/upload.js')}}"></script>
     <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <!-- Font Awesome -->

@@ -36,9 +36,10 @@
     <style>
     @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
 
-    .font-family-karla {
-        font-family: karla;
-    }
+    * {
+    font-family: 'ui-sans', sans-serif;
+}
+
 
     .bg-sidebar {
         background: #3d68ff;
@@ -113,7 +114,7 @@
                             @elseif (auth()->check() && auth()->user()->role == 'user')
                                 <p>Bienvenido, Usuario!</p>
                             @elseif (auth()->check() && auth()->user()->role == 'manager')
-                                <a href="{{route('manager.denunciationslist')}}"
+                                <a href="{{route('manager.denouncements.list')}}"
                                 class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Crear
                                 Denuncias</a>
                             @else

@@ -11,13 +11,17 @@ use Illuminate\Support\Str;
 
 class ManagerController extends Controller
 {
+    public function create(){
+        $list = TypeDenouncements::all();
+        return(view('manager.create',compact('list')));
+    }
     public function ManagerDenunciation(Request $request){
        // En tu controlador
        $status = $request->input('status');
        $type = $request->input('type');
        $date = $request->input('fdate');
        $tp = TypeDenouncements::all();
-       $denouncements = Denouncement::with(['user', 'type', 'manager']) 
+       $denouncements = Denouncement::with(['user', 'type', 'manager'])
         ->when($status, function ($query, $status) {
             return $query->where('status', $status); })
         ->when($type, function ($query, $type) {
@@ -25,10 +29,12 @@ class ManagerController extends Controller
         })
         ->when($date, function ($query, $date) {
             return $query->where('created_at', 'like', $date . '%');
-        })->paginate(2);
+        })->paginate(10);
 
        return view('manager.list', compact('denouncements','tp'));
     }
+
+
     public function FinalEvidence(Request $request){
         $request->validate([
             'final_evidence' => 'required|array',
