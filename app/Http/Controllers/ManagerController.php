@@ -15,11 +15,16 @@ class ManagerController extends Controller
        // En tu controlador
        $status = $request->input('status');
        $type = $request->input('type');
+       $date = $request->input('fdate');
        $tp = TypeDenouncements::all();
-       $denouncements = Denouncement::with(['user', 'type', 'manager']) ->when($status, function ($query, $status) {
-        return $query->where('status', $status); })
+       $denouncements = Denouncement::with(['user', 'type', 'manager']) 
+        ->when($status, function ($query, $status) {
+            return $query->where('status', $status); })
         ->when($type, function ($query, $type) {
             return $query->where('id_type_denouncement', $type);
+        })
+        ->when($date, function ($query, $date) {
+            return $query->where('created_at', 'like', $date . '%');
         })->paginate(2);
 
        return view('manager.list', compact('denouncements','tp'));
@@ -111,8 +116,6 @@ class ManagerController extends Controller
         $imagePaths = array_map(fn($image) => asset('public/' . $image), $initial_evidence_images);
 
         $type =  TypeDenouncements::find($denouncement->id_type_denouncement)->pluck('type_service')->first();
-
-
 
         $finalImagePaths = [];
         if ($denouncement->final_evidence) {

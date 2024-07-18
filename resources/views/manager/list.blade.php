@@ -6,24 +6,23 @@
 @if(session('success'))
 <div>{{ session('success') }}</div>
 @endif
-<section class="container px-4 mx-auto">
+<section class=" mx-auto">
     <div class="sm:flex sm:items-center sm:justify-between">
         <div>
             <div class="flex items-center gap-x-3">
-                <h2 class="text-lg font-medium text-gray-800 dark:text-white">Customers</h2>
+                <h2 class="text-lg font-medium text-gray-800 :text-white">Denuncias</h2>
 
-                <span
-                    class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">240
+                <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full :bg-gray-800 :text-blue-400">240
                     vendors</span>
             </div>
 
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">These companies have purchased in the last 12
+            <p class="mt-1 text-sm text-gray-500 :text-gray-300">These companies have purchased in the last 12
                 months.</p>
         </div>
 
-        <div class="flex items-center mt-4 gap-x-3">
+        <div class="flex flex-col sm:flex-row items-center mt-4 gap-2">
             <button
-                class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700">
+                class="flex  w-full lg:w-auto  items-center justify-center px-5 py-3 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto :hover:bg-gray-800 :bg-gray-900 hover:bg-gray-100 :text-gray-200 :border-gray-700">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_3098_154395)">
                         <path
@@ -41,7 +40,7 @@
             </button>
 
             <button
-                class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                class="flex items-center justify-center w-full lg:w-auto  px-5 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 :hover:bg-blue-500 :bg-blue-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -53,55 +52,94 @@
         </div>
     </div>
 
-    <div class="mt-6 md:flex md:items-center md:justify-between">
-    <form method="GET" action="{{ route('manager.denunciationslist') }}">
+    <div class="mt-6 w-full flex flex-col md:flex-row md:justify-between">
+        <form method="GET" action="{{ route('manager.denouncements.list') }}">
 
-        <div
-            class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
-            <a class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 bg-gray-100 sm:text-sm dark:bg-gray-800 dark:text-gray-300"
-            href="{{ route('manager.denunciationslist') }}">Mostrar Todo</a>
+            <div class="flex flex-col md:flex-row w-full gap-2 ">
+                <a class="appearance-none p-2 text-sm font-medium text-gray-600 text-center transition-colors duration-200 lg:w-32 rounded-lg bg-white border border-gray-200"
+                    href="{{ route('manager.denouncements.list') }}">Todo</a>
+                <div class="relative w-full md:w-32 text-gray-600   ">
+                    <div class="relative inline-block w-full h-full  flex justify-between">
+                        <select
+                            class="appearance-none p-2 text-sm font-medium transition-colors duration-200 rounded-lg w-full bg-white border border-gray-200"
+                            name="status" id="status">
+                            <option value="">Estado</option>
+                            <option value="Cerrada" {{ request('status') == 'Cerrada' ? 'selected' : '' }}>Cerrada
+                            </option>
+                            <option value="En espera" {{ request('status') == 'En espera' ? 'selected' : '' }}>En espera
+                            </option>
+                            <option value="Rechazada" {{ request('status') == 'Rechazada' ? 'selected' : '' }}>Rechazada
+                            </option>
+                        </select>
 
-                    <select class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100" name="status" id="status">
-                        <option value="">Estado</option>
-                        <option value="Cerrada" {{ request('status') == 'Cerrada' ? 'selected' : '' }}>Cerrada</option>
-                        <option value="En espera" {{ request('status') == 'En espera' ? 'selected' : '' }}>En espera
-                        </option>
-                        <option value="Rechazada" {{ request('status') == 'Rechazada' ? 'selected' : '' }}>Rechazada
-                        </option>
-                    </select>
-                    <select class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100" name="type" id="status">
-                        <option value="">Tipo</option>
-                        @foreach($tp as $ls)
-                            <option value="{{$ls->id}}">{{$ls->type_service}}</option>
-                        @endforeach
-                    </select>
-                <button type="submit" class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-slate-900 sm:w-auto gap-x-2 hover:bg-slate-950 ">Aplicar Filtro</button>
-        </div>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2  ">
+                            <svg class="h-4 w-4 text-gray-600" viewBox="0 0 20 20" fill="none">
+                                <path d="M7 15L12 20L17 15M7 9L12 4L17 9" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="relative bg-gray-100 w-full md:w-36	">
+                    <div class="relative inline-block w-full flex justify-between">
+                        <select
+                            class="appearance-none p-2 text-sm font-medium text-gray-600 transition-colors duration-200 w-full rounded-lg bg-white border border-gray-200"
+                            name="type" id="status">
+                            <option value="">Tipo</option>
+                            @foreach($tp as $ls)
+                            <option value="{{$ls->id}}" {{ request('type') == $ls->id ? 'selected' : '' }}>
+                                {{$ls->type_service}}</option>
+                            @endforeach
+                        </select>
+
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
+                            <svg class="h-4 w-4 text-gray-600" viewBox="0 0 20 20" fill="none">
+                                <path d="M7 15L12 20L17 15M7 9L12 4L17 9" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative bg-gray-100 w-full md:w-36	">
+                    <div class="relative inline-block w-full flex justify-between">
+                        <input name="fdate" type="date"
+                            class="appearance-none p-2 text-sm font-medium text-gray-600 transition-colors duration-200 w-full rounded-lg bg-white border border-gray-200">
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="appearance-none p-2 text-sm font-medium text-gray-200 bg-slate-900 transition-colors duration-200 w-full md:w-auto rounded-lg border border-gray-200 hover:bg-slate-950 rounded-lg">Aplicar</button>
+            </div>
         </form>
 
         <div class="relative flex items-center mt-4 md:mt-0">
             <span class="absolute">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600">
+                    stroke="currentColor" class="w-5 h-5 mx-3 text-gray-400 :text-gray-600">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
             </span>
 
             <input type="text" placeholder="Search"
-                class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
         </div>
     </div>
 
     <div class="flex flex-col mt-6 ">
-        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-800">
+                <div class="overflow-hidden border border-gray-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200 ">
+                        <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
-                                    class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 :text-gray-400">
                                     <button class="flex items-center gap-x-3 focus:outline-none">
                                         <span>Asunto</span>
 
@@ -121,25 +159,25 @@
                                 </th>
 
                                 <th scope="col"
-                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 :text-gray-400">
                                     <div>Estado</div>
                                 </th>
 
                                 <th scope="col"
-                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 :text-gray-400">
                                     Fecha de Creacion
                                 </th>
 
                                 <th scope="col"
-                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 :text-gray-400">
                                     Ciudadano</th>
 
                                 <th scope="col"
-                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 :text-gray-400">
                                     Tipo de Denuncia</th>
 
                                 <th scope="col"
-                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 :text-gray-400">
                                     Gestor a Cargo</th>
 
                                 <th scope="col" class="relative py-3.5 px-4">
@@ -147,7 +185,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                        <tbody class="bg-white divide-y divide-gray-200 :divide-gray-700 :bg-gray-900">
                             @foreach ($denouncements as $list)
                             <tr>
                                 <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
@@ -160,7 +198,7 @@
                                         @switch($list->status)
                                         @case('Rechazada')
                                         <div
-                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
+                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-red-100/60 :bg-gray-800">
                                             <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>
 
                                             <h2 class="text-sm font-normal text-red-500 capitalize">{{$list->status}}
@@ -169,7 +207,7 @@
                                         @break
                                         @case('Cerrada')
                                         <div
-                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
+                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 :bg-gray-800">
                                             <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 
                                             <h2 class="text-sm font-normal text-emerald-500 capitalize">
@@ -178,7 +216,7 @@
                                         @break
                                         @case('En espera')
                                         <div
-                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-gray-100/60 dark:bg-gray-800">
+                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-gray-100/60 :bg-gray-800">
                                             <span class="h-1.5 w-1.5 rounded-full bg-gray-500"></span>
 
                                             <h2 class="text-sm font-normal text-gray-500 capitalize">{{$list->status}}
@@ -187,7 +225,7 @@
                                         @break
                                         @case('Pendiente a comentarios')
                                         <div
-                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-orange-100/60 dark:bg-gray-800">
+                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-orange-100/60 :bg-gray-800">
                                             <span class="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
 
                                             <h2 class="text-sm font-normal text-orange-500 capitalize">{{$list->status}}
@@ -212,7 +250,7 @@
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     @if ($list->type)
                                     <div
-                                        class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-[#{{ $list->type->color}}]/20 dark:bg-gray-800">
+                                        class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-[#{{ $list->type->color}}]/20 :bg-gray-800">
                                         <span class="h-1.5 w-1.5 rounded-full bg-[#{{ $list->type->color}}]"></span>
 
                                         <h2 class="text-sm font-normal text-[#{{ $list->type->color}}] capitalize">
@@ -234,8 +272,8 @@
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     <div class="flex gap-1">
 
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Ver</a>
+                                        <a href="{{route('manager.denuncement.detail',['id' => $list->id])}}"
+                                            class="block px-4 py-2 text-sm text-blue-700 hover:bg-blue-50 rounded-md">Ver</a>
                                         <a href="#"
                                             class="block px-4 py-2 text-sm text-red-500 hover:bg-red-100 rounded-md">Report</a>
 
@@ -249,7 +287,7 @@
             </div>
         </div>
         <div class="mt-6 mb-12 flex justify-between ">
-        {{ $denouncements->appends(request()->input())->links() }}
+            {{ $denouncements->appends(request()->input())->links() }}
         </div>
     </div>
 

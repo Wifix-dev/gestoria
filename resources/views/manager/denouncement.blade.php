@@ -106,7 +106,7 @@
     </a>
 </div>
 
-<div class="w-full min-h-96 shadow rounded-lg bg-white">
+<div class="w-full min-h-96 shadow rounded-lg bg-white border border-gray-200">
     <div class="flex flex-col space-y-3 lg:space-y-0 lg:grid lg:gap-4 lg:grid-cols-3 p-6 lg:p-8">
         <div class="font-bold p-2 ">
             <div class="space-y-5 sticky top-10 ">

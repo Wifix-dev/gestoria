@@ -31,8 +31,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->middleware('role:admin')->name('admin.dashboard');
     Route::post('/denouncements/response', [ManagerController::class, 'ResponseRequest'])->middleware('role:manager')->name('manager.setesponse');
     Route::post('/denouncements/update', [ManagerController::class, 'FinalEvidence'])->middleware('role:manager')->name('manager.setEvidence');
-    Route::get('/denouncements', [ManagerController::class, 'ManagerDenunciation'])->middleware('role:manager')->name('manager.denunciationslist');
-    Route::get('/denouncements/{id}', [ManagerController::class, 'GetDenouncement'])->middleware('role:manager')->name('manager.denunciationsdetail');
+    Route::get('/denouncements', [ManagerController::class, 'ManagerDenunciation'])->middleware('role:manager')->name('manager.denouncements.list');
+    Route::get('/denouncements/{id}', [ManagerController::class, 'GetDenouncement'])->middleware('role:manager')->name('manager.denuncement.detail');
 
 });
 

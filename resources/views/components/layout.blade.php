@@ -29,7 +29,17 @@
     .cta-btn {
         color: #3d68ff;
     }
-
+    select {
+        -moz-appearance: none;
+        text-indent: 0.01px;
+        text-overflow: '';
+        color: black;
+        background: white;
+        -webkit-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+    }
     .upgrade-btn {
         background: #1947ee;
     }
