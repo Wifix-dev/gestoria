@@ -33,6 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::post('/denouncements/update', [ManagerController::class, 'FinalEvidence'])->middleware('role:manager')->name('manager.setEvidence');
     Route::get('/denouncements', [ManagerController::class, 'ManagerDenunciation'])->middleware('role:manager')->name('manager.denouncements.list');
     Route::get('/denouncements/{id}', [ManagerController::class, 'GetDenouncement'])->middleware('role:manager')->name('manager.denuncement.detail');
+    Route::post('/denouncements/search/cp', [ManagerController::class, 'SearchCP'])->middleware('role:manager')->name('manager.search.cp');
+    Route::post('/denouncement/search/cp', [UserController::class, 'SearchCP'])->middleware('role:user')->name('user.search.cp');
 
 });
 

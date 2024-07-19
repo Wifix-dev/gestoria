@@ -13,7 +13,8 @@ class Contact extends Model
         'id',
         'address',
         'phone',
-        'contact_schedule'
+        'contact_schedule',
+        'suburbs_id'
     ];
 
     public function denouncement()

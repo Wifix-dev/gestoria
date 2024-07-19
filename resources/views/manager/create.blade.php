@@ -6,7 +6,7 @@
 @if(session('success'))
 <div>{{ session('success') }}</div>
 @endif
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
 .hasImage:hover section {
     background-color: rgba(5, 5, 5, 0.4);
@@ -91,7 +91,8 @@ select {
         </div>
         <div>
             <div class="flex items-center gap-x-3">
-                <h2 class="sm:text-xl text-2xl font-bold uppercase title-font mb-1text-gray-900">Registro de Peticion</h2>
+                <h2 class="sm:text-xl text-2xl font-bold uppercase title-font mb-1text-gray-900">Registro de Peticion
+                </h2>
             </div>
             <p class="mb-2 text-sm text-gray-500 :text-gray-300">Estas son las peticiones realizadas por los ciudadanos
                 registrados en la plataforma.</p>
@@ -104,23 +105,17 @@ select {
                         cuidadano</span>
                 </div>
                 <div class="p-6 pt-0">
-                    <div class="grid grid-col-1 md:grid-cols-2 gap-x-3 gap-y-3">
+                    <div class="grid grid-col-1 lg:grid-cols-3 gap-x-3 gap-y-3">
                         <div>
                             <x-label for="name" class="block text-sm font-medium text-gray-700" :value="__('Nombre')" />
                             <input id="name" class="mt-1 p-2 w-full border rounded-md "
                                 aria-label="Default select example " name="name" :value="old('name')"></input>
                         </div>
-                        <div>
+                        <div class="lg:col-span-2 ">
                             <x-label for="last_name" class="block text-sm font-medium text-gray-700"
                                 :value="__('Apellido')" />
                             <input id="last_name" class="mt-1 p-2 w-full border rounded-md "
                                 aria-label="Default select example " name="last_name" :value="old('last_name')"></input>
-                        </div>
-                        <div class="lg:col-span-2">
-                            <x-label for="address" class="block text-sm font-medium text-gray-700"
-                                :value="__('Direccion')" />
-                            <input id="address" class="mt-1 p-2 w-full border rounded-md "
-                                aria-label="Default select example " name="address" :value="old('address')"></input>
                         </div>
                         <div>
                             <x-label for="phone" class="block text-sm font-medium text-gray-700"
@@ -135,10 +130,53 @@ select {
                                 aria-label="Default select example " name="contact_schedule"
                                 :value="old('contact_schedule')"></input>
                         </div>
+                        <div class="">
+                            <x-label for="address" class="block text-sm font-medium text-gray-700"
+                                :value="__('Codigo Postal')" />
+                            <div class="relative group mt-1 ">
+                                <button id="dropdown-button"
+                                    class="inline-flex justify-between w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-offset-gray-100 focus:ring-black">
+                                    <span class="mr-2">Selecionar</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 -mr-1"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <div id="dropdown-menu"
+                                    class="hidden absolute mt-1 w-full right-0 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1 z-10">
+                                    <!-- Search input -->
+                                    <input id="search-input"
+                                        class="block w-full px-4 py-2 text-gray-800 border rounded-md  border-gray-300 focus:outline-none"
+                                        type="text" placeholder="Buscar CP" autocomplete="off">
+                                    <!-- Dropdown content goes here -->
+                                    <div id="results" class="max-h-56 overflow-y-auto">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <input id="id" class="mt-1 p-2 w-full border rounded-md " aria-label="Default select example "
+                            name="id" hidden></input>
+                        <div>
+                            <x-label for="suburb" class="block text-sm font-medium text-gray-700"
+                                :value="__('Colonia o Fraccionamiento')" />
+                            <input id="suburb" class="mt-1 p-2 w-full border rounded-md "
+                                aria-label="Default select example " name="suburb" :value="old('suburb')" disabled></input>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <x-label for="address" class="block text-sm font-medium text-gray-700"
+                                :value="__('Calles')" />
+                            <input id="address" class="mt-1 p-2 w-full border rounded-md "
+                                aria-label="Default select example " name="address" :value="old('address')"></input>
+                        </div>
+
                     </div>
                 </div>
             </div>
-            <div class="bg-white rounded shadow-sm col-span-2">
+            <div class="bg-white rounded-lg shadow-sm col-span-2">
                 <div class="p-6 pb-2">
                     <span class="sm:text-lg text-lg font-bold title-font mb-4 text-gray-600">Detalles de la
                         petición</span>
@@ -327,6 +365,64 @@ $(document).ready(function() {
     $('#upload-form').on('submit', function() {
         var editorContent = quill.root.innerHTML;
         $('#description').val(editorContent);
+    });
+});
+</script>
+<script>
+// JavaScript to toggle the dropdown
+const dropdownButton = document.getElementById('dropdown-button');
+const dropdownMenu = document.getElementById('dropdown-menu');
+const searchInput = document.getElementById('search-input');
+let isOpen = false;
+let suburb = document.getElementById('suburb');
+function toggleDropdown() {
+    isOpen = !isOpen;
+    dropdownMenu.classList.toggle('hidden', !isOpen);
+}
+dropdownButton.addEventListener('click', () => {
+    toggleDropdown();
+});
+
+let results = document.getElementById('results');
+
+function SelectSuburb(slct, name) {
+    console.log(slct);
+    suburb.value = name;
+    toggleDropdown();
+}
+searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    var parametros = {
+        "id": searchTerm,
+    };
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: parametros,
+        url: '{{route('manager.search.cp')}}',
+        type: 'post',
+        beforeSend: function() {
+            console.log("Espera por favor...")
+        },
+        success: function(response) {
+            $("#results").html("");
+            response.forEach(element => {
+                var item = $(
+                    `<a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
+                    ${element.name}
+                    <p class="text-gray-500 text-sm -mt-1"> ${element.type_suburb}</p>
+                    </a>`
+                );
+
+                item.on('click', function(event) {
+                    event.preventDefault();
+                    SelectSuburb(element.id, element.name);
+                });
+
+                $("#results").append(item);
+            });
+        }
     });
 });
 </script>

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('suburb');
             $table->string('contact_schedule');
             $table->timestamps();
+            $table->unsignedBigInteger('suburbs_id')->nullable();
+            $table->foreign('suburbs_id')->references('id')->on('suburbs');
         });
     }
 

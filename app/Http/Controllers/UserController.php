@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Denouncement;
+use App\Models\Suburb;
 use App\Models\TypeDenouncements;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -42,7 +43,10 @@ class UserController extends Controller
         ]);
         return redirect()->route('denouncement.info', ['id' => $request->id]);
     }
-
+    public function SearchCP(Request $request){
+        $result = Suburb::where('postal_code', $request->id)->limit(29)->get();
+        return response()->json($result);
+    }
     public function SaveDenouncement(Request $request){
         $rules = [
             'case_name' => 'required|string',
@@ -92,7 +96,8 @@ class UserController extends Controller
         $contact = Contact::create([
             'address' => $request->address,
             'phone' => $request->phone,
-            'contact_schedule' => $request->contact_schedule
+            'contact_schedule' => $request->contact_schedule,
+            'suburbs_id'=>$request->id
         ]);
 
             $user = Denouncement::create([
