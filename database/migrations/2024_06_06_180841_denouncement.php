@@ -21,7 +21,9 @@ return new class extends Migration
             $table->enum('status', ['En espera','Revisada','Aceptada','Rechazada','En proceso','Terminada','Pendiente a comentarios','Cerrada'])->default('En espera');
             $table->json('final_evidence')->nullable();
             $table->longText('final_comments')->nullable();
+            $table->json('status_history')->nullable();
             $table->timestamps();
+
             //columnas
             $table->unsignedBigInteger('id_type_denouncement');
             $table->unsignedBigInteger('user_id')->nullable();

@@ -29,7 +29,6 @@ class ManagerController extends Controller
             'phone'=>'required|numeric',
             'contact_schedule'=>'required|string'
         ];
-
         $messages = [
             'name.required'=> 'Es necesario el nombre del ciudadano',
             'last_name.required'=> 'Es necesario los apellidos',
@@ -47,11 +46,8 @@ class ManagerController extends Controller
             'phone.numeric' => 'El campo de número telefónico solo debe contener números.',
             'contact_schedule.required' => 'Es necesario especificar un horario de contacto para no ser inoportunos.',
         ];
-
         $this->validate($request, $rules, $messages);
-
         $imagenes = [];
-
         if ($request->hasFile('initial_evidence')) {
             foreach ($request->file('initial_evidence') as $file) {
                 $fileName = Str::random(20) . '.' . $file->getClientOriginalExtension();
@@ -59,31 +55,37 @@ class ManagerController extends Controller
                 $imagenes[] = 'imagenes/' . Auth::user()->folder_name . '/' . $fileName;
             }
         }
-
         if(empty($imagenes)) {
             return redirect()->back()->with('error', 'No se han subido imágenes correctamente.');
         }
-
         $rutaImagenesJSON = json_encode($imagenes);
-
         $contact = Contact::create([
             'address' => $request->address,
             'phone' => $request->phone,
             'contact_schedule' => $request->contact_schedule,
-
+            'suburbs_id'=> $request->id
         ]);
 
-        $user = Denouncement::create([
-                'case_name'=> $request->case_name,
-                'description' => $request->description,
-                'id_type_denouncement' => $request->id_type_denouncement,
-                'initial_evidence' => $rutaImagenesJSON,
-                'user_id' => Auth::user()->id,
-                'contact_id' => $contact->id
-        ]);
+        $history[] = [
+            'from' => 'Inicio',
+            'to' => 'Revisada',
+            'changed_at' => now()->toDateTimeString(),
+        ];
 
-        return redirect()->route('denouncement.info', ['id' => $user->id])->with('success', 'Denuncia creada con éxito.');
+        $user = DenouncementWeb::create([
+            'name'=>$request->name,
+            'last_name'=>$request->last_name,
+            'case_name'=> $request->case_name,
+            'description' => $request->description,
+            'id_type_denouncement' => $request->id_type_denouncement,
+            'initial_evidence' => $rutaImagenesJSON,
+            'manager_id' => Auth::user()->id,
+            'status_history' => json_encode($history),
+            'contact_id' => $contact->id
+        ]);
+        return redirect()->route('manager.denuncement.record.detail', ['id' => $user->id])->with('success', 'Denuncia creada con éxito.');
     }
+
     public function SearchCP(Request $request){
         $result = Suburb::where('postal_code', $request->id)->limit(29)->get();
         return response()->json($result);
@@ -108,18 +110,31 @@ class ManagerController extends Controller
        return view('manager.list', compact('denouncements','tp'));
     }
 
+    public function ManagerDenunciationWeb(Request $request){
+        $status = $request->input('status');
+        $type = $request->input('type');
+        $date = $request->input('fdate');
+        $tp = TypeDenouncements::all();
+        $denouncements = DenouncementWeb::with(['type','manager'])
+         ->when($status, function ($query, $status) {
+             return $query->where('status', $status); })
+         ->when($type, function ($query, $type) {
+             return $query->where('id_type_denouncement', $type);
+         })
+         ->when($date, function ($query, $date) {
+             return $query->where('created_at', 'like', $date . '%');
+         })->paginate(10);
+        return view('manager.list_web', compact('denouncements','tp'));
+     }
 
     public function FinalEvidence(Request $request){
         $request->validate([
             'final_evidence' => 'required|array',
             'final_evidence.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
         $denouncement = Denouncement::findOrFail($request->id);
         $user = User::findOrFail($denouncement->user_id);
-
         $imagenes = [];
-
         if ($request->hasFile('final_evidence')) {
             foreach ($request->file('final_evidence') as $file) {
                 $fileName = Str::random(20) . '.' . $file->getClientOriginalExtension();
@@ -127,18 +142,49 @@ class ManagerController extends Controller
                 $imagenes[] = 'imagenes/' . Auth::user()->folder_name . '/' . $fileName;
             }
         }
-
         if(empty($imagenes)) {
             return redirect()->back()->with('error', 'No se han subido imágenes correctamente.');
         }
-
         $rutaImagenesJSON = json_encode($imagenes);
         $affectedRows = Denouncement::where('id', $request->id)->update([
             'status' => 'Terminada',
             'final_evidence'=> $rutaImagenesJSON
         ]);
-        return redirect()->route('manager.denunciationsdetail', ['id' => $request->id]);
+        return redirect()->route('manager.denuncement.detail', ['id' => $request->id]);
     }
+
+    public function FinalCommentsWeb(Request $request){
+        $affectedRows = DenouncementWeb::where('id', $request->id)->update([
+            'status' => 'Cerrada',
+            'final_comments'=> $request->final_comments
+        ]);
+        return redirect()->route('manager.denuncement.record.detail', ['id' => $request->id]);
+    }
+
+    public function FinalEvidenceWeb(Request $request){
+        $request->validate([
+            'final_evidence' => 'required|array',
+            'final_evidence.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $imagenes = [];
+        if ($request->hasFile('final_evidence')) {
+            foreach ($request->file('final_evidence') as $file) {
+                $fileName = Str::random(20) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('imagenes/' . Auth::user()->folder_name), $fileName);
+                $imagenes[] = 'imagenes/' . Auth::user()->folder_name . '/' . $fileName;
+            }
+        }
+        if(empty($imagenes)) {
+            return redirect()->back()->with('error', 'No se han subido imágenes correctamente.');
+        }
+        $rutaImagenesJSON = json_encode($imagenes);
+        $affectedRows = DenouncementWeb::where('id', $request->id)->update([
+            'status' => 'Terminada',
+            'final_evidence'=> $rutaImagenesJSON
+        ]);
+        return redirect()->route('manager.denuncement.record.detail', ['id' => $request->id]);
+    }
+
     public function ResponseRequest(Request $request){
         if($request->final_comments){
             $affectedRows = Denouncement::where('id', $request->id)->update([
@@ -153,8 +199,34 @@ class ManagerController extends Controller
                 'manager_id'=>Auth::user()->id
             ]);
         }
+        return redirect()->route('manager.denuncement.detail', ['id' => $request->id]);
+    }
 
-        return redirect()->route('manager.denunciationsdetail', ['id' => $request->id]);
+    public function ResponseRequestWeb(Request $request){
+
+        $denouncement = DenouncementWeb::findOrFail($request->id);
+        $oldStatus = $denouncement->status;
+        $newStatus = $request->status;
+        $history = $denouncement->status_history ? json_decode($denouncement->status_history, true) : [];
+        $history[] = [
+            'from' => $oldStatus,
+            'to' => $newStatus,
+            'changed_at' => now()->toDateTimeString(),
+        ];
+
+        if($request->final_comments){
+            $affectedRows = DenouncementWeb::where('id', $request->id)->update([
+                'status' => $request->status,
+                'final_comments'=> $request->final_comments,
+            ]);
+        }else{
+            $affectedRows = DenouncementWeb::where('id', $request->id)->update([
+                'status' => $request->status,
+                'status_history' => json_encode($history),
+                'final_comments'=> '',
+            ]);
+        }
+        return redirect()->route('manager.denuncement.record.detail', ['id' => $request->id]);
     }
 
     public function FinalComments(Request $request){
@@ -162,11 +234,10 @@ class ManagerController extends Controller
             'status' => $request->status,
             'final_comments'=> $request->final_comments
         ]);
-        return redirect()->route('manager.denunciationsdetail', ['id' => $request->id]);
+        return redirect()->route('manager.denuncement.detail', ['id' => $request->id]);
     }
 
     public function GetDenouncement($id){
-
         $denouncement = Denouncement::find($id);
         $contact=Contact::find($denouncement->contact_id);
         if($denouncement->status == "En espera"){
@@ -181,8 +252,6 @@ class ManagerController extends Controller
             return redirect()->back()->with('error', 'Denuncia no encontrada.');
         }
 
-
-
         $nombre=$user->name.' '.$user->last_name;
 
         $denouncement = Denouncement::find($id);
@@ -196,13 +265,11 @@ class ManagerController extends Controller
         $imagePaths = array_map(fn($image) => asset('public/' . $image), $initial_evidence_images);
 
         $type =  TypeDenouncements::find($denouncement->id_type_denouncement)->pluck('type_service')->first();
-
         $finalImagePaths = [];
         if ($denouncement->final_evidence) {
             $final_evidence_images = json_decode($denouncement->final_evidence, true);
             $finalImagePaths = array_map(fn($image) => asset('public/' . $image), $final_evidence_images);
         }
-
         $data = [
             'denouncement' => $denouncement,
             'imagePaths' => $imagePaths,
@@ -212,6 +279,43 @@ class ManagerController extends Controller
             'finalImagePaths' => $finalImagePaths
         ];
         return view('manager.denouncement', $data);
+    }
 
+    public function GetDenouncementWeb($id){
+
+        $list = DenouncementWeb::with(['type','contact.suburb'])->when($id, function ($query, $id) {
+            return $query->where('id', $id);
+        })->get();
+
+        if ($list->isNotEmpty() && $list[0]->status == "En espera") {
+            $affectedRows = DenouncementWeb::where('id', $id)->update([
+                'status' => 'Revisada',
+            ]);
+        }
+
+        $denouncement = $list->toJson();
+
+        if (!$denouncement) {
+            return redirect()->back()->with('error', 'Denuncia no encontrada.');
+        }
+        $denouncement = DenouncementWeb::find($id);
+        if (!$denouncement) {
+            return redirect()->back()->with('error', 'Denuncia no encontrada.');
+        }
+
+        $initial_evidence_images = $denouncement->initial_evidence ? json_decode($denouncement->initial_evidence, true) : [];
+        $imagePaths = array_map(fn($image) => asset('public/' . $image), $initial_evidence_images);
+
+        $finalImagePaths = [];
+        if ($denouncement->final_evidence) {
+            $final_evidence_images = json_decode($denouncement->final_evidence, true);
+            $finalImagePaths = array_map(fn($image) => asset('public/' . $image), $final_evidence_images);
+        }
+        $data = [
+            'denouncement' => $denouncement,
+            'imagePaths' => $imagePaths,
+            'finalImagePaths' => $finalImagePaths
+        ];
+        return view('manager.denouncement_web', $data);
     }
 }

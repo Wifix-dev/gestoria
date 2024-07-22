@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('denouncements_web',function(Blueprint $table){
+        Schema::create('denouncement_webs',function(Blueprint $table){
 
             $table->id();
 
@@ -24,6 +24,8 @@ return new class extends Migration
             $table->json('initial_evidence')->nullable();
             $table->enum('status', ['En espera','Revisada','Aceptada','Rechazada','En proceso','Terminada','Pendiente a comentarios','Cerrada'])->default('En espera');
             $table->json('final_evidence')->nullable();
+            $table->longText('final_comments')->nullable();
+            $table->json('status_history')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('manager_id')->nullable();
@@ -45,6 +47,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('denouncements');
+        Schema::dropIfExists('denouncement_webs');
     }
 };

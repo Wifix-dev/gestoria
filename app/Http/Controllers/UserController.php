@@ -43,6 +43,7 @@ class UserController extends Controller
         ]);
         return redirect()->route('denouncement.info', ['id' => $request->id]);
     }
+
     public function SearchCP(Request $request){
         $result = Suburb::where('postal_code', $request->id)->limit(29)->get();
         return response()->json($result);
@@ -58,7 +59,6 @@ class UserController extends Controller
             'phone'=>'required|numeric',
             'contact_schedule'=>'required|string'
         ];
-
         $messages = [
             'case_name.required' => 'El campo Asunto es obligatorio.',
             'case_name.string' => 'El campo Asunto debe ser texto.',
@@ -74,11 +74,8 @@ class UserController extends Controller
             'phone.numeric' => 'El campo de número telefónico solo debe contener números.',
             'contact_schedule.required' => 'Es necesario especificar un horario de contacto para no ser inoportunos.',
         ];
-
         $this->validate($request, $rules, $messages);
-
         $imagenes = [];
-
         if ($request->hasFile('initial_evidence')) {
             foreach ($request->file('initial_evidence') as $file) {
                 $fileName = Str::random(20) . '.' . $file->getClientOriginalExtension();
@@ -86,29 +83,24 @@ class UserController extends Controller
                 $imagenes[] = 'imagenes/' . Auth::user()->folder_name . '/' . $fileName;
             }
         }
-
         if(empty($imagenes)) {
             return redirect()->back()->with('error', 'No se han subido imágenes correctamente.');
         }
-
         $rutaImagenesJSON = json_encode($imagenes);
-
         $contact = Contact::create([
             'address' => $request->address,
             'phone' => $request->phone,
             'contact_schedule' => $request->contact_schedule,
             'suburbs_id'=>$request->id
         ]);
-
-            $user = Denouncement::create([
+        $user = Denouncement::create([
                 'case_name'=> $request->case_name,
                 'description' => $request->description,
                 'id_type_denouncement' => $request->id_type_denouncement,
                 'initial_evidence' => $rutaImagenesJSON,
                 'user_id' => Auth::user()->id,
                 'contact_id' => $contact->id
-            ]);
-
+        ]);
         return redirect()->route('denouncement.info', ['id' => $user->id])->with('success', 'Denuncia creada con éxito.');
     }
 }

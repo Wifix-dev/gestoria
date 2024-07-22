@@ -218,7 +218,7 @@
                     @endif
 
                     @if($denouncement->status=="Terminada" || $denouncement->status=="Cerrada")
-                    <form id="upload-form" class="" method="POST" action="{{ route('user.closecase') }}">
+                    <form id="upload-form" class="" method="POST" action="{{ route('user.close.case') }}">
                         @csrf
                         <div class="row g-3">
                             <input class="form-control" type="text" value="{{$denouncement->id}}" name="id" hidden>

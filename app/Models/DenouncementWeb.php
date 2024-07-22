@@ -21,16 +21,17 @@ class DenouncementWeb extends Model
         'final_evidence',
         'created_at',
         'manager_id',
+        'status_history',
         'contact_id',
         'updated_at'
     ];
-    public function manager()
-    {
-        return $this->belongsTo(User::class, 'manager_id');
-    }
     public function contact()
     {
         return $this->belongsTo(Contact::class);
+    }
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
     }
     public function type()
     {

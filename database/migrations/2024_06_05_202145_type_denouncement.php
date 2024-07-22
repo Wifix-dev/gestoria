@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('type_service');
             $table->string('color');
             $table->timestamps();
+
         });
     }
 

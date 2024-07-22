@@ -21,6 +21,7 @@ class Denouncement extends Model
         'user_id',
         'manager_id',
         'contact_id',
+        'status_history',
         'updated_at'
     ];
     public function user()

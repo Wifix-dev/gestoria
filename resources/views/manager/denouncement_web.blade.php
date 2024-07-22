@@ -3,9 +3,6 @@
 @section('title', 'Detalle de la Denuncia')
 
 @section('content')
-@if(session('success'))
-<div>{{ session('success') }}</div>
-@endif
 <style>
 .ql-toolbar {
     background: #f8f9fa;
@@ -244,7 +241,7 @@
             </div>
         </div>
         <div class="col-span-2 ">
-            <h4 class="text-3xl text-gray-900 font-bold pt-5">Peticion o denuncia</h4>
+            <h4 class="text-xl text-gray-900 font-bold pt-5 pb-3">Peticion o denuncia</h4>
             @if ($errors->any())
             <div class="flex flex-col space-y-3 lg:space-y-0 lg:grid lg:gap-4 lg:grid-cols-2">
                 <div class="col-span-2" id="msgE">
@@ -303,11 +300,44 @@
             </section>
             @endif
 
+            @if($denouncement->status=="Terminada")
+                    <form id="upload-form" class="" method="POST" action="{{ route('manager.close.case') }}">
+                        @csrf
+                        <div class="row g-3">
+                            <input class="form-control" type="text" value="{{$denouncement->id}}" name="id" hidden>
+                            <div class="col-md-12 ">
+                                @if($denouncement->status=="Cerrada" && $denouncement->final_comments!="")
+                                <x-label for="final_comments" class="block text-sm font-medium text-gray-700"
+                                    :value="__('Comentarios Finales')" />
+                                <textarea type="text"
+                                    class="mt-1 p-2 w-full border rounded-md disabled text-sm text-gray-700"
+                                    id="final_comments" name="final_comments" style="height:150px;"
+                                    disabled>{{$denouncement->final_comments}}</textarea>
+                                @else
+                                <x-label for="final_comments" class="block text-sm font-medium text-gray-700"
+                                    :value="__('Comentarios o Agradecimientos')" />
+                                <textarea type="text"
+                                    class="mt-1 p-2 w-full border rounded-md text-sm font-light text-gray-700"
+                                    id="final_comments" name="final_comments" style="height:150px;"></textarea>
+                                @endif
+                            </div>
+                            @if($denouncement->status!="Cerrada")
+
+                            <div class=" flex justify-end">
+                                <button type="submit"
+                                    class=" bg-slate-950 text-white rounded border-0 py-2 px-5 hover:bg-slate-800"
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enviar</button>
+                            </div>
+                            @endif
+                        </div>
+                    </form>
+                    @endif
+
             @if($denouncement->status=="En espera" || $denouncement->status=="Revisada" ||
             $denouncement->status=="Rechazada")
             <div class=" bg-gray-50 border border-gray-200 p-4 lg:p-6 rounded-lg">
                 <div class="">
-                    <form id="upload-form" class="" method="POST" action="{{route('manager.set.response')}}">
+                    <form id="upload-form" class="" method="POST" action="{{route('manager.set.web.response')}}">
                         @csrf
                         <div class="">
                             <div>
@@ -361,7 +391,7 @@
                             </div>
                             <div class="flex justify-end">
                                 <button type="submit"
-                                    class="bg-black text-white py-3 px-5 w-full rounded-md uppercase md:w-auto mt-sm-2 mt-md-0"
+                                    class="bg-black text-white p-2 px-4 w-full rounded-md md:w-auto mt-sm-2 mt-md-0"
                                     data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enviar</button>
                             </div>
                         </div>
@@ -372,43 +402,49 @@
             <div class="mt-5">
                 <div class="">
                     <h3 class="text-xl font-semibold leading-7 text-gray-900">Informacion de la peticion</h3>
-                    <p class="mt-1 max-w-2xl text-base leading-6 text-gray-500">Personal details and application.
+                    <p class="mt-1 max-w-2xl text-base leading-6 text-gray-500">Informacion
                     </p>
                 </div>
                 <div class="mt-6 border-t border-gray-100">
                     <dl class="divide-y divide-gray-100 text-base">
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class=" font-bold leading-6 text-gray-900">Nombre Completo</dt>
-                            <dd class="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{$nombre}}</dd>
+                            <dt class=" leading-6 text-gray-900">Nombre Completo</dt>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->name}} {{$denouncement->last_name}}</dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="font-bold leading-6 text-gray-900">Tipo de denuncia</dt>
-                            <dd class="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{$type}}</dd>
+                            <dt class=" leading-6 text-gray-900">Tipo de denuncia</dt>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->type->type_service}}</dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="font-bold leading-6 text-gray-900">Direccion</dt>
-                            <dd class="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{$contact->address}}
+                            <dt class=" leading-6 text-gray-900">Colonia</dt>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->contact->suburb->name}}
                             </dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="font-bold leading-6 text-gray-900">Numero de Telefono</dt>
-                            <dd class="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{$contact->phone}}</dd>
+                            <dt class=" leading-6 text-gray-900">Direccion</dt>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->contact->address}}
+                            </dd>
+                        </div>
+
+                        <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class=" leading-6 text-gray-900">Numero de Telefono</dt>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->contact->phone}}</dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class=" font-bold leading-6 text-gray-900">Horario de Contacto</dt>
-                            <dd class="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                {{$contact->contact_schedule}}</dd>
+                            <dt class=" leading-6 text-gray-900">Horario de Contacto</dt>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">
+                                {{$denouncement->contact->contact_schedule}}</dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="font-bold leading-6 text-gray-900">Descripcion</dt>
-                            <dd class="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                            <dt class=" leading-6 text-gray-900">Descripcion</dt>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">
                                 <div id="quill-editor" class=" rounded-bottom h-64" disabled>
                                     {!! $denouncement->description !!}
                                 </div>
                             </dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-base font-bold leading-6 text-gray-900">Evidencia</dt>
+                            <dt class="text-base leading-6 text-gray-900">Evidencia</dt>
                             <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                 <ul role="list"
                                     class="divide-y divide-gray-100 rounded-md border border-gray-200 h-72 overflow-y-auto">
@@ -444,7 +480,7 @@
                 </div>
             </div>
             @if($denouncement->status == "En proceso")
-            <form id="upload-form" class="" method="POST" action="{{route('manager.setEvidence')}}"
+            <form id="upload-form" class="" method="POST" action="{{route('manager.setEvidence.web')}}"
                 enctype="multipart/form-data">
                 @csrf
                 <h4 class="text-xl text-gray-900 font-bold py-3">Evidencia Final</h4>

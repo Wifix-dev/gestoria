@@ -208,7 +208,7 @@
                                 </td>
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     <div>
-                                        {{$list->name}} {{$list->user->last_name}}
+                                        {{$list->name}} {{$list->last_name}}
                                     </div>
                                 </td>
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
@@ -235,12 +235,7 @@
 
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     <div class="flex gap-1">
-
-                                        <a href="{{route('manager.denuncement.detail',['id' => $list->id])}}"
-                                            class="block px-4 py-2 text-sm text-blue-700 hover:bg-blue-50 rounded-md">Ver</a>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-red-500 hover:bg-red-100 rounded-md">Report</a>
-
+                                        <a href="{{route('manager.denuncement.record.detail',['id' => $list->id])}}" class="block px-4 py-2 text-sm text-blue-700 hover:bg-blue-50 rounded-md">Ver</a>
                                     </div>
                                 </td>
                             </tr>
@@ -254,6 +249,5 @@
             {{ $denouncements->appends(request()->input())->links() }}
         </div>
     </div>
-
 </section>
 @endsection

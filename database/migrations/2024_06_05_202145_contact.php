@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->longText('address');
             $table->string('phone');
-            $table->string('suburb');
             $table->string('contact_schedule');
             $table->timestamps();
             $table->unsignedBigInteger('suburbs_id')->nullable();

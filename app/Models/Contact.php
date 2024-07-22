@@ -19,6 +19,13 @@ class Contact extends Model
 
     public function denouncement()
     {
-        return $this->has(Denouncement::class);
+        return $this->hasMany(Denouncement::class);
     }
+
+    public function suburb()
+    {
+        return $this->belongsTo(Suburb::class, 'suburbs_id');
+    }
+
+
 }

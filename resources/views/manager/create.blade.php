@@ -97,6 +97,8 @@ select {
             <p class="mb-2 text-sm text-gray-500 :text-gray-300">Estas son las peticiones realizadas por los ciudadanos
                 registrados en la plataforma.</p>
         </div>
+        <form id="upload-form" class="" method="POST" action="{{ route('manager.save.denouncement') }}" enctype="multipart/form-data">
+        @csrf
         <div class="grid  grid-cols-1 lg:grid-cols-3 gap-y-4">
 
             <div class="bg-white rounded shadow-sm col-span-2">
@@ -134,7 +136,7 @@ select {
                             <x-label for="address" class="block text-sm font-medium text-gray-700"
                                 :value="__('Codigo Postal')" />
                             <div class="relative group mt-1 ">
-                                <button id="dropdown-button"
+                                <button type="button" id="dropdown-button"
                                     class="inline-flex justify-between w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-offset-gray-100 focus:ring-black">
                                     <span class="mr-2">Selecionar</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 -mr-1"
@@ -347,7 +349,10 @@ select {
                     </template>
                 </div>
             </div>
-        </div>
+            <div><button type="submit" >Confirmar</button></div>
+            </div>
+        </form>
+
         <div class="bg-white rounded shadow-sm col-span-3">
         </div>
     </div>
@@ -375,6 +380,7 @@ const dropdownMenu = document.getElementById('dropdown-menu');
 const searchInput = document.getElementById('search-input');
 let isOpen = false;
 let suburb = document.getElementById('suburb');
+let id =document.getElementById('id');
 function toggleDropdown() {
     isOpen = !isOpen;
     dropdownMenu.classList.toggle('hidden', !isOpen);
@@ -386,7 +392,7 @@ dropdownButton.addEventListener('click', () => {
 let results = document.getElementById('results');
 
 function SelectSuburb(slct, name) {
-    console.log(slct);
+    id.value = slct;
     suburb.value = name;
     toggleDropdown();
 }

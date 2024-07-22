@@ -126,7 +126,7 @@
 
                     </div>
                     <input id="id" class="mt-1 p-2 w-full border rounded-md " aria-label="Default select example "
-                        name="id" hidden></input>
+                        name="id"></input>
                     <div>
                         <x-label for="suburb" class="block text-sm font-medium text-gray-700"
                             :value="__('Colonia o Fraccionamiento')" />

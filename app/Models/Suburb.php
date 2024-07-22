@@ -15,4 +15,10 @@ class Suburb extends Model
         'name',
         'type_suburb',
     ];
+    public function contact()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
+
 }
