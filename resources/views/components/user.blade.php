@@ -35,55 +35,24 @@
 -->
     <style>
     @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-
-    * {
-    font-family: 'ui-sans', sans-serif;
-}
-
-
-    .bg-sidebar {
-        background: #3d68ff;
-    }
-
-    .cta-btn {
-        color: #3d68ff;
-    }
-
-    .upgrade-btn {
-        background: #1947ee;
-    }
-
-    .upgrade-btn:hover {
-        background: #0038fd;
-    }
-
-    .active-nav-link {
-        background: #1947ee;
-    }
-
-    .nav-item:hover {
-        background: #1947ee;
-    }
-
-    .account-link:hover {
-        background: #3d68ff;
-    }
     </style>
 </head>
 
-<body class="bg-gray-100 font-family-karla flex w-full h-full overflow-visible ">
+<body class="bg-gray-50 font-family-karla flex w-full h-full overflow-visible ">
     <div class="w-full h-full flex flex-col h-screen overflow-y-hidden">
-        <!-- Desktop Header -->
+        <!-- Desktop Header
         <header class="w-full items-center bg-white py-2 px-6 hidden lg:flex lg:flex-col fixed z-10 top-0 shadow">
             <div class="max-w-7xl w-full mx-auto flex flex-wrap flex-col md:flex-row justify-between">
                 <div class="lg:flex lg:items-center lg:justify-between w-full">
                     <div class="flex items-center justify-between">
-                        <a href="{{route('home')}}" class="flex flex-row">
+
+
+
+                    <a href="{{route('home')}}" class="flex flex-row">
                             <img class="w-auto h-[60px]" src="{{asset('public/assets/img/SOS2.png')}}" alt="">
                             <span class="font-extrabold text-2xl my-auto pl-3 ">S.O.S</span>
                         </a>
 
-                        <!-- Mobile menu button -->
                         <div class="flex lg:hidden">
                             <button x-cloak @click="isOpen = !isOpen" type="button"
                                 class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
@@ -101,7 +70,6 @@
                         </div>
                     </div>
 
-                    <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
                     <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
                         class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
                         <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
@@ -150,64 +118,145 @@
             <div class="w-1/2"></div>
 
         </header>
+         -->
+
+        <nav class="bg-white border-gray-200 z-30 hidden lg:block">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
+                <a href="#" class="flex items-center">
+                    <img src="{{asset('public/assets/img/cnt.png')}}" class="h-12 mr-3" alt="Flowbite Logo" />
+                    <span class="self-center text-2xl font-extrabold whitespace-nowrap text-gray-700">S.O.S</span>
+                </a>
+                <div class="flex md:order-2">
+                    <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
+                        aria-expanded="false"
+                        class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                    <div class="relative hidden md:block">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                            <span class="sr-only">Search icon</span>
+                        </div>
+                        <input type="text" id="search-navbar"
+                            class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Search...">
+                    </div>
+                    <button data-collapse-toggle="navbar-search" type="button"
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        aria-controls="navbar-search" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 17 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 1h15M1 7h15M1 13h15" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
+                    <div class="relative mt-3 md:hidden">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
+                        <input type="text" id="search-navbar"
+                            class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Search...">
+                    </div>
+                    <ul
+                        class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
+                        <li>
+                            <a href="#" class="block py-2 pl-3 pr-4 text-[#00558E] rounded md:bg-transparent md:p-0"
+                                aria-current="page">Home</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
         <!-- Mobile Header & Nav -->
-        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 fixed lg:hidden z-10">
+        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-4 px-6 sticky top-0 bg-white shadow lg:hidden z-10">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
-                <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
-                    <i x-show="!isOpen" class="fas fa-bars"></i>
-                    <i x-show="isOpen" class="fas fa-times"></i>
+                <a href="index.html" class="text-gray-700 text-3xl font-semibold uppercase hover:text-gray-600">SOS</a>
+                <button class="text-gray-500 w-8 h-8 relative focus:outline-none bg-white rounded border border-gray-200" @click="isOpen = !isOpen">
+                    <span class="sr-only">Open main menu</span>
+                    <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
+                        <span aria-hidden="true"
+                            class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
+                            :class="{'rotate-45': isOpen,' -translate-y-1.5': !isOpen }"></span>
+                        <span aria-hidden="true"
+                            class="block absolute  h-0.5 w-5 bg-current   transform transition duration-500 ease-in-out"
+                            :class="{'opacity-0': isOpen } "></span>
+                        <span aria-hidden="true"
+                            class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out"
+                            :class="{'-rotate-45': isOpen, ' translate-y-1.5': !isOpen}"></span>
+                    </div>
                 </button>
+
             </div>
 
             <!-- Dropdown Nav -->
-            <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-                <a href="index.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
+            <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4 text-gray-500">
+                <a href="index.html" class="flex items-center hover:rounded hover:text-gray-600 hover:bg-gray-100 py-2 pl-4 ">
                     <i class="fas fa-tachometer-alt mr-3"></i>
                     Dashboard
                 </a>
                 <a href="blank.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:rounded hover:bg-gray-100 hover:text-gray-600 ">
                     <i class="fas fa-sticky-note mr-3"></i>
                     Blank Page
                 </a>
                 <a href="tables.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4  hover:rounded hover:bg-gray-100 hover:text-gray-600">
                     <i class="fas fa-table mr-3"></i>
                     Tables
                 </a>
                 <a href="forms.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4  hover:rounded hover:bg-gray-100 hover:text-gray-600">
                     <i class="fas fa-align-left mr-3"></i>
                     Forms
                 </a>
                 <a href="tabs.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4  hover:rounded  hover:bg-gray-100 hover:text-gray-600">
                     <i class="fas fa-tablet-alt mr-3"></i>
                     Tabbed Content
                 </a>
                 <a href="calendar.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4  hover:rounded hover:bg-gray-100 hover:text-gray-600">
                     <i class="fas fa-calendar mr-3"></i>
                     Calendar
                 </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <a href="#" class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600">
                     <i class="fas fa-cogs mr-3"></i>
                     Support
                 </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <a href="#" class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600 ">
                     <i class="fas fa-user mr-3"></i>
                     My Account
                 </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <a href="#" class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600">
                     <i class="fas fa-sign-out-alt mr-3"></i>
                     Sign Out
                 </a>
-                <button
-                    class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                    <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
-                </button>
             </nav>
             <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                 <i class="fas fa-plus mr-3"></i> New Report

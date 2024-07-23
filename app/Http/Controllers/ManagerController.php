@@ -154,18 +154,46 @@ class ManagerController extends Controller
     }
 
     public function FinalCommentsWeb(Request $request){
+
+        $denouncement = DenouncementWeb::findOrFail($request->id);
+        $history = $denouncement->status_history ? json_decode($denouncement->status_history, true) : [];
+
+        $history[] = [
+            'from' => $denouncement->status,
+            'to' => 'Comentarios Finales',
+            'changed_at' => now()->toDateTimeString(),
+            'comments' => $request->final_comments
+        ];
+
+        $history[] = [
+            'from' => 'Comentarios Finales',
+            'to' => 'Cerrada',
+            'changed_at' => now()->toDateTimeString(),
+        ];
+
         $affectedRows = DenouncementWeb::where('id', $request->id)->update([
             'status' => 'Cerrada',
+            'status_history' => json_encode($history),
             'final_comments'=> $request->final_comments
         ]);
         return redirect()->route('manager.denuncement.record.detail', ['id' => $request->id]);
     }
 
     public function FinalEvidenceWeb(Request $request){
+
+        $denouncement = DenouncementWeb::findOrFail($request->id);
+        $history = $denouncement->status_history ? json_decode($denouncement->status_history, true) : [];
+
         $request->validate([
             'final_evidence' => 'required|array',
             'final_evidence.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        $history[] = [
+            'from' => $denouncement->status,
+            'to' => 'Terminada',
+            'changed_at' => now()->toDateTimeString(),
+        ];
+
         $imagenes = [];
         if ($request->hasFile('final_evidence')) {
             foreach ($request->file('final_evidence') as $file) {
@@ -180,6 +208,7 @@ class ManagerController extends Controller
         $rutaImagenesJSON = json_encode($imagenes);
         $affectedRows = DenouncementWeb::where('id', $request->id)->update([
             'status' => 'Terminada',
+            'status_history' => json_encode($history),
             'final_evidence'=> $rutaImagenesJSON
         ]);
         return redirect()->route('manager.denuncement.record.detail', ['id' => $request->id]);
@@ -205,21 +234,31 @@ class ManagerController extends Controller
     public function ResponseRequestWeb(Request $request){
 
         $denouncement = DenouncementWeb::findOrFail($request->id);
-        $oldStatus = $denouncement->status;
-        $newStatus = $request->status;
         $history = $denouncement->status_history ? json_decode($denouncement->status_history, true) : [];
-        $history[] = [
-            'from' => $oldStatus,
-            'to' => $newStatus,
-            'changed_at' => now()->toDateTimeString(),
-        ];
 
         if($request->final_comments){
+            $history[] = [
+                'from' => $denouncement->status,
+                'to' => $request->status,
+                'changed_at' => now()->toDateTimeString(),
+                'comments' => $request->final_comments
+            ];
             $affectedRows = DenouncementWeb::where('id', $request->id)->update([
                 'status' => $request->status,
+                'status_history' => json_encode($history),
                 'final_comments'=> $request->final_comments,
             ]);
         }else{
+            $history[] = [
+                'from' => $denouncement->status,
+                'to' => 'Aceptada',
+                'changed_at' => now()->toDateTimeString(),
+            ];
+            $history[] = [
+                'from' => 'Aceptada',
+                'to' => 'En proceso',
+                'changed_at' => now()->toDateTimeString(),
+            ];
             $affectedRows = DenouncementWeb::where('id', $request->id)->update([
                 'status' => $request->status,
                 'status_history' => json_encode($history),
@@ -282,27 +321,28 @@ class ManagerController extends Controller
     }
 
     public function GetDenouncementWeb($id){
-
-        $list = DenouncementWeb::with(['type','contact.suburb'])->when($id, function ($query, $id) {
+        $denouncement = DenouncementWeb::with(['type', 'contact.suburb'])->when($id, function ($query, $id) {
             return $query->where('id', $id);
-        })->get();
+        })->first();
 
-        if ($list->isNotEmpty() && $list[0]->status == "En espera") {
-            $affectedRows = DenouncementWeb::where('id', $id)->update([
+        if (!$denouncement) {
+            return redirect()->back()->with('error', 'Denuncia no encontrada.');
+        }
+
+        if ($denouncement->status == "En espera") {
+            $history = $denouncement->status_history ? json_decode($denouncement->status_history, true) : [];
+            $history[] = [
+                'from' => $denouncement->status,
+                'to' => 'Revisada',
+                'changed_at' => now()->toDateTimeString(),
+            ];
+            DenouncementWeb::where('id', $id)->update([
                 'status' => 'Revisada',
+                'status_history' => json_encode($history)
             ]);
         }
 
-        $denouncement = $list->toJson();
-
-        if (!$denouncement) {
-            return redirect()->back()->with('error', 'Denuncia no encontrada.');
-        }
-        $denouncement = DenouncementWeb::find($id);
-        if (!$denouncement) {
-            return redirect()->back()->with('error', 'Denuncia no encontrada.');
-        }
-
+        $denouncement->status_history = $denouncement->status_history ? json_decode($denouncement->status_history, true) : [];
         $initial_evidence_images = $denouncement->initial_evidence ? json_decode($denouncement->initial_evidence, true) : [];
         $imagePaths = array_map(fn($image) => asset('public/' . $image), $initial_evidence_images);
 
@@ -311,11 +351,13 @@ class ManagerController extends Controller
             $final_evidence_images = json_decode($denouncement->final_evidence, true);
             $finalImagePaths = array_map(fn($image) => asset('public/' . $image), $final_evidence_images);
         }
+
         $data = [
             'denouncement' => $denouncement,
             'imagePaths' => $imagePaths,
             'finalImagePaths' => $finalImagePaths
         ];
+
         return view('manager.denouncement_web', $data);
     }
 }

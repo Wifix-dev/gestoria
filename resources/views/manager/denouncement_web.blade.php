@@ -105,138 +105,35 @@
 
 <div class="w-full min-h-96 shadow rounded-lg bg-white border border-gray-200">
     <div class="flex flex-col space-y-3 lg:space-y-0 lg:grid lg:gap-4 lg:grid-cols-3 p-6 lg:p-8">
-        <div class="font-bold p-2 ">
-            <div class="space-y-5 sticky top-10 ">
-                <div class="">
-                    <h4 class="text-xl text-gray-900 font-bold ">Estado de la Denuncia</h4>
-                </div>
-                <div id="imf" class="border-l-2 border-dashed border-left flex flex-col gap-3 pl-2">
-                    <div class="relative w-full pt-0 mt-0 ">
-                        <p class="text-base font-normal  mt-0 pl-3">En espera a revision</p>
-                        @switch($denouncement->status)
-                        @case('En espera')
-                        <div class="relative w-full">
-                            <span
-                                class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300 animate-rotate-x-infinite ">
-                                <i class="bi bi-hourglass "></i>
-                            </span>
-                            <div class="ml-6">
-                                <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
-                            </div>
-                        </div>
-                        @break
-                        @case('Revisada')
-                        @default
-                        <div class="relative w-full">
-                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5  text-2xl rounded-full text-blue-500">
-                                <i class="bi bi-patch-check-fill"></i>
-                            </span>
-                            <div class="ml-6">
-                                <h4 class="text-md text-blue-500 -ml-3 pt-1">Revisada</h4>
-                            </div>
-                        </div>
-                        @endswitch
-                    </div>
-                    <div class="relative w-full">
-                        <p class="text-base font-normal pl-3">Recepcion de solicitud</p>
-                        @switch($denouncement->status)
-                        @case('Revisada')
-                        <div class="relative w-full">
-                            <span
-                                class="absolute -top-0.5 z-10 h-9 w-9 text-2xl -ml-5 rounded-full text-gray-500 animate-rotate-x-infinite">
-                                <i class="bi bi-hourglass"></i>
-                            </span>
+        <div class="font-bold">
+            <div class=" mt-4 sticky top-4">
+                <h4 class="text-xl text-gray-900 font-bold ">Estado de la Denuncia</h4>
+                <div class="relative px-4 pt-2 ">
+                    <div class="absolute h-full border border-dashed border-opacity-20 border-secondary "></div>
+                    @if(!empty($denouncement->status_history))
 
-                            <div class="ml-6">
-                                <h4 class="text-md text-gray-500 -ml-3 pt-1">En espera</h4>
-                            </div>
+                    @foreach ($denouncement->status_history as $stat)
+                    <div class="flex items-start w-full mb-4 -ml-1.5">
+                        <div class="w-1/12 z-10 mt-1 ">
+                            <div class="w-3.5 h-3.5 bg-blue-500 rounded-full "></div>
                         </div>
-                        @break
-                        @case('Aceptada')
-                        @case('En proceso')
-                        @case('Terminada')
-                        @case('Pendiente a comentarios')
-                        @case('Cerrada')
-                        <div class="relative w-full">
-                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
-                                <i class="bi bi-patch-check-fill "></i>
-                            </span>
-                            <div class="ml-6">
-                                <h4 class="text-md text-blue-500 -ml-3 pt-1">Aceptada</h4>
+                        <div class="w-11/12 ">
+                            <p class="text-sm font-semibold">{{ $stat['to'] }}.</p>
+                            <p class="text-xs font-normal text-blue-500">{{ $stat['changed_at'] }}</p>
+                            @if(isset($stat['comments']) && $stat['comments'])
+                            <div class="bg-white p-4 rounded border border-slate-200 text-slate-500 shadow mt-2">
+                                <p class="text-xs font-normal text-gray-400">
+                                    {{ $stat['comments'] }}
+                                </p>
                             </div>
+                            @endif
                         </div>
-                        @break
-                        @case('Rechazada')
-                        <div class="relative w-full">
-                            <span
-                                class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500 animate-bounce ">
-                                <i class="bi bi-clipboard-x-fill"></i>
-                            </span>
-                            <div class="ml-6">
-                                <h4 class="text-md text-red-500 -ml-3 pt-1">Rechazada</h4>
-                            </div>
-                        </div>
-                        @break
-                        @default
-                        <div class="relative w-full">
-                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
-                                <i class="bi bi-stopwatch-fill"></i>
-                            </span>
-                            <div class="ml-6">
-                                <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
-                            </div>
-                        </div>
-                        @endswitch
                     </div>
-                    <div class="relative w-full">
-                        <p class="text-base font-normal pl-3">Solucion</p>
-                        @switch($denouncement->status)
-                        @case('Terminada')
-                        @case('Pendiente a comentarios')
-                        @case('Cerrada')
-                        <div class="relative w-full">
-                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
-                                <i class="bi bi-patch-check-fill "></i>
-                            </span>
-                            <div class="ml-6">
-                                <h4 class="text-md text-blue-500 -ml-3 pt-1">Terminada</h4>
-                            </div>
-                        </div>
-                        @break
+                    @endforeach
+                    @else
+                    <p>No hay historial de estados disponible.</p>
+                    @endif
 
-                        @case('En proceso')
-                        <div class="relative w-full">
-                            <span
-                                class="absolute -top-0.5 z-10 h-9 w-9 text-2xl -ml-5 rounded-full text-blue-400  animate-bounce ">
-                                <i class="bi bi-gear-fill"></i>
-                            </span>
-                            <div class="ml-6">
-                                <h4 class="text-md text-blue-400 -ml-3 pt-1">En proceso</h4>
-                            </div>
-                        </div>
-                        @break
-                        @case('Rechazada')
-                        <div class="relative w-full">
-                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500  ">
-                                <i class="bi bi-clipboard-x-fill"></i>
-                            </span>
-                            <div class="ml-6">
-                                <h4 class="text-md text-red-500 -ml-3 pt-1">Rechazada</h4>
-                            </div>
-                        </div>
-                        @break
-
-                        @default
-                        <div class="relative w-full">
-                            <span class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
-                                <i class="bi bi-stopwatch-fill"></i>
-                            </span>
-                            <div class="ml-6">
-                                <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
-                            </div>
-                        </div>
-                        @endswitch
-                    </div>
                 </div>
             </div>
         </div>
@@ -301,37 +198,35 @@
             @endif
 
             @if($denouncement->status=="Terminada")
-                    <form id="upload-form" class="" method="POST" action="{{ route('manager.close.case') }}">
-                        @csrf
-                        <div class="row g-3">
-                            <input class="form-control" type="text" value="{{$denouncement->id}}" name="id" hidden>
-                            <div class="col-md-12 ">
-                                @if($denouncement->status=="Cerrada" && $denouncement->final_comments!="")
-                                <x-label for="final_comments" class="block text-sm font-medium text-gray-700"
-                                    :value="__('Comentarios Finales')" />
-                                <textarea type="text"
-                                    class="mt-1 p-2 w-full border rounded-md disabled text-sm text-gray-700"
-                                    id="final_comments" name="final_comments" style="height:150px;"
-                                    disabled>{{$denouncement->final_comments}}</textarea>
-                                @else
-                                <x-label for="final_comments" class="block text-sm font-medium text-gray-700"
-                                    :value="__('Comentarios o Agradecimientos')" />
-                                <textarea type="text"
-                                    class="mt-1 p-2 w-full border rounded-md text-sm font-light text-gray-700"
-                                    id="final_comments" name="final_comments" style="height:150px;"></textarea>
-                                @endif
-                            </div>
-                            @if($denouncement->status!="Cerrada")
+            <form id="upload-form" class="" method="POST" action="{{ route('manager.close.case') }}">
+                @csrf
+                <div class="row g-3">
+                    <input class="form-control" type="text" value="{{$denouncement->id}}" name="id" hidden>
+                    <div class="col-md-12 ">
+                        @if($denouncement->status=="Cerrada" && $denouncement->final_comments!="")
+                        <x-label for="final_comments" class="block text-sm font-medium text-gray-700"
+                            :value="__('Comentarios Finales')" />
+                        <textarea type="text" class="mt-1 p-2 w-full border rounded-md disabled text-sm text-gray-700"
+                            id="final_comments" name="final_comments" style="height:150px;"
+                            disabled>{{$denouncement->final_comments}}</textarea>
+                        @else
+                        <x-label for="final_comments" class="block text-sm font-medium text-gray-700"
+                            :value="__('Comentarios o Agradecimientos')" />
+                        <textarea type="text" class="mt-1 p-2 w-full border rounded-md text-sm font-light text-gray-700"
+                            id="final_comments" name="final_comments" style="height:150px;"></textarea>
+                        @endif
+                    </div>
+                    @if($denouncement->status!="Cerrada")
 
-                            <div class=" flex justify-end">
-                                <button type="submit"
-                                    class=" bg-slate-950 text-white rounded border-0 py-2 px-5 hover:bg-slate-800"
-                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enviar</button>
-                            </div>
-                            @endif
-                        </div>
-                    </form>
+                    <div class=" flex justify-end">
+                        <button type="submit"
+                            class=" bg-slate-950 text-white rounded border-0 py-2 px-5 hover:bg-slate-800"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enviar</button>
+                    </div>
                     @endif
+                </div>
+            </form>
+            @endif
 
             @if($denouncement->status=="En espera" || $denouncement->status=="Revisada" ||
             $denouncement->status=="Rechazada")
@@ -409,26 +304,31 @@
                     <dl class="divide-y divide-gray-100 text-base">
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt class=" leading-6 text-gray-900">Nombre Completo</dt>
-                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->name}} {{$denouncement->last_name}}</dd>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->name}}
+                                {{$denouncement->last_name}}</dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt class=" leading-6 text-gray-900">Tipo de denuncia</dt>
-                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->type->type_service}}</dd>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">
+                                {{$denouncement->type->type_service}}</dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt class=" leading-6 text-gray-900">Colonia</dt>
-                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->contact->suburb->name}}
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">
+                                {{$denouncement->contact->suburb->name}}
                             </dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt class=" leading-6 text-gray-900">Direccion</dt>
-                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->contact->address}}
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">
+                                {{$denouncement->contact->address}}
                             </dd>
                         </div>
 
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt class=" leading-6 text-gray-900">Numero de Telefono</dt>
-                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">{{$denouncement->contact->phone}}</dd>
+                            <dd class="mt-1 leading-6 text-gray-500 sm:col-span-2 sm:mt-0">
+                                {{$denouncement->contact->phone}}</dd>
                         </div>
                         <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt class=" leading-6 text-gray-900">Horario de Contacto</dt>
@@ -447,7 +347,7 @@
                             <dt class="text-base leading-6 text-gray-900">Evidencia</dt>
                             <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                 <ul role="list"
-                                    class="divide-y divide-gray-100 rounded-md border border-gray-200 h-72 overflow-y-auto">
+                                    class="divide-y divide-gray-100 rounded-md border border-gray-200 max-h-72 overflow-y-auto">
                                     @if(!empty($imagePaths))
                                     @foreach($imagePaths as $image)
                                     <li onclick="openModal('{{ asset($image)}}')"
@@ -483,7 +383,7 @@
             <form id="upload-form" class="" method="POST" action="{{route('manager.setEvidence.web')}}"
                 enctype="multipart/form-data">
                 @csrf
-                <h4 class="text-xl text-gray-900 font-bold py-3">Evidencia Final</h4>
+                <h4 class="text-xl text-gray-900 py-3">Evidencia Final</h4>
                 <div class="bg-gray-50 p-5 rounded-md border border-gray-100">
                     <article aria-label="File Upload Modal" class="relative h-full flex flex-col "
                         ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"
@@ -612,11 +512,11 @@
             @endif
             @if($denouncement->status == "Terminada" || $denouncement->status == "Cerrada")
 
-            <div class=" py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 md:px-4 px-0">
-                <dt class="text-base font-bold leading-6 text-gray-900">Evidencia Final</dt>
+            <div class=" py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 md:px-4 px-0 ">
+                <dt class="text-base leading-6 text-gray-900">Evidencia Final</dt>
                 <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                     <ul role="list"
-                        class="divide-y divide-gray-100 rounded-md border border-gray-200 h-72 overflow-y-auto">
+                        class="divide-y divide-gray-100 rounded-md border border-gray-200 max-h-72 overflow-y-auto">
                         @if(!empty($finalImagePaths))
                         @foreach($finalImagePaths as $imagen)
                         <li onclick="openModal('{{ asset($imagen)}}')"
@@ -650,11 +550,11 @@
             @if(($denouncement->status=="Terminada" || $denouncement->status=="Cerrada") &&
             $denouncement->final_comments != '')
             <div class="lg:px-4 py-3 lg:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt class=" font-bold leading-6 text-gray-900">Comentarios Finales</dt>
+                <dt class="leading-6 text-gray-900">Comentarios Finales</dt>
                 <dd class="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     <textarea type="text"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="final_comments" name="final_comments"
-                        style="height:150px;" disabled>{{$denouncement->final_comments}}
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="final_comments" name="final_comments" style="height:150px;" disabled>{{$denouncement->final_comments}}
                     </textarea>
                 </dd>
             </div>

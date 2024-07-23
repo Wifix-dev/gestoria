@@ -3,35 +3,66 @@
 @section('title', 'Detalle de la Denuncia')
 
 @section('content')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<header class="bg-blue-300 py-24 pb-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
+        <div class="min-w-0 flex-1">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
 
-<form id="upload-form" class="" method="POST" action="{{ route('denouncement.save') }}" enctype="multipart/form-data">
-    <div class="h-48 lg:h-56  relative overflow-hidden bg-indigo-950 z-0  ">
-        <x-fondo class="max-w-full "></x-fondo>
+                    <li>
+                        <div>
+                            <a href="#" class="text-sm font-medium text-gray-500 hover:text-gray-700">Jobs</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 flex-shrink-0 text-gray-400"
+                                x-description="Heroicon name: mini/chevron-right" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <a href="#"
+                                class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Engineering</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Denuncia o Peticion</h1>
+        </div>
+        <div class="mt-5 flex xl:mt-0 xl:ml-4">
+
+            <div x-data="Components.listbox({ modelName: 'selected', open: false, selectedIndex: 0, activeIndex: 0, items: [{&quot;name&quot;:&quot;Published&quot;,&quot;description&quot;:&quot;This job posting can be viewed by anyone who has the link.&quot;,&quot;current&quot;:true},{&quot;name&quot;:&quot;Draft&quot;,&quot;description&quot;:&quot;This job posting will no longer be publicly accessible.&quot;,&quot;current&quot;:false}] })"
+                x-init="init()" class="sm:ml-3">
+                <label id="listbox-label" class="sr-only" @click="$refs.button.focus()"> Change published status
+                </label>
+                <div class="relative">
+                    <div class="inline-flex divide-x divide-purple-600 rounded-md shadow-sm">
+                        <div class="inline-flex divide-x divide-purple-600 rounded-md shadow-sm">
+                            <div
+                                class="inline-flex items-center rounded-md border border-transparent bg-slate-900 py-2 pl-3 pr-4 text-white shadow-sm">
+                                <svg class="h-5 w-5" x-description="Heroicon name: mini/check"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                    aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <p x-text="selected.name" class="ml-2.5 text-sm font-medium">Published</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="w-full max-w-6xl mt-24 absolute  mx-auto z-0 inset-x-0 top-0 pb-12">
+</header>
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+    <div class="w-full max-w-6xl mt-24 relative  mx-auto z-0 inset-x-0 top-0 pb-12">
         <div class="flex items-center pb-6 overflow-x-auto whitespace-nowrap px-5 pt-2 lg:pt-6 lg:px-0 ">
-            <a href="#" class="text-white ">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path
-                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                </svg>
-            </a>
 
-            <span class="mx-5 text-white ">
-                /
-            </span>
-
-            <a href="#" class="text-white ">
-                Denuncia o Peticion
-            </a>
-
-            <span class="mx-5 text-white ">
-                /
-            </span>
-            <a href="#" class=" text-blue-400 ">
-                Crear
-            </a>
         </div>
         <div class="mx-2 lg:mx-0 bg-white p-6 lg:p-12 rounded shadow">
             <div class="relative">
@@ -289,64 +320,65 @@
         </div>
     </div>
     <script>
-// JavaScript to toggle the dropdown
-const dropdownButton = document.getElementById('dropdown-button');
-const dropdownMenu = document.getElementById('dropdown-menu');
-const searchInput = document.getElementById('search-input');
-let isOpen = false;
-let suburb = document.getElementById('suburb');
-let id = document.getElementById('id');
-function toggleDropdown() {
-    isOpen = !isOpen;
-    dropdownMenu.classList.toggle('hidden', !isOpen);
-}
-dropdownButton.addEventListener('click', () => {
-    toggleDropdown();
-});
+    // JavaScript to toggle the dropdown
+    const dropdownButton = document.getElementById('dropdown-button');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    const searchInput = document.getElementById('search-input');
+    let isOpen = false;
+    let suburb = document.getElementById('suburb');
+    let id = document.getElementById('id');
 
-let results = document.getElementById('results');
+    function toggleDropdown() {
+        isOpen = !isOpen;
+        dropdownMenu.classList.toggle('hidden', !isOpen);
+    }
+    dropdownButton.addEventListener('click', () => {
+        toggleDropdown();
+    });
 
-function SelectSuburb(slct, name) {
-    id.value = slct;
-    suburb.value = name;
-    toggleDropdown();
-}
-searchInput.addEventListener('input', () => {
-    const searchTerm = searchInput.value.toLowerCase();
-    var parametros = {
-        "id": searchTerm,
-    };
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: parametros,
-        url: '{{route('user.search.cp')}}',
-        type: 'post',
-        beforeSend: function() {
-            console.log("Espera por favor...")
-        },
-        success: function(response) {
-            $("#results").html("");
-            response.forEach(element => {
-                var item = $(
-                    `<a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
+    let results = document.getElementById('results');
+
+    function SelectSuburb(slct, name) {
+        id.value = slct;
+        suburb.value = name;
+        toggleDropdown();
+    }
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        var parametros = {
+            "id": searchTerm,
+        };
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: parametros,
+            url: '{{route('user.search.cp')}}',
+            type: 'post',
+            beforeSend: function() {
+                console.log("Espera por favor...")
+            },
+            success: function(response) {
+                $("#results").html("");
+                response.forEach(element => {
+                    var item = $(
+                        `<a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
                     ${element.name}
                     <p class="text-gray-500 text-sm -mt-1"> ${element.type_suburb}</p>
                     </a>`
-                );
+                    );
 
-                item.on('click', function(event) {
-                    event.preventDefault();
-                    SelectSuburb(element.id, element.name);
+                    item.on('click', function(event) {
+                        event.preventDefault();
+                        SelectSuburb(element.id, element.name);
+                    });
+
+                    $("#results").append(item);
                 });
-
-                $("#results").append(item);
-            });
-        }
+            }
+        });
     });
-});
-</script>
+    </script>
     <script>
     function cerrarElemento() {
         var elemento = document.getElementById('msgE');
