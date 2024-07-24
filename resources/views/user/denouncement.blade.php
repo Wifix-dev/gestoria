@@ -4,180 +4,313 @@
 
 @section('content')
 
+<header class="bg-blue-400 py-24 pb-6">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
+        <div class="min-w-0 flex-1">
+            <nav aria-label="breadcrumb">
+                <ol class="flex w-full flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60">
+                    <li
+                        class="flex cursor-pointer items-center font-sans text-sm font-normal leading-normal text-blue-gray-900 transition-colors duration-300 hover:text-red-600">
+                        <a class="opacity-60" href="#">
+                            <span>Inicio</span>
+                        </a>
+                        <span
+                            class="pointer-events-none mx-2 select-none font-sans text-sm font-normal leading-normal text-blue-gray-500 antialiased">
+                            /
+                        </span>
+                    </li>
+                    <li
+                        class="flex cursor-pointer items-center font-sans text-sm font-normal leading-normal text-blue-gray-900 antialiased transition-colors duration-300 hover:text-red-600">
+                        <a class="opacity-60" href="#">
+                            <span>Denuncias</span>
+                        </a>
+                        <span
+                            class="pointer-events-none mx-2 select-none font-sans text-sm font-normal leading-normal text-blue-gray-500 antialiased">
+                            /
+                        </span>
+                    </li>
+                    <li
+                        class="flex cursor-pointer items-center font-sans text-sm font-normal leading-normal text-blue-gray-900 antialiased transition-colors duration-300 hover:text-red-600">
+                        <a class="opacity-60" href="#">
+                            <span>Detalles</span>
+                        </a>
+                        <span
+                            class="pointer-events-none mx-2 select-none font-sans text-sm font-normal leading-normal text-blue-gray-500 antialiased">
+                            /
+                        </span>
+                    </li>
+                    <li
+                        class="flex cursor-pointer items-center font-sans text-sm font-normal leading-normal text-blue-gray-900 antialiased transition-colors duration-300 hover:text-red-600">
+                        <a class="font-medium text-blue-gray-900 transition-colors hover:text-red-500" href="#">
+                            {{$denouncement->id}}
+                        </a>
+                    </li>
+                </ol>
+            </nav>
+            <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                Denuncia o Peticion</h1>
+        </div>
 
-<div class="h-48 lg:h-56  relative overflow-hidden bg-indigo-950 z-0  ">
-    <x-fondo class="max-w-full "></x-fondo>
-</div>
-<div class="w-full max-w-6xl mt-24 absolute  mx-auto z-0 inset-x-0 top-0 pb-12">
-    <div class="flex items-center pb-6 overflow-x-auto whitespace-nowrap px-5 pt-2 lg:pt-6 lg:px-0 ">
-        <a href="#" class="text-white ">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                <path
-                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-            </svg>
-        </a>
-
-        <span class="mx-3 text-white ">
-            /
-        </span>
-
-        <a href="#" class="text-white ">
-            Denuncia o Peticion
-        </a>
-        <span class="mx-3 text-white ">
-            /
-        </span>
-        <a href="#" class="text-white ">
-            Detalles
-        </a>
-        <span class="mx-3 text-white ">
-            /
-        </span>
-        <a href="#" class=" text-blue-400 ">
-            {{$denouncement->id}}
-        </a>
     </div>
-    <div class="mx-2 lg:mx-0 bg-white p-6 lg:p-12 rounded shadow">
+</header>
+
+<div class="w-full max-w-7xl relative  mx-auto z-0 inset-x-0 top-0 pb-12">
+    <div class="mx-2 lg:mx-0 p-4 lg:p-8 ">
         <div class="relative">
             <div class="flex flex-col space-y-3 lg:space-y-0 lg:grid lg:gap-4 lg:grid-cols-3">
                 <!-- Status Report -->
-                <div class="font-bold bg-white p-3">
-                    <div class="space-y-5 sticky top-24 ">
+                <div class="font-bold bg-white pt-3">
+                    <div class="space-y-1 sticky top-24 ">
                         <div class="">
                             <h4 class="text-xl text-gray-900 font-bold">Estado de la Denuncia</h4>
                         </div>
-                        <div class="border-l-2 border-dashed border-left flex flex-col gap-3 pl-2">
-                            <div class="relative w-full pt-0 mt-0 ">
-                                <p class="text-base font-normal  mt-0 ml-3">En espera a revision</p>
+                        <div class="">
+                            <div class="flex flex-col md:grid grid-cols-12 text-gray-50">
+                                <div class="flex md:contents">
+                                    @switch($denouncement->status)
+                                    @case('En espera')
+                                    <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-gray-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-gray-300 text-center">
+                                            <i class="bi bi-stopwatch-fill text-xl text-gray-500"></i>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la Revision</div>
+                                        <div class="bg-gray-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-gray-500">En espera</h3>
+                                        </div>
+                                    </div>
+                                    @break
+                                    @case('Revisada')
+                                    @default
+                                    <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-blue-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-blue-300 text-center">
+                                            <i class="bi bi-patch-check-fill text-xl text-blue-500"></i>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la Revision</div>
+                                        <div class="bg-blue-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-blue-500">Revisada</h3>
+                                        </div>
+                                    </div>
+                                    @endswitch
+                                </div>
+                                <div class="flex md:contents">
+                                    @switch($denouncement->status)
+                                    @case('Revisada')
+                                    <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-gray-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-gray-300 text-center">
+                                            <i class="bi bi-stopwatch-fill text-xl text-gray-500"></i>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solicitud</div>
+                                        <div class="bg-gray-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-gray-500">En espera</h3>
+                                        </div>
+                                    </div>
+                                    @break
+                                    @case('Aceptada')
+                                    @case('En proceso')
+                                    @case('Terminada')
+                                    @case('Pendiente a comentarios')
+                                    @case('Cerrada')
+                                    <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-blue-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-blue-300 text-center">
+                                            <i class="bi bi-patch-check-fill text-xl text-blue-500"></i>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solicitud</div>
+                                        <div class="bg-blue-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-blue-500">Aceptada</h3>
+                                        </div>
+                                    </div>
+                                    @break
+                                    @case('Rechazada')
+                                    <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-red-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-red-300 text-center">
+                                            <i class="bi bi-clipboard-x-fill text-xl text-red-500"></i>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solicitud</div>
+                                        <div class="bg-red-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-red-500">Rechazada</h3>
+                                        </div>
+                                    </div>
+                                    @break
+                                    @default
+                                    <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-gray-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-gray-300 text-center">
+                                            <i class="bi bi-stopwatch-fill text-xl text-gray-500"></i>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solicitud</div>
+                                        <div class="bg-gray-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-gray-500">Pendiente</h3>
+                                        </div>
+                                    </div>
+                                    @endswitch
+                                </div>
+                                <div class="flex md:contents">
                                 @switch($denouncement->status)
-                                @case('En espera')
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300 animate-rotate-x-infinite ">
-                                        <i class="bi bi-hourglass "></i>
-                                    </span>
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
-                                    </div>
-                                </div>
-                                @break
-                                @case('Revisada')
-                                @default
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5  text-2xl rounded-full text-blue-500">
-                                        <i class="bi bi-patch-check-fill"></i>
-                                    </span>
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-blue-500 -ml-3 pt-1">Revisada</h4>
-                                    </div>
-                                </div>
-                                @endswitch
-                            </div>
-                            <div class="relative w-full">
-                                <p class="text-base font-normal ml-3">Recepcion de solicitud</p>
-                                @switch($denouncement->status)
-                                @case('Revisada')
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 text-2xl -ml-5 rounded-full text-gray-500 animate-rotate-x-infinite">
-                                        <i class="bi bi-hourglass"></i>
-                                    </span>
-
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-gray-500 -ml-3 pt-1">En espera</h4>
-                                    </div>
-                                </div>
-                                @break
-                                @case('Aceptada')
-                                @case('En proceso')
                                 @case('Terminada')
                                 @case('Pendiente a comentarios')
                                 @case('Cerrada')
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
-                                        <i class="bi bi-patch-check-fill "></i>
-                                    </span>
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-blue-500 -ml-3 pt-1">Aceptada</h4>
+                                <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-blue-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-blue-300 text-center">
+                                            <i class="bi bi-patch-check-fill text-xl text-blue-500"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                @break
-                                @case('Rechazada')
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500 animate-bounce ">
-                                        <i class="bi bi-clipboard-x-fill"></i>
-                                    </span>
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-red-500 -ml-3 pt-1">Rechazada</h4>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solucion</div>
+                                        <div class="bg-blue-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-blue-500">Terminada</h3>
+                                        </div>
                                     </div>
-                                </div>
-                                @break
-                                @default
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
-                                        <i class="bi bi-stopwatch-fill"></i>
-                                    </span>
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
-                                    </div>
-                                </div>
-                                @endswitch
-                            </div>
-                            <div class="relative w-full">
-                                <p class="text-base font-normal ml-3">Solucion</p>
-                                @switch($denouncement->status)
-                                @case('Terminada')
-                                @case('Pendiente a comentarios')
-                                @case('Cerrada')
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-blue-500">
-                                        <i class="bi bi-patch-check-fill "></i>
-                                    </span>
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-blue-500 -ml-3 pt-1">Terminada</h4>
-                                    </div>
-                                </div>
                                 @break
 
                                 @case('En proceso')
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 text-2xl -ml-5 rounded-full text-blue-400  animate-bounce ">
-                                        <i class="bi bi-gear-fill"></i>
-                                    </span>
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-blue-400 -ml-3 pt-1">En proceso</h4>
+                                <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-gray-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-gray-300 text-center">
+                                            <i class="bi bi-gear-fill text-xl text-gray-500"></i>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solucion</div>
+                                        <div class="bg-gray-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-gray-500">En proceso</h3>
+                                        </div>
+                                    </div>
                                 @break
                                 @case('Rechazada')
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-red-500  ">
-                                        <i class="bi bi-clipboard-x-fill"></i>
-                                    </span>
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-red-500 -ml-3 pt-1">Rechazada</h4>
+                                <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-red-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-red-300 text-center flex">
+                                            <i class="fas fa-exclamation-circle text-xl text-red-500 m-auto"></i>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solucion</div>
+                                        <div class="bg-red-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-red-500">Rechazada</h3>
+                                        </div>
+                                    </div>
                                 @break
-
                                 @default
-                                <div class="relative w-full">
-                                    <span
-                                        class="absolute -top-0.5 z-10 h-9 w-9 -ml-5 text-2xl rounded-full text-gray-300">
-                                        <i class="bi bi-stopwatch-fill"></i>
-                                    </span>
-                                    <div class="ml-6">
-                                        <h4 class="text-md text-gray-300 -ml-3 pt-1">Pendiente</h4>
+                                <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-gray-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-gray-300 text-center">
+                                            <i class="bi bi-stopwatch-fill text-xl text-gray-500"></i>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div
+                                        class=" col-start-3 col-end-12 mb-4 mt-1 mr-auto w-full">
+                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solucion</div>
+                                        <div class="bg-gray-300 py-2 px-4 rounded-md w-full">
+                                            <h3 class="font-normal font-semibold text-gray-500">Pendiente</h3>
+                                        </div>
+                                    </div>
                                 @endswitch
+                                </div>
+                                <div class="flex md:contents">
+                                @switch($denouncement->status)
+                                @case('Cerrada')
+                                <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-blue-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-blue-300 text-center">
+                                            <i class="bi bi-patch-check-fill text-xl text-blue-500"></i>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-blue-300 col-start-3 col-end-12 py-2 px-4 rounded-md mt-2 mr-auto w-full">
+                                        <h3 class="font-normal font-semibold text-blue-500">Cerrada</h3>
+                                    </div>
+                                @break
+                                @case('Rechazada')
+                                <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-red-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-red-300 text-center flex">
+                                            <i class="fas fa-exclamation-circle text-xl text-red-500 m-auto"></i>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-red-300 col-start-3 col-end-12 py-2 px-4 rounded-md mt-4 mr-auto w-full">
+                                        <h3 class="font-normal font-semibold text-red-500">Rechazada</h3>
+                                    </div>
+                                @break
+                                @default
+                                <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
+                                        <div class="h-full w-8 flex items-center justify-center">
+                                            <div class="h-full w-1 bg-gray-300 pointer-events-none"></div>
+                                        </div>
+                                        <div
+                                            class="w-8 h-8 absolute top-1/2 -mt-2 rounded-full bg-gray-300 text-center">
+                                            <i class="bi bi-stopwatch-fill text-xl text-gray-500"></i>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-gray-300 col-start-3 col-end-12 py-2 px-4 rounded-md mt-4 mr-auto w-full">
+                                        <h3 class="font-normal font-semibold text-gray-500">Pendiente</h3>
+                                    </div>
+                                @endswitch
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -185,7 +318,7 @@
                 </div>
                 <!-- Status Report -->
                 <div class="min-h-24 w-full col-span-2 rounded  lg:mt-0">
-                    <h4 class="text-xl text-gray-900 font-bold pt-3">Peticion o denincia</h4>
+                    <h4 class="text-xl text-gray-900 font-bold pt-3">Peticion o Denuncia</h4>
                     <section>
                         @if ($denouncement->status == "Rechazada")
                         <div
@@ -315,7 +448,7 @@
                             <dt class="block text-sm font-medium text-gray-700">Evidencia</dt>
                             <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                 <ul role="list"
-                                    class="divide-y divide-gray-100 rounded-md border border-gray-200 h-72 overflow-y-auto">
+                                    class="divide-y divide-gray-100 rounded-md border border-gray-200 max-h-72 overflow-y-auto">
                                     @if(!empty($imagePaths))
                                     @foreach($imagePaths as $image)
                                     <li onclick="openModal('{{ asset($image)}}')"
@@ -350,7 +483,7 @@
                             <dt class="block text-sm font-medium text-gray-700">Evidencia Final</dt>
                             <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                 <ul role="list"
-                                    class="divide-y divide-gray-100 rounded-md border border-gray-200 h-72 overflow-y-auto">
+                                    class="divide-y divide-gray-100 rounded-md border border-gray-200 max-h-72 overflow-y-auto">
                                     @if(!empty($finalImagePaths))
                                     @foreach($finalImagePaths as $imagen)
                                     <li onclick="openModal('{{ asset($imagen)}}')"
@@ -374,7 +507,14 @@
                                     </li>
                                     @endforeach
                                     @else
-                                    <p>No hay evidencia inicial.</p>
+                                    <li
+                                        class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6 group">
+                                        <div class="flex w-0 flex-1 items-center">
+                                            <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                                                <span class="truncate font-medium">No hay evidencia inicial</span>
+                                            </div>
+                                        </div>
+                                    </li>
                                     @endif
                                 </ul>
                             </dd>
