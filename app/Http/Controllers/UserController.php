@@ -15,14 +15,22 @@ class UserController extends Controller
         $list = TypeDenouncements::all();
         return view('user.register',compact('list'));
     }
+    public function Denouncement(){
+        $user_id=Auth::user()->id;
+        $denouncements = Denouncement::with(['user', 'type', 'manager'])
+        ->when($user_id, function ($query, $id) {
+            return $query->where('user_id', $id); })->paginate(10);
+        return view('user.list',compact('denouncements'));
+    }
     public function GetDenouncement($id){
-        $list = TypeDenouncements::all();
-        $denouncement = Denouncement::find($id);
+
+        $denouncement = Denouncement::with(['type', 'contact.suburb'])->when($id, function ($query, $id) {
+            return $query->where('id', $id);
+        })->first();
+
         if (!$denouncement) {
             return redirect()->back()->with('error', 'Denuncia no encontrada.');
         }
-
-        $contact = Contact::find($denouncement->contact_id);
 
         $initial_evidence_images = $denouncement->initial_evidence ? json_decode($denouncement->initial_evidence, true) : [];
         $imagePaths = array_map(fn($image) => asset('public/' . $image), $initial_evidence_images);
@@ -33,7 +41,7 @@ class UserController extends Controller
             $finalImagePaths = array_map(fn($image) => asset('public/' . $image), $final_evidence_images);
         }
 
-        return view('user.denouncement', compact('denouncement', 'imagePaths', 'contact', 'finalImagePaths','list'));
+        return view('user.denouncement', compact('denouncement', 'imagePaths', 'finalImagePaths'));
     }
 
     public function FinalComments(Request $request){

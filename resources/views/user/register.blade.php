@@ -8,28 +8,28 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<header class="bg-blue-400 py-24 pb-6">
+<header class="bg-gradient-to-l from-blue-500 to-blue-700 py-24 pb-6">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
         <div class="min-w-0 flex-1">
             <nav aria-label="breadcrumb">
-                <ol class="flex w-full flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60">
+                <ol class="flex w-full flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60 text-white font-semibold">
                     <li
-                        class="flex cursor-pointer items-center font-sans text-sm font-normal leading-normal text-blue-gray-900 transition-colors duration-300 hover:text-red-600">
-                        <a class="opacity-60" href="#">
+                        class="flex cursor-pointer items-center font-sans text-sm leading-normal text-blue-gray-900 transition-colors duration-300 hover:text-red-600">
+                        <a class="opacity-70" href="#">
                             <span>Inicio</span>
                         </a>
                         <span
-                            class="pointer-events-none mx-2 select-none font-sans text-sm font-normal leading-normal text-blue-gray-500 antialiased">
+                            class="pointer-events-none mx-2 select-none font-sans text-sm leading-normal  antialiased">
                             /
                         </span>
                     </li>
                     <li
-                        class="flex cursor-pointer items-center font-sans text-sm font-normal leading-normal text-blue-gray-900 antialiased transition-colors duration-300 hover:text-red-600">
-                        <a class="opacity-60" href="#">
-                            <span>Denouncias</span>
+                        class="flex cursor-pointer items-center font-sans text-sm leading-normal  antialiased transition-colors duration-300 hover:text-red-600">
+                        <a class="opacity-70" href="#">
+                            <span> Mis Peticiones</span>
                         </a>
                         <span
-                            class="pointer-events-none mx-2 select-none font-sans text-sm font-normal leading-normal text-blue-gray-500 antialiased">
+                            class="pointer-events-none mx-2 select-none font-sans text-sm font-normal leading-normal  antialiased">
                             /
                         </span>
                     </li>
@@ -41,8 +41,8 @@
                     </li>
                 </ol>
             </nav>
-            <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                Denuncia o Peticion</h1>
+            <h1 class="mt-2 text-2xl font-bold leading-7 text-white sm:truncate sm:text-3xl sm:tracking-tight">
+                Registro de Peticion</h1>
         </div>
         <div class="mt-5 flex xl:mt-0 xl:ml-4">
             <div x-data="Components.listbox({ modelName: 'selected', open: false, selectedIndex: 0, activeIndex: 0, items: [{&quot;name&quot;:&quot;Published&quot;,&quot;description&quot;:&quot;This job posting can be viewed by anyone who has the link.&quot;,&quot;current&quot;:true},{&quot;name&quot;:&quot;Draft&quot;,&quot;description&quot;:&quot;This job posting will no longer be publicly accessible.&quot;,&quot;current&quot;:false}] })"

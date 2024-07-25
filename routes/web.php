@@ -25,11 +25,11 @@ Route::middleware(['auth', 'verified'])->group(function() {
     })->name('dashboard');
     Route::get('/denouncements/create',[ManagerController::class, 'Create'])->middleware('role:manager')->name('manager.create.denouncement');
     Route::post('/denouncements/create/save',[ManagerController::class, 'SaveDenouncement'])->middleware('role:manager')->name('manager.save.denouncement');
-    Route::get('/denouncement', [UserController::class, 'UserDenunciation'])->middleware('role:user')->name('denouncement');
-    Route::get('/denouncement/{id}', [UserController::class, 'GetDenouncement'])->middleware('role:user')->name('denouncement.info');
+    Route::get('/denouncement/create', [UserController::class, 'UserDenunciation'])->middleware('role:user')->name('denouncement');
+    Route::get('/denouncement/create/{id}', [UserController::class, 'GetDenouncement'])->middleware('role:user')->name('denouncement.info');
     Route::post('/denouncement/save',  [UserController::class, 'SaveDenouncement'])->middleware('role:user')->name('denouncement.save');
     Route::post('/denouncement/close', [UserController::class, 'FinalComments'])->middleware('role:user')->name('user.close.case');
-
+    Route::get('/denouncement', [UserController::class, 'Denouncement'])->middleware('role:user')->name('user.denouncement.list');
     Route::post('/denouncements/close', [ManagerController::class, 'FinalCommentsWeb'])->middleware('role:manager')->name('manager.close.case');
 
 
@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
     Route::get('/denouncements/user', [ManagerController::class, 'ManagerDenunciation'])->middleware('role:manager')->name('manager.denouncements.list');
 
-    Route::get('/denouncements/web', [ManagerController::class, 'ManagerDenunciationWeb'])->middleware('role:manager')->name('manager.denouncements.list');
+    Route::get('/denouncements/web', [ManagerController::class, 'ManagerDenunciationWeb'])->middleware('role:manager')->name('manager.denouncementsWeb.list');
     Route::get('/denouncements/web/{id}', [ManagerController::class, 'GetDenouncementWeb'])->middleware('role:manager')->name('manager.denuncement.record.detail');
 
     Route::get('/denouncements/{id}', [ManagerController::class, 'GetDenouncement'])->middleware('role:manager')->name('manager.denuncement.detail');

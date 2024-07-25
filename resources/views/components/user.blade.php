@@ -119,7 +119,10 @@
 
         </header>
          -->
-
+         <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
         <nav id="menu" class="bg-white border-gray-200 z-30 hidden lg:block ">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
                 <a href="#" class="flex items-center">
@@ -127,28 +130,26 @@
                     <span class="self-center text-2xl font-extrabold whitespace-nowrap text-gray-700">S.O.S</span>
                 </a>
                 <div class="flex md:order-2">
-                    <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
-                        aria-expanded="false"
-                        class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                        <span class="sr-only">Search</span>
-                    </button>
-                    <div class="relative hidden md:block">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                            <span class="sr-only">Search icon</span>
+                    <div class="flex items-center mt-4 lg:mt-0 relative hidden md:block">
+
+                        <div x-data="{ isOpen: false }" class="relative flex justify-end">
+                            @if (auth()->check())
+                            <button @click="isOpen = !isOpen"
+                                class="w-9 h-9 overflow-hidden bg-blue-600 rounded-full flex justify-center items-center text-md uppercase text-white font-normal">
+                                <span>{{auth()->user()->name[0]}}</span>
+                                <span>{{auth()->user()->name[1]}}</span>
+                            </button>
+                            @endif
+                            <div x-show="isOpen"
+                                class="absolute w-40 bg-white rounded-lg shadow-lg p-1.5 mt-11 shadow-sm border border-gray-100 text-sm text-gray-700">
+                                <a href="#"
+                                    class="block px-4 py-2 account-link hover:bg-gray-100 rounded hover:text-blue-700"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt mr-.5"></i>
+                                    Cerrar Sesión
+                                </a>
+                            </div>
                         </div>
-                        <input type="text" id="search-navbar"
-                            class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Search...">
                     </div>
                     <button data-collapse-toggle="navbar-search" type="button"
                         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -175,18 +176,19 @@
                             placeholder="Search...">
                     </div>
                     <ul
-                        class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
+                        class="flex flex-col p-4 md:p-0 mt-4 font-normal font-sans border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
                         <li>
-                            <a href="#" class="block py-2 px-3 text-gray-900 md:hover:text-blue-600 hover:bg-gray-100 rounded-md"
+                            <a href="#"
+                                class="block py-2 px-3 text-gray-800 md:hover:text-blue-700 hover:bg-gray-100 rounded-md"
                                 aria-current="page">Inicio</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-100 md:hover:text-blue-600">About</a>
+                                class="block py-2 px-3 text-gray-800 rounded-md hover:bg-gray-100 md:hover:text-blue-700">About</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-100 md:hover:text-blue-600">Services</a>
+                                class="block py-2 px-3 text-gray-800 rounded-md hover:bg-gray-100 md:hover:text-blue-700">Services</a>
                         </li>
                     </ul>
                 </div>
@@ -194,10 +196,13 @@
         </nav>
 
         <!-- Mobile Header & Nav -->
-        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-4 px-6 sticky top-0 bg-white shadow lg:hidden z-10">
+        <header x-data="{ isOpen: false }"
+            class="w-full bg-sidebar py-4 px-6 sticky top-0 bg-white shadow lg:hidden z-10">
             <div class="flex items-center justify-between">
                 <a href="index.html" class="text-gray-700 text-3xl font-semibold uppercase hover:text-gray-600">SOS</a>
-                <button class="text-gray-500 w-8 h-8 relative focus:outline-none bg-white rounded border border-gray-200" @click="isOpen = !isOpen">
+                <button
+                    class="text-gray-500 w-8 h-8 relative focus:outline-none bg-white rounded border border-gray-200"
+                    @click="isOpen = !isOpen">
                     <span class="sr-only">Open main menu</span>
                     <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
                         <span aria-hidden="true"
@@ -216,7 +221,8 @@
 
             <!-- Dropdown Nav -->
             <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4 text-gray-500">
-                <a href="index.html" class="flex items-center hover:rounded hover:text-gray-600 hover:bg-gray-100 py-2 pl-4 ">
+                <a href="index.html"
+                    class="flex items-center hover:rounded hover:text-gray-600 hover:bg-gray-100 py-2 pl-4 ">
                     <i class="fas fa-tachometer-alt mr-3"></i>
                     Dashboard
                 </a>
@@ -245,15 +251,18 @@
                     <i class="fas fa-calendar mr-3"></i>
                     Calendar
                 </a>
-                <a href="#" class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600">
+                <a href="#"
+                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600">
                     <i class="fas fa-cogs mr-3"></i>
                     Support
                 </a>
-                <a href="#" class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600 ">
+                <a href="#"
+                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600 ">
                     <i class="fas fa-user mr-3"></i>
                     My Account
                 </a>
-                <a href="#" class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600">
+                <a href="#"
+                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600">
                     <i class="fas fa-sign-out-alt mr-3"></i>
                     Sign Out
                 </a>
@@ -284,15 +293,15 @@
         integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
 
     <script>
- document.getElementById('main-content').addEventListener('scroll', function() {
-  const menu = document.getElementById('menu');
+    document.getElementById('main-content').addEventListener('scroll', function() {
+        const menu = document.getElementById('menu');
 
-  if (this.scrollTop > 0) {
-    menu.classList.add('shadow');
-  } else {
-    menu.classList.remove('shadow');
-  }
-});
+        if (this.scrollTop > 0) {
+            menu.classList.add('shadow');
+        } else {
+            menu.classList.remove('shadow');
+        }
+    });
     var chartOne = document.getElementById('chartOne');
     var myChart = new Chart(chartOne, {
         type: 'bar',

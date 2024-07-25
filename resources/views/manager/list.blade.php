@@ -12,7 +12,8 @@
             <div class="flex items-center gap-x-3">
                 <h2 class="sm:text-xl text-2xl font-bold uppercase title-font mb-2 text-gray-900">Denuncias</h2>
             </div>
-            <p class="mt-1 text-sm text-gray-500 :text-gray-300">Estas son las peticiones realizadas por los ciudadanos registrados en la plataforma.</p>
+            <p class="mt-1 text-sm text-gray-500 :text-gray-300">Estas son las peticiones realizadas por los ciudadanos
+                registrados en la plataforma.</p>
         </div>
     </div>
 
@@ -137,22 +138,22 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 :divide-gray-700 :bg-gray-900">
-                            @foreach ($denouncements as $list)
+                            @foreach ($denouncements as $lista)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                     <div>
-                                        {{$list->case_name}}
+                                        {{$lista->case_name}}
                                     </div>
                                 </td>
                                 <td class="px-4 py-4 text-sm font-medium whitespace-nowrap ">
                                     <div class="flex">
-                                        @switch($list->status)
+                                        @switch($lista->status)
                                         @case('Rechazada')
                                         <div
                                             class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-red-100/60 :bg-gray-800">
                                             <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>
 
-                                            <h2 class="text-sm font-normal text-red-500 capitalize">{{$list->status}}
+                                            <h2 class="text-sm font-normal text-red-500 capitalize">{{$lista->status}}
                                             </h2>
                                         </div>
                                         @break
@@ -162,7 +163,16 @@
                                             <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 
                                             <h2 class="text-sm font-normal text-emerald-500 capitalize">
-                                                {{$list->status}}</h2>
+                                                {{$lista->status}}</h2>
+                                        </div>
+                                        @break
+                                        @case('En proceso')
+                                        <div
+                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-cyan-100/60">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-cyan-500"></span>
+
+                                            <h2 class="text-sm font-normal text-cyan-500 capitalize">
+                                                {{$lista->status}}</h2>
                                         </div>
                                         @break
                                         @case('En espera')
@@ -170,7 +180,7 @@
                                             class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-gray-100/60 :bg-gray-800">
                                             <span class="h-1.5 w-1.5 rounded-full bg-gray-500"></span>
 
-                                            <h2 class="text-sm font-normal text-gray-500 capitalize">{{$list->status}}
+                                            <h2 class="text-sm font-normal text-gray-500 capitalize">{{$lista->status}}
                                             </h2>
                                         </div>
                                         @break
@@ -179,42 +189,47 @@
                                             class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-orange-100/60 :bg-gray-800">
                                             <span class="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
 
-                                            <h2 class="text-sm font-normal text-orange-500 capitalize">{{$list->status}}
+                                            <h2 class="text-sm font-normal text-orange-500 capitalize">
+                                                {{$lista->status}}
                                             </h2>
                                         </div>
                                         @break
                                         @default
-                                        {{$list->status}}
+                                        {{$lista->status}}
                                         @endswitch
                                     </div>
                                 </td>
                                 <td class="px-4 py-4 text-sm font-medium text-left whitespace-nowrap">
                                     <div>
-                                        {{$list->created_at}}
+                                        {{$lista->created_at}}
                                     </div>
                                 </td>
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                    <div>
-                                        {{$list->name}} {{$list->user->last_name}}
+                                    <div class="flex items-center">
+                                        <div class="relative w-10 h-10 rounded-full bg-blue-500 flex justify-center items-center text-lg uppercase text-white font-normal">
+                                            <span>{{$lista->user->name[0]}}</span>
+                                            <span>{{$lista->user->name[1]}}</span>
+                                        </div>
+                                        <span class="pl-2">{{$lista->user->name}} {{$lista->user->last_name}}</span>
                                     </div>
                                 </td>
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                    @if ($list->type)
+                                    @if ($lista->type)
                                     <div
-                                        class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-[#{{ $list->type->color}}]/20 :bg-gray-800">
-                                        <span class="h-1.5 w-1.5 rounded-full bg-[#{{ $list->type->color}}]"></span>
+                                        class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-[#{{ $lista->type->color}}]/20 :bg-gray-800">
+                                        <span class="h-1.5 w-1.5 rounded-full bg-[#{{ $lista->type->color}}]"></span>
 
-                                        <h2 class="text-sm font-normal text-[#{{ $list->type->color}}] capitalize">
-                                            {{ $list->type->type_service}}</h2>
+                                        <h2 class="text-sm font-normal text-[#{{ $lista->type->color}}] capitalize">
+                                            {{ $lista->type->type_service}}</h2>
                                     </div>
                                     @else
                                     No asignado
                                     @endif
                                 </td>
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                    @if ($list->manager)
-                                    {{ $list->manager->name }}
-                                    {{ $list->manager->last_name }}
+                                    @if ($lista->manager)
+                                    {{ $lista->manager->name }}
+                                    {{ $lista->manager->last_name }}
                                     @else
                                     Asesor no asignado
                                     @endif
@@ -223,11 +238,8 @@
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     <div class="flex gap-1">
 
-                                        <a href="{{route('manager.denuncement.detail',['id' => $list->id])}}"
+                                        <a href="{{route('manager.denuncement.detail',['id' => $lista->id])}}"
                                             class="block px-4 py-2 text-sm text-blue-700 hover:bg-blue-50 rounded-md">Ver</a>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-red-500 hover:bg-red-100 rounded-md">Report</a>
-
                                     </div>
                                 </td>
                             </tr>
