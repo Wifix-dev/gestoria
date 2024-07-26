@@ -101,6 +101,7 @@
                     </div>
                 </div>
                 @endif
+
                 <h3 class="text-xl font-semibold leading-7 text-gray-900 col-span-2">Informacion de la peticion</h3>
 
                 <div>

@@ -15,11 +15,20 @@ class UserController extends Controller
         $list = TypeDenouncements::all();
         return view('user.register',compact('list'));
     }
-    public function Denouncement(){
+    public function Denouncement(Request $request){
         $user_id=Auth::user()->id;
+        $status = $request->input('status');
+        $date = $request->input('fdate');
+        $tp = TypeDenouncements::all();
         $denouncements = Denouncement::with(['user', 'type', 'manager'])
-        ->when($user_id, function ($query, $id) {
-            return $query->where('user_id', $id); })->paginate(10);
+         ->when($status, function ($query, $status) {
+             return $query->where('status', $status); })
+         ->when($date, function ($query, $date) {
+             return $query->where('created_at', 'like', $date . '%');
+         })
+         ->when($user_id, function ($query, $id) {
+            return $query->where('user_id', $id); })
+        ->paginate(6);
         return view('user.list',compact('denouncements'));
     }
     public function GetDenouncement($id){
@@ -101,7 +110,7 @@ class UserController extends Controller
             'contact_schedule' => $request->contact_schedule,
             'suburbs_id'=>$request->id
         ]);
-        $user = Denouncement::create([
+        $case = Denouncement::create([
                 'case_name'=> $request->case_name,
                 'description' => $request->description,
                 'id_type_denouncement' => $request->id_type_denouncement,
@@ -109,6 +118,6 @@ class UserController extends Controller
                 'user_id' => Auth::user()->id,
                 'contact_id' => $contact->id
         ]);
-        return redirect()->route('denouncement.info', ['id' => $user->id])->with('success', 'Denuncia creada con éxito.');
+        return redirect()->route('denouncement.info', ['id' => $case->id])->with('success', 'Denuncia creada con éxito.');
     }
 }

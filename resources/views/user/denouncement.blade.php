@@ -62,11 +62,11 @@
                 <div class="font-bold bg-white ">
                     <div class="space-y-1 sticky top-24 rounded-xl lg:px-5 ">
                         <div class="pb-3">
-                            <h4 class="text-xl text-gray-900 font-bold">Estado de la Denuncia</h4>
+                            <h4 class=" text-gray-900 text-xl font-semibold ">Estado de la Denuncia</h4>
                         </div>
                         <div class="">
-                            <div class="flex flex-col md:grid grid-cols-12 text-gray-50">
-                                <div class="flex md:contents">
+                            <div class="flex flex-col md:grid grid-cols-12 text-gray-50 leading-7">
+                                <div class="flex md:contents text-sm">
                                     @switch($denouncement->status)
                                     @case('En espera')
                                     <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
@@ -79,10 +79,10 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13 mb-2 mr-auto w-full">
-                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la Revision
+                                        <div class=" font-semibold text-gray-600 pb-1">Estado de la Revision
                                         </div>
                                         <div class="bg-gray-200 py-2 px-4 rounded-md w-full">
-                                            <h3 class="font-normal font-semibold text-gray-500">En espera</h3>
+                                            <h3 class=" font-semibold text-gray-500">En espera</h3>
                                         </div>
                                     </div>
                                     @break
@@ -98,15 +98,15 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13 mb-2 mr-auto w-full">
-                                    <div class="text-base font-semibold text-gray-600 pb-1">Estado de la Revision
+                                    <div class="font-semibold text-gray-600 pb-1">Estado de la Revision
                                     </div>
                                         <div class="bg-blue-100 py-2 px-4 rounded-md w-full">
-                                            <h3 class="font-normal font-semibold text-blue-500">Revisada</h3>
+                                            <h3 class=" font-semibold text-blue-500">Revisada</h3>
                                         </div>
                                     </div>
                                     @endswitch
                                 </div>
-                                <div class="flex md:contents">
+                                <div class="flex md:contents text-sm">
                                     @switch($denouncement->status)
                                     @case('Revisada')
                                     <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
@@ -119,9 +119,9 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13  my-1 mr-auto w-full">
-                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solicitud
+                                        <div class=" font-semibold text-gray-600 pb-1">Estado de la solicitud
                                         </div>
-                                        <div class="bg-gray-200 py-2 px-4 rounded-md w-full">
+                                        <div class="bg-gray-200 py-2 px-4 rounded-md w-full ">
                                             <h3 class="font-normal font-semibold text-gray-500">En espera</h3>
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13   my-1 mr-auto w-full">
-                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solicitud
+                                        <div class=" font-semibold text-gray-600 pb-1">Estado de la solicitud
                                         </div>
                                         <div class="bg-blue-100 py-2 px-4 rounded-md w-full">
                                             <h3 class="font-normal font-semibold text-blue-500">Aceptada</h3>
@@ -158,7 +158,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13  my-1 mr-auto w-full">
-                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solicitud
+                                        <div class=" font-semibold text-gray-600 pb-1">Estado de la solicitud
                                         </div>
                                         <div class="bg-red-100 py-2 px-4 rounded-md w-full">
                                             <h3 class="font-normal font-semibold text-red-500">Rechazada</h3>
@@ -176,7 +176,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13   my-1 mr-auto w-full">
-                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solicitud
+                                        <div class=" font-semibold text-gray-600 pb-1">Estado de la solicitud
                                         </div>
                                         <div class="bg-gray-200 py-2 px-4 rounded-md w-full">
                                             <h3 class="font-normal font-semibold text-gray-500">Pendiente</h3>
@@ -184,7 +184,7 @@
                                     </div>
                                     @endswitch
                                 </div>
-                                <div class="flex md:contents">
+                                <div class="flex md:contents text-sm">
                                     @switch($denouncement->status)
                                     @case('Terminada')
                                     @case('Pendiente a comentarios')
@@ -199,7 +199,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13  my-1 mr-auto w-full">
-                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solucion
+                                        <div class=" font-semibold text-gray-600 pb-1">Estado de la solucion
                                         </div>
                                         <div class="bg-blue-100 py-2 px-4 rounded-md w-full">
                                             <h3 class="font-normal font-semibold text-blue-500">Terminada</h3>
@@ -218,7 +218,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13   my-1 mr-auto w-full">
-                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solucion
+                                        <div class=" font-semibold text-gray-600 pb-1">Estado de la solucion
                                         </div>
                                         <div class="bg-gray-200 py-2 px-4 rounded-md w-full">
                                             <h3 class="font-normal font-semibold text-gray-500">En proceso</h3>
@@ -236,7 +236,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13  my-1 mr-auto w-full">
-                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solucion
+                                        <div class=" font-semibold text-gray-600 pb-1">Estado de la solucion
                                         </div>
                                         <div class="bg-red-100 py-2 px-4 rounded-md w-full">
                                             <h3 class="font-normal font-semibold text-red-500">Rechazada</h3>
@@ -254,7 +254,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-start-3 col-end-13   my-1 mr-auto w-full">
-                                        <div class="text-base font-semibold text-gray-600 pb-1">Estado de la solucion
+                                        <div class=" font-semibold text-gray-600 pb-1">Estado de la solucion
                                         </div>
                                         <div class="bg-gray-200 py-2 px-4 rounded-md w-full">
                                             <h3 class="font-normal font-semibold text-gray-500">Pendiente</h3>
@@ -262,7 +262,7 @@
                                     </div>
                                     @endswitch
                                 </div>
-                                <div class="flex md:contents">
+                                <div class="flex md:contents text-sm">
                                     @switch($denouncement->status)
                                     @case('Cerrada')
                                     <div class="col-start-1 col-end-2 mr-10 md:mx-auto relative">
@@ -305,7 +305,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="bg-gray-200 col-start-3 col-end-13   py-2 px-4 rounded-md mt-4 mr-auto w-full">
+                                        class="bg-gray-200 col-start-3 col-end-13 py-2 px-4 rounded-md mt-4 mr-auto w-full">
                                         <h3 class="font-normal font-semibold text-gray-500">Pendiente</h3>
                                     </div>
                                     @endswitch
@@ -328,11 +328,11 @@
                             Pendiente a comentarios finales y agradecimientos adicionales.</div>
                         @elseif($denouncement->status == "Cerrada")
                         <div
-                            class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-blue-400 bg-blue-100 p-4 font-medium hover:border-blue-500">
+                            class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-blue-400 bg-blue-100 p-4 font-medium rounded hover:border-blue-500">
                             Su peticion ha sido cumplida.</div>
                         @elseif(session('success'))
                         <div
-                            class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-indigo-400 bg-indigo-100 p-4 font-medium hover:border-indigo-500">
+                            class="lg:mt-0 mt-3 w-full mb-2 select-none border-l-4 border-indigo-400 bg-indigo-100 p-4 font-medium rounded hover:border-indigo-500">
                             {{ session('success') }}</div>
                         @endif
                     </section>
@@ -380,7 +380,7 @@
                         </div>
                     </form>
                     @endif
-                    <div class="flex flex-col space-y-5 mt-3 ">
+                    <div class="flex flex-col space-y-5 text-sm">
                         <h3 class="text-xl font-semibold leading-7 text-gray-900 col-span-2">Informacion de la peticion</h3>
                         <div>
                             <x-label for="case_name" class="block text-sm font-medium text-gray-700"
@@ -414,7 +414,7 @@
                             <x-label for="quill-editor" class="block text-sm font-medium text-gray-700 mb-1"
                                 :value="__('Contenido de la peticion')" />
                             <div id="quill-editor"
-                                class="quill-editor-default p-2 w-full border rounded-b-md border-slate-300 "
+                                class="quill-editor-default pl-2 w-full border rounded-b-md border-slate-300 "
                                 style="height: 250px; background-color:#fff; " disabled></div>
                         </div>
                         <div class="grid grid-col-1 lg:grid-cols-3 gap-3 ">
@@ -543,7 +543,7 @@
 <div
     class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray-900 bg-opacity-50">
     <div
-        class="border border-gray-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+        class="border border-gray-500 shadow-lg modal-container bg-white w-full max-w-5xl mx-auto rounded shadow-lg z-50 overflow-y-auto">
         <div class="modal-content py-4 text-left px-6">
             <!--Title-->
             <div class="flex justify-between items-center pb-3">
@@ -558,8 +558,8 @@
                 </div>
             </div>
             <!--Body-->
-            <div class="my-5">
-                <img id="ImageModal" alt="nature" class="h-96 w-96 mx-auto object-cover object-center" />
+            <div class="my-5 ">
+                <img id="ImageModal" alt="nature" class="h-96 w-full mx-auto object-contain object-center" />
             </div>
             <!--Footer-->
             <div class="flex justify-end pt-2">

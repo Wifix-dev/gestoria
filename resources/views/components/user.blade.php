@@ -119,28 +119,26 @@
 
         </header>
          -->
-         <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
         <nav id="menu" class="bg-white border-gray-200 z-30 hidden lg:block ">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-3 py-1">
                 <a href="#" class="flex items-center">
-                    <img src="{{asset('public/assets/img/cnt.png')}}" class="h-12 mr-3" alt="Flowbite Logo" />
-                    <span class="self-center text-2xl font-extrabold whitespace-nowrap text-gray-700">S.O.S</span>
+                    <img src="{{asset('public/assets/img/SOS 2 negro.png')}}" class="h-16 mr-3" alt="Flowbite Logo" />
                 </a>
                 <div class="flex md:order-2">
                     <div class="flex items-center mt-4 lg:mt-0 relative hidden md:block">
 
-                        <div x-data="{ isOpen: false }" class="relative flex justify-end">
+                        <div x-data="{ Open: false }" class="relative flex justify-end">
                             @if (auth()->check())
-                            <button @click="isOpen = !isOpen"
+                            <button @click="Open = !Open"
                                 class="w-9 h-9 overflow-hidden bg-blue-600 rounded-full flex justify-center items-center text-md uppercase text-white font-normal">
                                 <span>{{auth()->user()->name[0]}}</span>
                                 <span>{{auth()->user()->name[1]}}</span>
                             </button>
                             @endif
-                            <div x-show="isOpen"
+                            <div x-show="Open"
                                 class="absolute w-40 bg-white rounded-lg shadow-lg p-1.5 mt-11 shadow-sm border border-gray-100 text-sm text-gray-700">
                                 <a href="#"
                                     class="block px-4 py-2 account-link hover:bg-gray-100 rounded hover:text-blue-700"
@@ -197,9 +195,20 @@
 
         <!-- Mobile Header & Nav -->
         <header x-data="{ isOpen: false }"
-            class="w-full bg-sidebar py-4 px-6 sticky top-0 bg-white shadow lg:hidden z-10">
+            class="w-full bg-sidebar py-1 px-6 sticky top-0 bg-white shadow lg:hidden z-10"
+             :class="{'pb-3': isOpen, ' pb-0': !isOpen}">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-gray-700 text-3xl font-semibold uppercase hover:text-gray-600">SOS</a>
+                <a href="#" class="flex items-center">
+                    <img src="{{asset('public/assets/img/SOS 2 negro.png')}}" class="h-16 mr-3" alt="Flowbite Logo" />
+                </a>
+                <div class="flex flex-row gap-2">
+                @if (auth()->check())
+                            <div
+                                class="w-8 h-8 overflow-hidden bg-blue-600 rounded-full flex justify-center items-center text-md uppercase text-white font-normal">
+                                <span>{{auth()->user()->name[0]}}</span>
+                                <span>{{auth()->user()->name[1]}}</span>
+                            </div>
+                    @endif
                 <button
                     class="text-gray-500 w-8 h-8 relative focus:outline-none bg-white rounded border border-gray-200"
                     @click="isOpen = !isOpen">
@@ -216,60 +225,20 @@
                             :class="{'-rotate-45': isOpen, ' translate-y-1.5': !isOpen}"></span>
                     </div>
                 </button>
-
+                </div>
             </div>
 
             <!-- Dropdown Nav -->
             <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4 text-gray-500">
-                <a href="index.html"
-                    class="flex items-center hover:rounded hover:text-gray-600 hover:bg-gray-100 py-2 pl-4 ">
-                    <i class="fas fa-tachometer-alt mr-3"></i>
-                    Dashboard
-                </a>
-                <a href="blank.html"
-                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:rounded hover:bg-gray-100 hover:text-gray-600 ">
-                    <i class="fas fa-sticky-note mr-3"></i>
-                    Blank Page
-                </a>
-                <a href="tables.html"
-                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4  hover:rounded hover:bg-gray-100 hover:text-gray-600">
-                    <i class="fas fa-table mr-3"></i>
-                    Tables
-                </a>
-                <a href="forms.html"
-                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4  hover:rounded hover:bg-gray-100 hover:text-gray-600">
-                    <i class="fas fa-align-left mr-3"></i>
-                    Forms
-                </a>
-                <a href="tabs.html"
-                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4  hover:rounded  hover:bg-gray-100 hover:text-gray-600">
-                    <i class="fas fa-tablet-alt mr-3"></i>
-                    Tabbed Content
-                </a>
-                <a href="calendar.html"
-                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4  hover:rounded hover:bg-gray-100 hover:text-gray-600">
-                    <i class="fas fa-calendar mr-3"></i>
-                    Calendar
-                </a>
-                <a href="#"
-                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600">
-                    <i class="fas fa-cogs mr-3"></i>
-                    Support
-                </a>
-                <a href="#"
-                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600 ">
-                    <i class="fas fa-user mr-3"></i>
-                    My Account
-                </a>
-                <a href="#"
+
+                @if (auth()->check())
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                     class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600">
                     <i class="fas fa-sign-out-alt mr-3"></i>
-                    Sign Out
+                    Cerrar Sesión
                 </a>
+                @endif
             </nav>
-            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                <i class="fas fa-plus mr-3"></i> New Report
-            </button> -->
         </header>
 
         <div class="w-full h-full overflow-x-hidden border-t fixed flex flex-col">

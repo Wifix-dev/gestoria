@@ -150,7 +150,7 @@
                                         @switch($lista->status)
                                         @case('Rechazada')
                                         <div
-                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-red-100/60 :bg-gray-800">
+                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-red-100/60">
                                             <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>
 
                                             <h2 class="text-sm font-normal text-red-500 capitalize">{{$lista->status}}
@@ -159,10 +159,19 @@
                                         @break
                                         @case('Cerrada')
                                         <div
-                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 :bg-gray-800">
+                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60">
                                             <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 
                                             <h2 class="text-sm font-normal text-emerald-500 capitalize">
+                                                {{$lista->status}}</h2>
+                                        </div>
+                                        @break
+                                        @case('Aceptada')
+                                        <div
+                                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-green-100/60 ">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+
+                                            <h2 class="text-sm font-normal text-green-500 capitalize">
                                                 {{$lista->status}}</h2>
                                         </div>
                                         @break
@@ -206,9 +215,9 @@
                                 </td>
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="relative w-10 h-10 rounded-full bg-blue-500 flex justify-center items-center text-lg uppercase text-white font-normal">
+                                        <div class="relative w-8 h-8 rounded-full bg-blue-500 flex justify-center items-center text-md uppercase text-white font-normal">
                                             <span>{{$lista->user->name[0]}}</span>
-                                            <span>{{$lista->user->name[1]}}</span>
+                                            <span>{{$lista->user->last_name[0]}}</span>
                                         </div>
                                         <span class="pl-2">{{$lista->user->name}} {{$lista->user->last_name}}</span>
                                     </div>
