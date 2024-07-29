@@ -286,16 +286,17 @@ function search() {
             result.classList.remove('block');
             setTimeout(function() {
 
-                log.classList.add('block');
-                log.classList.remove('hidden');
+                log.classList.add('hidden');
+                log.classList.remove('block');
             }, 2000);
-
             result.classList.add('hidden');
         },
         success: function(response) {
-            result.classList.remove('hidden');
+            log.classList.remove('hidden');
+            log.classList.add('block');
+            result.classList.add('hidden');
             result.classList.add('block');
-            log.classList.add('hidden');
+
         },
         error: function(xhr, status, error) {
             console.log('Error:', error);
