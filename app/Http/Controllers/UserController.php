@@ -29,6 +29,7 @@ class UserController extends Controller
          ->when($user_id, function ($query, $id) {
             return $query->where('user_id', $id); })
         ->paginate(6);
+        
         return view('user.list',compact('denouncements'));
     }
     public function GetDenouncement($id){

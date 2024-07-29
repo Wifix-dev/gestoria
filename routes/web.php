@@ -4,6 +4,7 @@ use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,10 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/search',[WebController::class, 'WebSearch'])->name('web.view.search');
+Route::post('/search/denouncement',[WebController::class, 'SearchCase'])->name('web.view.search.find');
+
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
     Route::get('/denouncements/create',[ManagerController::class, 'Create'])->middleware('role:manager')->name('manager.create.denouncement');
     Route::post('/denouncements/create/save',[ManagerController::class, 'SaveDenouncement'])->middleware('role:manager')->name('manager.save.denouncement');
     Route::get('/denouncement/create', [UserController::class, 'UserDenunciation'])->middleware('role:user')->name('denouncement');

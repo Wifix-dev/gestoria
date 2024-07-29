@@ -3,11 +3,10 @@
 @section('title', 'Detalle de la Denuncia')
 
 @section('content')
-<form id="upload-form" class="" method="POST" action="{{ route('denouncement.save') }}" enctype="multipart/form-data">
-@csrf
-
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<form id="upload-form" class="" method="POST" action="{{ route('denouncement.save') }}" enctype="multipart/form-data">
+@csrf
 <header class="bg-gradient-to-l from-blue-500 to-blue-700 py-24 pb-6">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
         <div class="min-w-0 flex-1">

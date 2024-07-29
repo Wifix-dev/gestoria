@@ -128,16 +128,14 @@
                     <img src="{{asset('public/assets/img/SOS 2 negro.png')}}" class="h-16 mr-3" alt="Flowbite Logo" />
                 </a>
                 <div class="flex md:order-2">
-                    <div class="flex items-center mt-4 lg:mt-0 relative hidden md:block">
-
+                    <div class="flex items-center mt-4 lg:mt-0 relative hidden md:block space-x-1">
+                        @if (auth()->check())
                         <div x-data="{ Open: false }" class="relative flex justify-end">
-                            @if (auth()->check())
                             <button @click="Open = !Open"
                                 class="w-9 h-9 overflow-hidden bg-blue-600 rounded-full flex justify-center items-center text-md uppercase text-white font-normal">
                                 <span>{{auth()->user()->name[0]}}</span>
                                 <span>{{auth()->user()->name[1]}}</span>
                             </button>
-                            @endif
                             <div x-show="Open"
                                 class="absolute w-40 bg-white rounded-lg shadow-lg p-1.5 mt-11 shadow-sm border border-gray-100 text-sm text-gray-700">
                                 <a href="#"
@@ -148,6 +146,13 @@
                                 </a>
                             </div>
                         </div>
+                        @else
+                        <a href="{{route('login')}}"
+                            class="text-slate-900 rounded-3xl py-2.5 px-5 ring-2 ring-slate-900 ring-inset">Iniciar
+                            Sesion</a>
+                        <a href="{{route('register')}}" class="bg-slate-900 text-white rounded-3xl py-2.5 px-5 ">Registro</a>
+
+                        @endif
                     </div>
                     <button data-collapse-toggle="navbar-search" type="button"
                         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -196,35 +201,35 @@
         <!-- Mobile Header & Nav -->
         <header x-data="{ isOpen: false }"
             class="w-full bg-sidebar py-1 px-6 sticky top-0 bg-white shadow lg:hidden z-10"
-             :class="{'pb-3': isOpen, ' pb-0': !isOpen}">
+            :class="{'pb-3': isOpen, ' pb-0': !isOpen}">
             <div class="flex items-center justify-between">
                 <a href="#" class="flex items-center">
                     <img src="{{asset('public/assets/img/SOS 2 negro.png')}}" class="h-16 mr-3" alt="Flowbite Logo" />
                 </a>
                 <div class="flex flex-row gap-2">
-                @if (auth()->check())
-                            <div
-                                class="w-8 h-8 overflow-hidden bg-blue-600 rounded-full flex justify-center items-center text-md uppercase text-white font-normal">
-                                <span>{{auth()->user()->name[0]}}</span>
-                                <span>{{auth()->user()->name[1]}}</span>
-                            </div>
-                    @endif
-                <button
-                    class="text-gray-500 w-8 h-8 relative focus:outline-none bg-white rounded border border-gray-200"
-                    @click="isOpen = !isOpen">
-                    <span class="sr-only">Open main menu</span>
-                    <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
-                        <span aria-hidden="true"
-                            class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
-                            :class="{'rotate-45': isOpen,' -translate-y-1.5': !isOpen }"></span>
-                        <span aria-hidden="true"
-                            class="block absolute  h-0.5 w-5 bg-current   transform transition duration-500 ease-in-out"
-                            :class="{'opacity-0': isOpen } "></span>
-                        <span aria-hidden="true"
-                            class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out"
-                            :class="{'-rotate-45': isOpen, ' translate-y-1.5': !isOpen}"></span>
+                    @if (auth()->check())
+                    <div
+                        class="w-8 h-8 overflow-hidden bg-blue-600 rounded-full flex justify-center items-center text-md uppercase text-white font-normal">
+                        <span>{{auth()->user()->name[0]}}</span>
+                        <span>{{auth()->user()->name[1]}}</span>
                     </div>
-                </button>
+                    @endif
+                    <button
+                        class="text-gray-500 w-8 h-8 relative focus:outline-none bg-white rounded border border-gray-200"
+                        @click="isOpen = !isOpen">
+                        <span class="sr-only">Open main menu</span>
+                        <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
+                            <span aria-hidden="true"
+                                class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
+                                :class="{'rotate-45': isOpen,' -translate-y-1.5': !isOpen }"></span>
+                            <span aria-hidden="true"
+                                class="block absolute  h-0.5 w-5 bg-current   transform transition duration-500 ease-in-out"
+                                :class="{'opacity-0': isOpen } "></span>
+                            <span aria-hidden="true"
+                                class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out"
+                                :class="{'-rotate-45': isOpen, ' translate-y-1.5': !isOpen}"></span>
+                        </div>
+                    </button>
                 </div>
             </div>
 
