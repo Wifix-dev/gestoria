@@ -22,6 +22,6 @@ class WebController extends Controller{
             return $query->where('id', $id);
         })->get();
 
-        return $denouncements;
+        return response()->json($denouncements);
     }
 }

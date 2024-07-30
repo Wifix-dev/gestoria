@@ -128,7 +128,7 @@
                     <img src="{{asset('public/assets/img/SOS 2 negro.png')}}" class="h-16 mr-3" alt="Flowbite Logo" />
                 </a>
                 <div class="flex md:order-2">
-                    <div class="flex items-center mt-4 lg:mt-0 relative hidden md:block space-x-1">
+                    <div class="flex items-center mt-4 lg:mt-0 relative hidden md:block text-sm space-x-1">
                         @if (auth()->check())
                         <div x-data="{ Open: false }" class="relative flex justify-end">
                             <button @click="Open = !Open"
