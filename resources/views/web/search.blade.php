@@ -9,17 +9,14 @@
     <div id="preloader5" class="mx-auto ">
         <div class="inner"></div>
     </div>
-
-
 </div>
 
-<style></style>
-<div class="bg-[url('{{ asset('/public/assets/img/fondo.jpg') }}')] bg-cover bg-center lg:bg-right-top  items-center ">
-    <div class="bg-blue-400 py-12  bg-opacity-80 h-full w-full overflow-y-auto ">
+<div class="bg-[url('{{ asset('/public/page_web/volunteer-6772196_1920.jpg') }}')] bg-cover bg-center  items-center ">
+    <div class="bg-blue-950 py-12  bg-opacity-50 h-full w-full overflow-y-auto ">
         <div class="mx-auto w-full flex flex-col items-center py-12">
             <div class="w-11/12 sm:w-2/3 lg:flex justify-center items-center flex-col mb-5 sm:mb-10">
                 <h1
-                    class="text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-6xl text-center text-gray-800 dark:text-white font-black leading-10">
+                    class="text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-6xl text-center text-gray-400 dark:text-white font-black leading-10">
                     Consulta tu
                     <span
                         class="bg-gradient-to-l from-blue-600 to-blue-800 bg-clip-text text-transparent">Denuncia</span>
@@ -50,42 +47,54 @@
         </div>
     </div>
 </div>
-<div class="w-full max-w-7xl bg-white mt-8 mx-auto z-0 inset-x-0 top-0 pb-12  relative grid lg:grid-cols-3">
+<div class="w-full max-w-7xl bg-white mt-4 mx-auto z-0 inset-x-0 top-0 pb-12  relative grid lg:grid-cols-3 ">
     <div class="lg:col-span-1"></div>
     <div class=" lg:mx-0 p-4 lg:p-8 lg:col-span-2 ">
         <div id="result" class="hidden">
             <div>
-                <div class="flex justify-between">
+            <div class="flex justify-between">
                     <div>
-                        <h3 class="text-xl font-semibold leading-7 text-gray-900">Informacion de la peticion</h3>
+                        <h3 class="text-2xl font-extrabold leading-7 text-gray-900">Informacion de la peticion</h3>
                         <p class="mt-1 max-w-2xl  leading-6 text-gray-500">Detalles de la peticion</p>
                     </div>
                 </div>
-                <div class="mt-3 border-t border-gray-100 text-sm">
-                    <dl class="divide-y divide-gray-100">
-                        <div class="lg:px-4 py-3 lg:py-4 sm:grid sm:grid-cols-3 sm:gap-4 ">
-                            <dt class="leading-6 text-gray-900">Nombre del ciudadano</dt>
+                <div class="p-3 mt-3 rounded bg-gray-100">
+                    <div id="user" class="" >
+
+                    </div>
+                </div>
+
+                <div class="mt-3 text-base">
+                    <dl>
+                        <div class="pt-4 sm:grid sm:grid-cols-3 sm:gap-4 ">
+                            <dt class="leading-6 text-gray-900 font-bold">Nombre del ciudadano</dt>
                             <dd class="mt-1 leading-6 text-gray-600 sm:col-span-2 sm:mt-0" id="full_name"></dd>
                         </div>
-                        <div class="lg:px-4 py-3 lg:py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="leading-6 text-gray-900">Nombre del caso</dt>
+                        <div class="pt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="leading-6 text-gray-900 font-bold">Nombre del caso</dt>
                             <dd class="mt-1  leading-6 text-gray-600 sm:col-span-2 sm:mt-0" id="case">
                             </dd>
                         </div>
-                        <div class="lg:px-4 py-3 lg:py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="leading-6 text-gray-900">Estado</dt>
+                        <div class="pt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="leading-6 text-gray-900 font-bold">Tipo de Denuncia</dt>
+                            <dd class="mt-1  leading-6 text-gray-600 sm:col-span-2 sm:mt-0">
+                                <span id="type"></span>
+                            </dd>
+                        </div>
+                        <div class="pt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="leading-6 text-gray-900 font-bold">Estado</dt>
                             <dd class="mt-1  leading-6 text-gray-600 sm:col-span-2 sm:mt-0">
                                 <span id="status"></span>
                             </dd>
                         </div>
-                        <div class="lg:px-4 py-3 lg:py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="leading-6 text-gray-900">Descripcion</dt>
+                        <div class="pt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class="leading-6 text-gray-900 font-bold">Descripcion</dt>
                             <dd class="mt-1  leading-6 text-gray-600 sm:col-span-2 sm:mt-0">
                                 <div id="quill-editor" class=" rounded-bottom h-64" disabled></div>
                             </dd>
                         </div>
-                        <div class="lg:px-4 py-3 lg:py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class=" leading-6 text-gray-900">Evidencia</dt>
+                        <div class="pt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                            <dt class=" leading-6 text-gray-900 font-bold">Evidencia</dt>
                             <dd class="mt-2  text-gray-900 sm:col-span-2 sm:mt-0">
                                 <ul id="list" role="list"
                                     class="divide-y divide-gray-100 rounded-md border border-gray-200 max-h-72 overflow-y-auto">
@@ -94,12 +103,7 @@
                         </div>
                     </dl>
                 </div>
-                <div class="mb-3">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">Acesor</h3>
-                    <div id="user" class="pt-1" >
 
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -302,7 +306,7 @@ function search() {
             full_name.innerText = response[0].name + " " + response[0].last_name;
             case_name.innerText = response[0].case_name;
             status_color = color[response[0].status];
-            let estado = `<div class="inline-flex items-center px-4 py-2 rounded-full gap-x-2 bg-${status_color}-100/60 ">
+            let estado = `<div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-${status_color}-100/60 ">
                                             <span class="h-1.5 w-1.5 rounded-full bg-${status_color}-500"></span>
                                             <h2 class="text-sm font-normal text-${status_color}-500 capitalize">
                             ${response[0].status}
@@ -312,8 +316,6 @@ function search() {
 
             let user = document.createElement('div')
             user.classList.add('flex','items-center')
-
-
             if(response[0].manager==null){
                 user.innerHTML=`
                         <div
@@ -324,11 +326,18 @@ function search() {
             }else{
                 user.innerHTML=`
                         <div
-                            class="relative w-8 h-8 rounded-full bg-gray-500 flex justify-center items-center text-md uppercase text-white font-normal">
+                            class="relative w-8 h-8 rounded bg-gray-500 flex justify-center items-center text-md uppercase text-white font-normal">
                             <span>${response[0].manager.name[0]+response[0].manager.last_name[0]}</span>
                         </div>
                         <span class="pl-2">${response[0].manager.name+' '+response[0].manager.last_name}</span>`;
             }
+
+            let type = document.getElementById('type');
+            let typeE = document.createElement('div')
+            typeE.innerHTML=`<span class="bg-[#${response[0].type.color}]/50 rounded-full px-3 py-1 text-sm font-semibold text-[#${response[0].type.color}]">#${response[0].type.type_service}</span>`;
+            type.appendChild(typeE);
+
+
             manager.innerHTML=""
             manager.appendChild(user);
 

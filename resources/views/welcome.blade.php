@@ -4,44 +4,43 @@
 
 @section('content')
 <!-- source https://github.com/themesberg/landwind -->
+<div class="relative bg-[url('public/page_web/volunteer-6772196_1920.jpg')] bg-cover bg-center">
+    <div class="absolute inset-x-0 bottom-0 z-10">
+        <svg viewBox="0 0 224 12" fill="currentColor" class="w-full -mb-1 text-white" preserveAspectRatio="none">
+            <path
+                d="M0,0 C48.8902582,6.27314026 86.2235915,9.40971039 112,9.40971039 C137.776408,9.40971039 175.109742,6.27314026 224,0 L224,12.0441132 L0,12.0441132 L0,0 Z">
+            </path>
+        </svg>
+    </div>
+    <div class="bg-blue-950 bg-opacity-60 absolute w-full h-full z-0"></div>
 
-<section class="bg-gray-900">
-    <div class="grid max-w-screen-xl px-4 pt-24 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:grid-cols-12 lg:py-36">
-        <div class="mr-auto place-self-center lg:col-span-7">
-            <h1
-                class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl =text-gray-900">
-                Lunes de Gestion <br>Viernes de Solucion.
+    <div class="flex justify-center items-center dark:bg-gray-800 relative z-10 py-44">
+        <div class="text-center max-w-6xl mx-10">
+            <p class="my-3 text-sm tracking-widest text-blue-500 uppercase">Central Noticias Tamaulipas</p>
+            <h1 class="my-3 text-3xl font-bold tracking-tight text-gray-950 md:text-5xl">
+                Lunes de Gestion Viernes de Solucion
             </h1>
-
-            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Esta página se encarga de atender peticiones y denuncias de la comunidad en diferentes áreas, ya sea alumbrado público, animales perdidos, o cualquier otra preocupación de la ciudadanía.
-            </p>
-
-            <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-
-                <a href="" target="_blank"
-                    class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:w-auto focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 ">
-                    Realizar peticion
-                </a>
-
-                <a href="" target="_blank"
-                    class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:w-auto focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 ">
-                    Registrarme
-                </a>
-
+            <div>
+                <p
+                    class="max-w-2xl mx-auto my-2 text-base text-gray-100 md:leading-relaxed md:text-xl dark:text-gray-400">
+                    Esta página, gestionada por Central Noticias Tamaulipas, se dedica a atender peticiones y denuncias de la comunidad en diferentes áreas de interés ciudadano.
+                </p>
+            </div>
+            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
+                <div class="rounded-md shadow">
+                    <a href="#"
+                        class="w-full flex items-center justify-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 md:text-lg ">
+                        Crear Peticion
+                    </a>
+                </div>
+                <div class="mt-3 sm:mt-0 sm:ml-3">
+                    <a href="#"
+                        class="w-full flex items-center justify-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-gray-800 bg-indigo-100 hover:bg-indigo-200 md:text-lg ">
+                        Registrarse
+                    </a>
+                </div>
             </div>
         </div>
-
-        <div class=" lg:mt-0 lg:col-span-5 lg:flex">
-            <img src="{{asset('public/assets/img/city.svg')}}" alt="hero image">
-        </div>
-
     </div>
-</section>
-@if (auth()->check())
-<p>Bienvenido, {{ auth()->user()->name }}!</p>
-@else
-<p>Por favor, inicia sesión.</p>
-@endif
+</div>
 @endsection
-
-

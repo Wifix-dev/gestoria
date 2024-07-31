@@ -122,10 +122,11 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-        <nav id="menu" class="bg-white border-gray-200 z-30 hidden lg:block ">
+        <nav id="menu" class="border-gray-200 z-30 hidden lg:block ">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-3 py-1">
                 <a href="#" class="flex items-center">
-                    <img src="{{asset('public/assets/img/SOS 2 negro.png')}}" class="h-16 mr-3" alt="Flowbite Logo" />
+                    <img id="logo" src="{{asset('public/assets/img/SOSB.png')}}" class="h-20 mr-3"
+                        alt="Flowbite Logo" />
                 </a>
                 <div class="flex md:order-2">
                     <div class="flex items-center mt-4 lg:mt-0 relative hidden md:block text-sm space-x-1">
@@ -148,9 +149,10 @@
                         </div>
                         @else
                         <a href="{{route('login')}}"
-                            class="text-slate-900 rounded-3xl py-2.5 px-5 ring-2 ring-slate-900 ring-inset">Iniciar
+                            class="text-blue-500 rounded-3xl py-2.5 px-5 ring-2 ring-blue-500 ring-inset">Iniciar
                             Sesion</a>
-                        <a href="{{route('register')}}" class="bg-slate-900 text-white rounded-3xl py-2.5 px-5 ">Registro</a>
+                        <a href="{{route('register')}}"
+                            class="bg-slate-900 text-white rounded-3xl py-2.5 px-5 ">Registro</a>
 
                         @endif
                     </div>
@@ -178,20 +180,20 @@
                             class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Search...">
                     </div>
-                    <ul
-                        class="flex flex-col p-4 md:p-0 mt-4 font-normal font-sans border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
+                    <ul id="options"
+                        class="flex flex-col p-4 md:p-0 mt-4 font-normal font-sans border font-semibold border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 text-white">
                         <li>
                             <a href="#"
-                                class="block py-2 px-3 text-gray-800 md:hover:text-blue-700 hover:bg-gray-100 rounded-md"
+                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20"
                                 aria-current="page">Inicio</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 px-3 text-gray-800 rounded-md hover:bg-gray-100 md:hover:text-blue-700">About</a>
+                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20">About</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 px-3 text-gray-800 rounded-md hover:bg-gray-100 md:hover:text-blue-700">Services</a>
+                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20 ">Services</a>
                         </li>
                     </ul>
                 </div>
@@ -204,7 +206,7 @@
             :class="{'pb-3': isOpen, ' pb-0': !isOpen}">
             <div class="flex items-center justify-between">
                 <a href="#" class="flex items-center">
-                    <img src="{{asset('public/assets/img/SOS 2 negro.png')}}" class="h-16 mr-3" alt="Flowbite Logo" />
+                    <img src="{{asset('public/assets/img/SOSN.png')}}" class="h-16 mr-3" alt="Flowbite Logo" />
                 </a>
                 <div class="flex flex-row gap-2">
                     @if (auth()->check())
@@ -250,105 +252,33 @@
             <main id="main-content" class="w-full h-full overflow-auto">
                 @yield('content')
             </main>
-
         </div>
-
     </div>
-
     <script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
-
-    <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
         integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-    <!-- ChartJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
         integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
-
     <script>
     document.getElementById('main-content').addEventListener('scroll', function() {
         const menu = document.getElementById('menu');
-
-        if (this.scrollTop > 0) {
-            menu.classList.add('shadow');
+        const options = document.getElementById('options');
+        const logo = document.getElementById('logo');
+        if (this.scrollTop > 80) {
+            menu.classList.add('shadow', 'bg-white');
+            options.classList.remove('text-white');
+            options.classList.add('text-gray-900');
+            logo.setAttribute("src", "{{asset('public/assets/img/SOSN.png')}}");
+            logo.classList.remove('h-20');
+            logo.classList.add('h-16');
         } else {
-            menu.classList.remove('shadow');
-        }
-    });
-    var chartOne = document.getElementById('chartOne');
-    var myChart = new Chart(chartOne, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-
-    var chartTwo = document.getElementById('chartTwo');
-    var myLineChart = new Chart(chartTwo, {
-        type: 'line',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
+            options.classList.remove('text-gray-900');
+            options.classList.add('text-white');
+            menu.classList.remove('shadow', 'bg-white');
+            logo.setAttribute("src", "{{asset('public/assets/img/SOSB.png')}}");
+            logo.classList.add('h-20');
+            logo.classList.remove('h-16');
         }
     });
     </script>

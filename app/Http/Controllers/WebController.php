@@ -24,4 +24,8 @@ class WebController extends Controller{
 
         return response()->json($denouncements);
     }
+    public function DenouncementCreate(){
+        $list = TypeDenouncements::all();
+        return(view('web.register',compact('list')));
+    }
 }
