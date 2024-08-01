@@ -23,7 +23,7 @@ return new class extends Migration
             $table->longText('final_comments')->nullable();
             $table->json('status_history')->nullable();
             $table->timestamps();
-
+            $table->string('key',11);
             //columnas
             $table->unsignedBigInteger('id_type_denouncement');
             $table->unsignedBigInteger('user_id')->nullable();

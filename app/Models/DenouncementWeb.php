@@ -11,6 +11,7 @@ class DenouncementWeb extends Model
     protected $fillable = [
         'id',
         'name',
+        'key',
         'last_name',
         'id_type_denouncement',
         'case_name',

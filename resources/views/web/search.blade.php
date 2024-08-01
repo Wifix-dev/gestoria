@@ -254,7 +254,8 @@
 <script>
 let color = {
     'Revisada': 'blue',
-
+    'En proceso': 'orange',
+    'Rechazada':'red'
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -334,6 +335,7 @@ function search() {
 
             let type = document.getElementById('type');
             let typeE = document.createElement('div')
+            type.innerHTML="";
             typeE.innerHTML=`<span class="bg-[#${response[0].type.color}]/50 rounded-full px-3 py-1 text-sm font-semibold text-[#${response[0].type.color}]">#${response[0].type.type_service}</span>`;
             type.appendChild(typeE);
 

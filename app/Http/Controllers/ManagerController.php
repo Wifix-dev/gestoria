@@ -17,7 +17,7 @@ class ManagerController extends Controller
         $list = TypeDenouncements::all();
         return(view('manager.create',compact('list')));
     }
-    
+
     public function SaveDenouncement(Request $request){
         $rules = [
             'case_name' => 'required|string',

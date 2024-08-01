@@ -65,16 +65,15 @@ select {
 }
 </style>
 
-<div class="bg-blue-300 bg-cover bg-center  items-center ">
-    <div class="bg-blue-950 py-12  bg-opacity-50 h-full w-full overflow-y-auto ">
+<div class="bg-gradient-to-l from-blue-500 to-blue-700 bg-cover bg-center  items-center ">
+    <div class=" py-12 h-full w-full overflow-y-auto ">
         <div class="mx-auto w-full flex flex-col items-center py-12">
             <div class="w-11/12 sm:w-2/3 lg:flex justify-center items-center flex-col mb-5 sm:mb-10">
                 <h1
-                    class="text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-6xl text-center text-gray-400 dark:text-white font-black leading-10">
-                    Crear <span class="bg-gradient-to-l from-blue-600 to-blue-800 bg-clip-text text-transparent">Denuncia</span>
+                    class="text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-6xl text-center text-white dark:text-white font-black leading-10">
+                    Crear <span class="bg-clip-text">Denuncia</span>
                 </h1>
                 <p class="mt-5 sm:mt-10 lg:w-10/12 text-gray-100 font-normal text-center text-xl">
-                    Si deseas consultar tu caso, por favor ingresa el número de caso asignado.
                 </p>
             </div>
         </div>
@@ -82,45 +81,15 @@ select {
 </div>
 
 
+<div class="w-full max-w-7xl bg-white mt-4 mx-auto z-0 top-0 pb-12  relative ">
 
 <div class="w-full ">
     <div class=" space-y-2">
-        <div class="flex items-center pb-2 overflow-x-auto whitespace-nowrap text-gray-500 px-0 ">
-            <a href="#" class=" ">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path
-                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                </svg>
-            </a>
-
-            <span class="mx-5 ">
-                /
-            </span>
-
-            <a href="#" class="">
-                Denuncia o Peticion
-            </a>
-
-            <span class="mx-5 ">
-                /
-            </span>
-            <a href="#" class=" ">
-                Crear
-            </a>
-        </div>
-        <div>
-            <div class="flex items-center gap-x-3">
-                <h2 class="sm:text-xl text-2xl font-bold uppercase title-font mb-1text-gray-900">Registro de Peticion
-                </h2>
-            </div>
-            <p class="mb-2 text-sm text-gray-500 :text-gray-300">Estas son las peticiones realizadas por los ciudadanos
-                registrados en la plataforma.</p>
-        </div>
-        <form id="upload-form" class="" method="POST" action="{{ route('manager.save.denouncement') }}" enctype="multipart/form-data">
+        <form id="upload-form" class="" method="POST" action="{{ route('web.save.denouncement') }}" enctype="multipart/form-data">
         @csrf
-        <div class="grid  grid-cols-1 lg:grid-cols-3 gap-y-4">
+        <div class="grid  grid-cols-1 lg:grid-cols-2 gap-y-4">
 
-            <div class="bg-white rounded shadow-sm col-span-2">
+            <div class="bg-white rounded col-span-2">
                 <div class="p-6 pb-2">
                     <span class="sm:text-lg text-lg font-bold title-font mb-4 text-gray-600">Informacion del
                         cuidadano</span>
@@ -197,7 +166,7 @@ select {
                     </div>
                 </div>
             </div>
-            <div class="bg-white rounded-lg shadow-sm col-span-2">
+            <div class="bg-white rounded-lg  col-span-2">
                 <div class="p-6 pb-2">
                     <span class="sm:text-lg text-lg font-bold title-font mb-4 text-gray-600">Detalles de la
                         petición</span>
@@ -243,7 +212,7 @@ select {
                     </div>
                 </div>
             </div>
-            <div class="bg-white rounded relative shadow-sm col-span-2">
+            <div class="bg-white rounded relative col-span-2">
                 <div class="p-6 pb-2">
                     <span class="sm:text-lg text-lg font-bold title-font mb-4 text-gray-600">Evidencia del caso</span>
                 </div>
@@ -298,7 +267,7 @@ select {
                     <template id="file-template">
                         <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
                             <article tabindex="0"
-                                class="group w-full h-full rounded-md focus:outline-none focus:shadow-outline elative bg-gray-100 cursor-pointer relative shadow-sm">
+                                class="group w-full h-full rounded-md focus:outline-none focus:shadow-outline elative bg-gray-100 cursor-pointer relative ">
                                 <img alt="upload preview"
                                     class="img-preview hidden w-full h-full object-cover rounded-md bg-fixed" />
                                 <section
@@ -333,7 +302,7 @@ select {
                     <template id="image-template">
                         <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
                             <article tabindex="0"
-                                class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white shadow-sm">
+                                class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white ">
                                 <img alt="upload preview"
                                     class="img-preview w-full h-full object-cover rounded-md bg-fixed" />
                                 <section
@@ -372,11 +341,12 @@ select {
             </div>
         </form>
 
-        <div class="bg-white rounded shadow-sm col-span-3">
+        <div class="bg-white rounded col-span-3">
         </div>
     </div>
 </div>
-
+</div>
+<script src="{{asset('public/js/upload.js')}}"></script>
 <script>
 $(document).ready(function() {
     var selectedFiles = [];
@@ -425,7 +395,7 @@ searchInput.addEventListener('input', () => {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         data: parametros,
-        url: '{{route('manager.search.cp')}}',
+        url: '{{route('web.search.cp')}}',
         type: 'post',
         beforeSend: function() {
             console.log("Espera por favor...")

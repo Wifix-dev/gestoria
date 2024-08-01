@@ -23,6 +23,9 @@ Route::get('/', function () {
 Route::get('/search',[WebController::class, 'WebSearch'])->name('web.view.search');
 Route::post('/search/denouncement',[WebController::class, 'SearchCase'])->name('web.view.search.find');
 Route::get('/create',[WebController::class, 'DenouncementCreate'])->name('web.view.create');
+Route::post('/web/search/cp', [WebController::class, 'SearchCP'])->name('web.search.cp');
+Route::post('/web/create/save',[WebController::class, 'SaveDenouncement'])->name('web.save.denouncement');
+
 
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/dashboard', function () {
