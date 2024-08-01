@@ -183,17 +183,28 @@
                     <ul id="options"
                         class="flex flex-col p-4 md:p-0 mt-4 font-normal font-sans border font-semibold border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 text-white">
                         <li>
-                            <a href="#"
-                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20"
+                            <a href="#" class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20"
                                 aria-current="page">Inicio</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20">About</a>
+                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20">Acerca de</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20 ">Services</a>
+                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20 ">Servicios</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20 ">Denuncias</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20 ">Contacto</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block py-2 px-3 rounded-md hover:text-blue-600 hover:bg-gray-50/20 ">Noticias</a>
                         </li>
                     </ul>
                 </div>
@@ -251,7 +262,82 @@
         <div class="w-full h-full overflow-x-hidden border-t fixed flex flex-col">
             <main id="main-content" class="w-full h-full overflow-auto">
                 @yield('content')
+                <footer class="px-3 pt-4 lg:px-9 border-t-2 bg-slate-900 text-white">
+                    <div class="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
+
+                        <div class="sm:col-span-2">
+                            <a href="#" class="inline-flex items-center">
+                                <img src="https://mcqmate.com/public/images/logos/60x60.png" alt="logo" class="h-8 w-8">
+                                <span class="ml-2 text-xl font-bold tracking-wide text-gray-100">Company Name</span>
+                            </a>
+                            <div class="mt-6 lg:max-w-xl">
+                                <p class="text-sm text-gray-100">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis mi, faucibus
+                                    dignissim lorem
+                                    id, imperdiet interdum mauris. Vestibulum ultrices sed libero non porta. Vivamus
+                                    malesuada urna eu
+                                    nibh malesuada, non finibus massa laoreet. Nunc nisi velit, feugiat a semper quis,
+                                    pulvinar id
+                                    libero. Vivamus mi diam, consectetur non orci ut, tincidunt pretium justo. In
+                                    vehicula porta
+                                    molestie. Suspendisse potenti.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-2 text-sm">
+                            <p class="text-base font-bold tracking-wide text-gray-900">Popular Courses</p>
+                            <a href="#">UPSC - Union Public Service Commission</a>
+                            <a href="#">General Knowledge</a>
+                            <a href="#">MBA</a>
+                            <p class="text-base font-bold tracking-wide text-gray-900">Popular Topics</p>
+                            <a href="#">Human Resource Management</a>
+                            <a href="#">Operations Management</a>
+                            <a href="#">Marketing Management</a>
+                        </div>
+
+                        <div>
+                            <p class="text-base font-bold tracking-wide text-gray-900">COMPANY IS ALSO AVAILABLE ON</p>
+                            <div class="flex items-center gap-1 px-2">
+                                <a href="#" class="w-full min-w-xl">
+                                    <img src="https://mcqmate.com/public/images/icons/playstore.svg"
+                                        alt="Playstore Button" class="h-10">
+                                </a>
+                                <a class="w-full min-w-xl"
+                                    href="https://www.youtube.com/channel/UCo8tEi6SrGFP8XG9O0ljFgA">
+                                    <img src="https://mcqmate.com/public/images/icons/youtube.svg" alt="Youtube Button"
+                                        class="h-28">
+                                </a>
+                            </div>
+                            <p class="text-base font-bold tracking-wide text-gray-900">Contacts</p>
+                            <div class="flex">
+                                <p class="mr-1 text-gray-800">Email:</p>
+                                <a href="#" title="send email">admin@company.com</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
+                        <p class="text-sm ">© Copyright 2023 Company. All rights reserved.</p>
+                        <ul class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
+                            <li>
+                                <a href="#"
+                                    class="text-sm  transition-colors duration-300 hover:text-deep-purple-accent-400">Privacy
+                                    &amp; Cookies Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="text-sm  transition-colors duration-300 hover:text-deep-purple-accent-400">Disclaimer
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </footer>
             </main>
+
         </div>
     </div>
     <script src="{{asset('public/assets/vendor/quill/quill.js')}}"></script>
