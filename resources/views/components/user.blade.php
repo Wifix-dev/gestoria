@@ -148,8 +148,8 @@
                             </div>
                         </div>
                         @else
-                        <a href="{{route('login')}}"
-                            class="text-blue-500 rounded-3xl py-2.5 px-5 ring-2 ring-blue-500 ring-inset">Iniciar
+                        <a id="is" href="{{route('login')}}"
+                            class="text-white rounded-3xl py-2.5 px-5 ring-2 ring-white ring-inset">Iniciar
                             Sesion</a>
                         <a href="{{route('register')}}"
                             class="bg-slate-900 text-white rounded-3xl py-2.5 px-5 ">Registro</a>
@@ -262,80 +262,76 @@
         <div class="w-full h-full overflow-x-hidden border-t fixed flex flex-col">
             <main id="main-content" class="w-full h-full overflow-auto">
                 @yield('content')
-                <footer class="px-3 pt-4 lg:px-9 border-t-2 bg-slate-900 text-white">
-                    <div class="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
+                <footer class="bg-slate-900 dark:bg-gray-900 relative z-10">
+    <div class="container px-6 py-12 mx-auto">
+        <div class="md:flex md:-mx-3 md:items-center md:justify-between">
+            <h1 class="text-xl font-semibold tracking-tight text-gray-800 md:mx-3 xl:text-2xl dark:text-white">Subscribe our newsletter to get update.</h1>
 
-                        <div class="sm:col-span-2">
-                            <a href="#" class="inline-flex items-center">
-                                <img src="https://mcqmate.com/public/images/logos/60x60.png" alt="logo" class="h-8 w-8">
-                                <span class="ml-2 text-xl font-bold tracking-wide text-gray-100">Company Name</span>
-                            </a>
-                            <div class="mt-6 lg:max-w-xl">
-                                <p class="text-sm text-gray-100">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis mi, faucibus
-                                    dignissim lorem
-                                    id, imperdiet interdum mauris. Vestibulum ultrices sed libero non porta. Vivamus
-                                    malesuada urna eu
-                                    nibh malesuada, non finibus massa laoreet. Nunc nisi velit, feugiat a semper quis,
-                                    pulvinar id
-                                    libero. Vivamus mi diam, consectetur non orci ut, tincidunt pretium justo. In
-                                    vehicula porta
-                                    molestie. Suspendisse potenti.
-                                </p>
-                            </div>
-                        </div>
+            <div class="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
+                <a href="#" class="inline-flex items-center justify-center w-full px-4 py-2 text-sm text-white duration-300 bg-gray-800 rounded-lg gap-x-3 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
+                    <span>Sign Up Now</span>
 
-                        <div class="flex flex-col gap-2 text-sm">
-                            <p class="text-base font-bold tracking-wide text-gray-900">Popular Courses</p>
-                            <a href="#">UPSC - Union Public Service Commission</a>
-                            <a href="#">General Knowledge</a>
-                            <a href="#">MBA</a>
-                            <p class="text-base font-bold tracking-wide text-gray-900">Popular Topics</p>
-                            <a href="#">Human Resource Management</a>
-                            <a href="#">Operations Management</a>
-                            <a href="#">Marketing Management</a>
-                        </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
 
-                        <div>
-                            <p class="text-base font-bold tracking-wide text-gray-900">COMPANY IS ALSO AVAILABLE ON</p>
-                            <div class="flex items-center gap-1 px-2">
-                                <a href="#" class="w-full min-w-xl">
-                                    <img src="https://mcqmate.com/public/images/icons/playstore.svg"
-                                        alt="Playstore Button" class="h-10">
-                                </a>
-                                <a class="w-full min-w-xl"
-                                    href="https://www.youtube.com/channel/UCo8tEi6SrGFP8XG9O0ljFgA">
-                                    <img src="https://mcqmate.com/public/images/icons/youtube.svg" alt="Youtube Button"
-                                        class="h-28">
-                                </a>
-                            </div>
-                            <p class="text-base font-bold tracking-wide text-gray-900">Contacts</p>
-                            <div class="flex">
-                                <p class="mr-1 text-gray-800">Email:</p>
-                                <a href="#" title="send email">admin@company.com</a>
-                            </div>
-                        </div>
+        <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700">
 
-                    </div>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div>
+                <p class="font-semibold text-gray-800 dark:text-white">Quick Link</p>
 
-                    <div class="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
-                        <p class="text-sm ">© Copyright 2023 Company. All rights reserved.</p>
-                        <ul class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
-                            <li>
-                                <a href="#"
-                                    class="text-sm  transition-colors duration-300 hover:text-deep-purple-accent-400">Privacy
-                                    &amp; Cookies Policy
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="text-sm  transition-colors duration-300 hover:text-deep-purple-accent-400">Disclaimer
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="flex flex-col items-start mt-5 space-y-2">
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Home</a>
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Who We Are</a>
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Our Philosophy</a>
+                </div>
+            </div>
 
-                </footer>
+            <div>
+                <p class="font-semibold text-gray-800 dark:text-white">Industries</p>
+
+                <div class="flex flex-col items-start mt-5 space-y-2">
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Retail & E-Commerce</a>
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Information Technology</a>
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Finance & Insurance</a>
+                </div>
+            </div>
+
+            <div>
+                <p class="font-semibold text-gray-800 dark:text-white">Services</p>
+
+                <div class="flex flex-col items-start mt-5 space-y-2">
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Translation</a>
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Proofreading & Editing</a>
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Content Creation</a>
+                </div>
+            </div>
+
+            <div>
+                <p class="font-semibold text-gray-800 dark:text-white">Contact Us</p>
+
+                <div class="flex flex-col items-start mt-5 space-y-2">
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">+880 768 473 4978</a>
+                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">info@merakiui.com</a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700">
+
+        <div class="flex flex-col items-center justify-between sm:flex-row">
+            <a href="#">
+                <img class="w-auto h-7" src="https://merakiui.com/images/full-logo.svg" alt="">
+            </a>
+
+            <p class="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-300">© Copyright 2021. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
             </main>
 
         </div>
@@ -351,20 +347,24 @@
         const menu = document.getElementById('menu');
         const options = document.getElementById('options');
         const logo = document.getElementById('logo');
+        const iss=document.getElementById('is');
         if (this.scrollTop > 80) {
-            menu.classList.add('shadow', 'bg-white');
+            menu.classList.add('shadow-sm', 'bg-white');
             options.classList.remove('text-white');
             options.classList.add('text-gray-900');
+
+            iss.classList.remove('ring-white','text-white');
+            iss.classList.add('ring-blue-500','text-blue-500');
             logo.setAttribute("src", "{{asset('public/assets/img/SOSN.png')}}");
-            logo.classList.remove('h-20');
-            logo.classList.add('h-16');
         } else {
             options.classList.remove('text-gray-900');
             options.classList.add('text-white');
-            menu.classList.remove('shadow', 'bg-white');
+
+            iss.classList.add('ring-white','text-white');
+            iss.classList.remove('ring-blue-500','text-blue-500');
+
+            menu.classList.remove('shadow-sm', 'bg-white');
             logo.setAttribute("src", "{{asset('public/assets/img/SOSB.png')}}");
-            logo.classList.add('h-20');
-            logo.classList.remove('h-16');
         }
     });
     </script>

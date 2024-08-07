@@ -67,8 +67,8 @@ select {
 
 <div class="bg-gradient-to-l from-blue-500 to-blue-700 bg-cover bg-center  items-center ">
     <div class=" py-12 h-full w-full overflow-y-auto ">
-        <div class="mx-auto w-full flex flex-col items-center py-12">
-            <div class="w-11/12 sm:w-2/3 lg:flex justify-center items-center flex-col mb-5 sm:mb-10">
+        <div class="mx-auto w-full flex flex-col items-center mt-12">
+            <div class="w-11/12 sm:w-2/3 lg:flex justify-center items-center flex-col mt-12 sm:mb-10">
                 <h1
                     class="text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-6xl text-center text-white dark:text-white font-black leading-10">
                     Crear <span class="bg-clip-text">Denuncia</span>
@@ -337,11 +337,13 @@ select {
                     </template>
                 </div>
             </div>
-            <div><button type="submit" >Confirmar</button></div>
+            <div class="p-6 bg-white rounded relative col-span-2 flex justify-end">
+                <button class="px-6 py-3 bg-slate-900 text-white rounded-lg" type="submit" >Confirmar</button>
+            </div>
             </div>
         </form>
 
-        <div class="bg-white rounded col-span-3">
+        <div class="bg-white rounded">
         </div>
     </div>
 </div>

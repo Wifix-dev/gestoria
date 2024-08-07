@@ -13,15 +13,15 @@
 
 <div class="bg-[url('{{ asset('/public/page_web/volunteer-6772196_1920.jpg') }}')] bg-cover bg-center  items-center ">
     <div class="bg-blue-950 py-12  bg-opacity-50 h-full w-full overflow-y-auto ">
-        <div class="mx-auto w-full flex flex-col items-center py-12">
-            <div class="w-11/12 sm:w-2/3 lg:flex justify-center items-center flex-col mb-5 sm:mb-10">
+        <div class="mx-auto w-full flex flex-col items-center py-8">
+            <div class="w-11/12 sm:w-2/3 lg:flex justify-center items-center flex-col mt-6 sm:mb-10">
                 <h1
                     class="text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-6xl text-center text-gray-400 dark:text-white font-black leading-10">
                     Consulta tu
                     <span
                         class="bg-gradient-to-l from-blue-600 to-blue-800 bg-clip-text text-transparent">Denuncia</span>
                 </h1>
-                <p class="mt-5 sm:mt-10 lg:w-10/12 text-gray-100 font-normal text-center text-xl">
+                <p class="mt-5 sm:mt-5 lg:w-10/12 text-gray-100 font-normal text-center text-xl">
                     Si deseas consultar tu caso, por favor ingresa el número de caso asignado.
                 </p>
             </div>

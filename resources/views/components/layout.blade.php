@@ -19,7 +19,7 @@
     @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
 
     * {
-    font-family: 'ui-sans', sans-serif;
+        font-family: 'ui-sans', sans-serif;
     }
 
 
@@ -30,6 +30,7 @@
     .cta-btn {
         color: #3d68ff;
     }
+
     select {
         -moz-appearance: none;
         text-indent: 0.01px;
@@ -41,6 +42,7 @@
         -o-appearance: none;
         appearance: none;
     }
+
     .upgrade-btn {
         background: #1947ee;
     }
@@ -65,128 +67,109 @@
 
 <body class="bg-gray-100 font-family-karla flex">
 
-    <aside class="relative bg-sidebar h-screen w-96 hidden lg:block shadow-xl">
-        <div class="p-6">
-            <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
-            <button
-                class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                <i class="fas fa-plus mr-3"></i> New Report
-            </button>
+    <aside class="relative bg-slate-900 h-screen w-96 hidden lg:block shadow-xl p-6">
+        <div class="h-full relative grid grid-rows-12 grid-flow-col">
+
+            <nav class="text-white relative w-full text-base text-white  relative font-normal pt-3 h-full  row-span-10 overflow-y-auto">
+                <a href="index.html" class="flex items-center rounded-lg py-4 px-6 hover:bg-gray-100 hover:bg-opacity-10">
+                    Denuncias
+                </a>
+            </nav>
+            <div class="row-span-2 relative flex flex-col text-white">
+                <div class="absolute w-full bottom-0 flex flex-col space-y-2">
+                @if (auth()->check())
+                <div class="relative w-full flex justify-start items-center px-4">
+                    <button
+                        class="w-9 h-9 overflow-hidden bg-blue-600 rounded-full flex justify-center items-center text-md uppercase text-white font-normal">
+                        <span>{{auth()->user()->name[0]}}</span>
+                        <span>{{auth()->user()->last_name[0]}}</span>
+                    </button>
+                    <span class="text-white text-sm ml-4">
+                        <span>{{auth()->user()->name}}</span>
+                        <span>{{auth()->user()->last_name}}</span>
+                    </span>
+                </div>
+
+                @endif
+            <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block  w-full  py-4 px-6 account-link hover:bg-gray-100 hover:bg-opacity-10 rounded-lg ">
+                        <i class="fas fa-sign-out-alt mr-1"></i>
+                        Cerrar Sesión
+                    </a>
+                    </div>
+            </div>
+
         </div>
-        <nav class="text-white text-base font-semibold pt-3">
-            <a href="index.html" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
-                <i class="fas fa-tachometer-alt mr-3"></i>
-                Dashboard
-            </a>
-            <a href="blank.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-sticky-note mr-3"></i>
-                Blank Page
-            </a>
-            <a href="tables.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-table mr-3"></i>
-                Tables
-            </a>
-            <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-align-left mr-3"></i>
-                Forms
-            </a>
-            <a href="tabs.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-tablet-alt mr-3"></i>
-                Tabbed Content
-            </a>
-            <a href="calendar.html"
-                class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-calendar mr-3"></i>
-                Calendar
-            </a>
-        </nav>
-        <a href="#"
-            class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
-            <i class="fas fa-arrow-circle-up mr-3"></i>
-            Upgrade to Pro!
-        </a>
+
     </aside>
 
     <div class="w-full flex flex-col h-screen overflow-y-hidden">
         <!-- Desktop Header -->
         <header class="w-full items-center bg-white py-2 px-6 hidden lg:flex">
             <div class="w-1/2"></div>
-            <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
-                <button @click="isOpen = !isOpen"
-                    class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
-                    <img src="https://source.unsplash.com/uJ8LNVCBjFQ/400x400">
+            @if (auth()->check())
+            <div x-data="{ Open: false }" class="relative w-1/2 flex justify-end">
+                <button @click="Open = !Open"
+                    class="w-9 h-9 overflow-hidden bg-blue-600 rounded-full flex justify-center items-center text-md uppercase text-white font-normal">
+                    <span>{{auth()->user()->name[0]}}</span>
+                    <span>{{auth()->user()->last_name[0]}}</span>
                 </button>
-                <button x-show="isOpen" @click="isOpen = false"
-                    class="h-full w-full fixed inset-0 cursor-default"></button>
-                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
-                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
-                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
-                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                <div x-show="Open"
+                    class="absolute w-40 z-10 bg-white rounded-lg shadow-lg p-1.5 mt-11 shadow-sm border border-gray-100 text-sm text-gray-700">
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 account-link hover:bg-gray-100 rounded hover:text-blue-700">
+                        <i class="fas fa-sign-out-alt mr-.5"></i>
+                        Cerrar Sesión
+                    </a>
                 </div>
             </div>
+            @endif
         </header>
 
         <!-- Mobile Header & Nav -->
-        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 lg:hidden">
+        <header x-data="{ isOpen: false }"
+            class="w-full bg-sidebar py-1 px-6 sticky top-0 bg-white shadow lg:hidden z-10"
+            :class="{'pb-3': isOpen, ' pb-0': !isOpen}">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
-                <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
-                    <i x-show="!isOpen" class="fas fa-bars"></i>
-                    <i x-show="isOpen" class="fas fa-times"></i>
-                </button>
+                <a href="#" class="flex items-center">
+                    <img src="{{asset('public/assets/img/SOSN.png')}}" class="h-16 mr-3" alt="Flowbite Logo" />
+                </a>
+                <div class="flex flex-row gap-2">
+                    @if (auth()->check())
+                    <div
+                        class="w-8 h-8 overflow-hidden bg-blue-600 rounded-full flex justify-center items-center text-md uppercase text-white font-normal">
+                        <span>{{auth()->user()->name[0]}}</span>
+                        <span>{{auth()->user()->name[1]}}</span>
+                    </div>
+                    @endif
+                    <button
+                        class="text-gray-500 w-8 h-8 relative focus:outline-none bg-white rounded border border-gray-200"
+                        @click="isOpen = !isOpen">
+                        <span class="sr-only">Open main menu</span>
+                        <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
+                            <span aria-hidden="true"
+                                class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
+                                :class="{'rotate-45': isOpen,' -translate-y-1.5': !isOpen }"></span>
+                            <span aria-hidden="true"
+                                class="block absolute  h-0.5 w-5 bg-current   transform transition duration-500 ease-in-out"
+                                :class="{'opacity-0': isOpen } "></span>
+                            <span aria-hidden="true"
+                                class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out"
+                                :class="{'-rotate-45': isOpen, ' translate-y-1.5': !isOpen}"></span>
+                        </div>
+                    </button>
+                </div>
             </div>
 
             <!-- Dropdown Nav -->
-            <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-                <a href="index.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
-                    <i class="fas fa-tachometer-alt mr-3"></i>
-                    Dashboard
-                </a>
-                <a href="blank.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-sticky-note mr-3"></i>
-                    Blank Page
-                </a>
-                <a href="tables.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-table mr-3"></i>
-                    Tables
-                </a>
-                <a href="forms.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-align-left mr-3"></i>
-                    Forms
-                </a>
-                <a href="tabs.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-tablet-alt mr-3"></i>
-                    Tabbed Content
-                </a>
-                <a href="calendar.html"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-calendar mr-3"></i>
-                    Calendar
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-cogs mr-3"></i>
-                    Support
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-user mr-3"></i>
-                    My Account
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+            <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4 text-gray-500">
+
+                @if (auth()->check())
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                    class="flex items-center opacity-75 hover:opacity-100 py-2 pl-4 hover:bg-gray-100 hover:rounded hover:text-gray-600">
                     <i class="fas fa-sign-out-alt mr-3"></i>
-                    Sign Out
+                    Cerrar Sesión
                 </a>
-                <button
-                    class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                    <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
-                </button>
+                @endif
             </nav>
-            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                <i class="fas fa-plus mr-3"></i> New Report
-            </button> -->
         </header>
 
         <div class="w-full h-full overflow-x-hidden border-t flex flex-col">
@@ -207,84 +190,9 @@
     <!-- ChartJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
         integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
-
-    <script>
-    var chartOne = document.getElementById('chartOne');
-    var myChart = new Chart(chartOne, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-
-    var chartTwo = document.getElementById('chartTwo');
-    var myLineChart = new Chart(chartTwo, {
-        type: 'line',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-    </script>
-</body>
+        <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+    @csrf
+</form>
+    </body>
 
 </html>

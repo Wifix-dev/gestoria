@@ -3,9 +3,10 @@
 @section('title', 'Detalle de la Denuncia')
 
 @section('content')
-<div class="max-h-full h-full bg-blue-500 text-gray-900 flex justify-center">
-    <div class="max-w-screen-xl bg-white h-full md:h-auto shadow sm:rounded-lg flex mt-16 sm:my-auto sm:mx-4 justify-center flex-1">
-        <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+<div class="w-full lg:bg-blue-500 text-gray-900 flex justify-center overflow-auto">
+    <div
+        class="max-w-7xl lg:mx-36 w-full bg-white lg:shadow sm:rounded-lg flex mt-16 sm:mt-24 lg:my-32 justify-center flex-1">
+        <div class="w-full lg:w-1/2 xl:w-5/12 p-8 sm:p-12">
             <div>
                 <img src="{{asset('public/assets/img/cnt.png')}}" class="w-32 mx-auto" />
             </div>
