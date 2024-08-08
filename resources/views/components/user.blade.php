@@ -18,21 +18,6 @@
     <link href="{{asset('public/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="{{asset('public/assets/user/css/bootstrap-icons.css')}}" rel="stylesheet">
-
-    <!--
-    <link href="public/build/assets/app-CCo-TTxN.css" rel="stylesheet">
-    <link href="assets/user/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/user/css/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/user/css/templatemo-topic-listing.css" rel="stylesheet">
-    <link href="public/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="public/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="public/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-
-    <link href="public/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="public/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-    <link href="public/assets/css/style.css" rel="stylesheet">
--->
     <style>
     @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
     </style>
@@ -40,85 +25,6 @@
 
 <body class="bg-white font-family-karla flex w-full h-full overflow-visible ">
     <div class="w-full h-full flex flex-col h-screen overflow-y-hidden">
-        <!-- Desktop Header
-        <header class="w-full items-center bg-white py-2 px-6 hidden lg:flex lg:flex-col fixed z-10 top-0 shadow">
-            <div class="max-w-7xl w-full mx-auto flex flex-wrap flex-col md:flex-row justify-between">
-                <div class="lg:flex lg:items-center lg:justify-between w-full">
-                    <div class="flex items-center justify-between">
-
-
-
-                    <a href="{{route('home')}}" class="flex flex-row">
-                            <img class="w-auto h-[60px]" src="{{asset('public/assets/img/SOS2.png')}}" alt="">
-                            <span class="font-extrabold text-2xl my-auto pl-3 ">S.O.S</span>
-                        </a>
-
-                        <div class="flex lg:hidden">
-                            <button x-cloak @click="isOpen = !isOpen" type="button"
-                                class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
-                                aria-label="toggle menu">
-                                <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
-                                </svg>
-
-                                <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
-                        class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
-                        <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                            <a href="#"
-                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Inicio</a>
-                            @if (auth()->check() && auth()->user()->role == 'admin')
-                            <a href="#"
-                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Crear
-                                Denuncias</a>
-                            @elseif (auth()->check() && auth()->user()->role == 'user')
-                                <p>Bienvenido, Usuario!</p>
-                            @elseif (auth()->check() && auth()->user()->role == 'manager')
-                                <a href="{{route('manager.denouncements.list')}}"
-                                class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Crear
-                                Denuncias</a>
-                            @else
-                            <p>Por favor, inicia sesión.</p>
-                            @endif
-
-                        </div>
-
-                        <div class="flex items-center mt-4 lg:mt-0">
-
-                            <div x-data="{ isOpen: false }" class="relative flex justify-end">
-
-                                <button @click="isOpen = !isOpen"
-                                    class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                        class="object-cover w-full h-full" alt="avatar">
-                                </button>
-                                <button x-show="isOpen" @click="isOpen = false"
-                                    class="h-full w-full fixed inset-0 cursor-default"></button>
-                                <div x-show="isOpen"
-                                    class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-11 shadow-sm border border-gray-50">
-                                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
-                                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
-                                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="w-1/2"></div>
-
-        </header>
-         -->
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
@@ -148,8 +54,8 @@
                             </div>
                         </div>
                         @else
-                        <a id="is" href="{{route('login')}}"
-                            class="text-white rounded-3xl py-2.5 px-5 ring-2 ring-white ring-inset">Iniciar
+                        <a id="sesion" href="{{route('login')}}"
+                            class="rounded-3xl py-2.5 px-5 ring-2 ring-white text-white ring-inset">Iniciar
                             Sesion</a>
                         <a href="{{route('register')}}"
                             class="bg-slate-900 text-white rounded-3xl py-2.5 px-5 ">Registro</a>
@@ -263,75 +169,100 @@
             <main id="main-content" class="w-full h-full overflow-auto">
                 @yield('content')
                 <footer class="bg-slate-900 dark:bg-gray-900 relative z-10">
-    <div class="container px-6 py-12 mx-auto">
-        <div class="md:flex md:-mx-3 md:items-center md:justify-between">
-            <h1 class="text-xl font-semibold tracking-tight text-gray-800 md:mx-3 xl:text-2xl dark:text-white">Subscribe our newsletter to get update.</h1>
+                    <div class="container px-6 py-12 mx-auto">
+                        <div class="md:flex md:-mx-3 md:items-center md:justify-between">
+                            <h1
+                                class="text-xl font-semibold tracking-tight text-gray-800 md:mx-3 xl:text-2xl dark:text-white">
+                                Subscribe our newsletter to get update.</h1>
 
-            <div class="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
-                <a href="#" class="inline-flex items-center justify-center w-full px-4 py-2 text-sm text-white duration-300 bg-gray-800 rounded-lg gap-x-3 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
-                    <span>Sign Up Now</span>
+                            <div class="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
+                                <a href="#"
+                                    class="inline-flex items-center justify-center w-full px-4 py-2 text-sm text-white duration-300 bg-gray-800 rounded-lg gap-x-3 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
+                                    <span>Sign Up Now</span>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                    </svg>
-                </a>
-            </div>
-        </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
 
-        <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700">
+                        <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700">
 
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            <div>
-                <p class="font-semibold text-gray-800 dark:text-white">Quick Link</p>
+                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                            <div>
+                                <p class="font-semibold text-gray-800 dark:text-white">Quick Link</p>
 
-                <div class="flex flex-col items-start mt-5 space-y-2">
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Home</a>
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Who We Are</a>
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Our Philosophy</a>
-                </div>
-            </div>
+                                <div class="flex flex-col items-start mt-5 space-y-2">
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Home</a>
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Who
+                                        We Are</a>
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Our
+                                        Philosophy</a>
+                                </div>
+                            </div>
 
-            <div>
-                <p class="font-semibold text-gray-800 dark:text-white">Industries</p>
+                            <div>
+                                <p class="font-semibold text-gray-800 dark:text-white">Industries</p>
 
-                <div class="flex flex-col items-start mt-5 space-y-2">
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Retail & E-Commerce</a>
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Information Technology</a>
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Finance & Insurance</a>
-                </div>
-            </div>
+                                <div class="flex flex-col items-start mt-5 space-y-2">
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Retail
+                                        & E-Commerce</a>
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Information
+                                        Technology</a>
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Finance
+                                        & Insurance</a>
+                                </div>
+                            </div>
 
-            <div>
-                <p class="font-semibold text-gray-800 dark:text-white">Services</p>
+                            <div>
+                                <p class="font-semibold text-gray-800 dark:text-white">Services</p>
 
-                <div class="flex flex-col items-start mt-5 space-y-2">
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Translation</a>
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Proofreading & Editing</a>
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Content Creation</a>
-                </div>
-            </div>
+                                <div class="flex flex-col items-start mt-5 space-y-2">
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Translation</a>
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Proofreading
+                                        & Editing</a>
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Content
+                                        Creation</a>
+                                </div>
+                            </div>
 
-            <div>
-                <p class="font-semibold text-gray-800 dark:text-white">Contact Us</p>
+                            <div>
+                                <p class="font-semibold text-gray-800 dark:text-white">Contact Us</p>
 
-                <div class="flex flex-col items-start mt-5 space-y-2">
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">+880 768 473 4978</a>
-                    <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">info@merakiui.com</a>
-                </div>
-            </div>
-        </div>
+                                <div class="flex flex-col items-start mt-5 space-y-2">
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">+880
+                                        768 473 4978</a>
+                                    <a href="#"
+                                        class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">info@merakiui.com</a>
+                                </div>
+                            </div>
+                        </div>
 
-        <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700">
+                        <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700">
 
-        <div class="flex flex-col items-center justify-between sm:flex-row">
-            <a href="#">
-                <img class="w-auto h-7" src="https://merakiui.com/images/full-logo.svg" alt="">
-            </a>
+                        <div class="flex flex-col items-center justify-between sm:flex-row">
+                            <a href="#">
+                                <img class="w-auto h-7" src="https://merakiui.com/images/full-logo.svg" alt="">
+                            </a>
 
-            <p class="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-300">© Copyright 2021. All Rights Reserved.</p>
-        </div>
-    </div>
-</footer>
+                            <p class="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-300">© Copyright 2021. All
+                                Rights Reserved.</p>
+                        </div>
+                    </div>
+                </footer>
             </main>
 
         </div>
@@ -343,28 +274,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
         integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
     <script>
-    document.getElementById('main-content').addEventListener('scroll', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const mainContent = document.getElementById('main-content');
         const menu = document.getElementById('menu');
         const options = document.getElementById('options');
         const logo = document.getElementById('logo');
-        const iss=document.getElementById('is');
-        if (this.scrollTop > 80) {
-            menu.classList.add('shadow-sm', 'bg-white');
-            options.classList.remove('text-white');
-            options.classList.add('text-gray-900');
+        const sesion = document.getElementById('sesion'); // Cambiar 'iss' a 'sesion'
 
-            iss.classList.remove('ring-white','text-white');
-            iss.classList.add('ring-blue-500','text-blue-500');
-            logo.setAttribute("src", "{{asset('public/assets/img/SOSN.png')}}");
-        } else {
-            options.classList.remove('text-gray-900');
-            options.classList.add('text-white');
+        if (mainContent) {
+            mainContent.addEventListener('scroll', function() {
+                if (this.scrollTop > 80) {
+                    menu.classList.add('shadow-sm', 'bg-white');
+                    options.classList.remove('text-white');
+                    options.classList.add('text-gray-900');
 
-            iss.classList.add('ring-white','text-white');
-            iss.classList.remove('ring-blue-500','text-blue-500');
+                    if (sesion) {
+                        sesion.classList.remove('ring-white', 'text-white');
+                        sesion.classList.add('ring-blue-500', 'text-blue-500');
+                    }
+                    logo.setAttribute("src", "{{asset('public/assets/img/SOSN.png')}}");
+                } else {
+                    options.classList.remove('text-gray-900');
+                    options.classList.add('text-white');
 
-            menu.classList.remove('shadow-sm', 'bg-white');
-            logo.setAttribute("src", "{{asset('public/assets/img/SOSB.png')}}");
+                    if (sesion) {
+                        sesion.classList.add('ring-white', 'text-white');
+                        sesion.classList.remove('ring-blue-500', 'text-blue-500');
+                    }
+                    menu.classList.remove('shadow-sm', 'bg-white');
+                    logo.setAttribute("src", "{{asset('public/assets/img/SOSB.png')}}");
+                }
+            });
         }
     });
     </script>

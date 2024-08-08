@@ -65,7 +65,7 @@ select {
 }
 </style>
 
-<div class="bg-gradient-to-l from-blue-500 to-blue-700 bg-cover bg-center  items-center ">
+<div class="bg-gradient-to-l from-blue-500 to-blue-700 items-center ">
     <div class=" py-12 h-full w-full overflow-y-auto ">
         <div class="mx-auto w-full flex flex-col items-center mt-12">
             <div class="w-11/12 sm:w-2/3 lg:flex justify-center items-center flex-col mt-12 sm:mb-10">

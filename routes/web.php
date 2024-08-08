@@ -58,6 +58,9 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::post('/denouncements/search/cp', [ManagerController::class, 'SearchCP'])->middleware('role:manager')->name('manager.search.cp');
     Route::post('/denouncement/search/cp', [UserController::class, 'SearchCP'])->middleware('role:user')->name('user.search.cp');
 
+
+    Route::get('/manager/dashboard', [ManagerController::class, 'Dashboard'])->middleware('role:manager')->name('manager.dashboard');
+
 });
 
 require __DIR__.'/auth.php';

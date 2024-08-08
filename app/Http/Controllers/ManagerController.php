@@ -18,6 +18,10 @@ class ManagerController extends Controller
         return(view('manager.create',compact('list')));
     }
 
+    public function Dashboard(){
+        return(view('manager.dashboard'));
+    }
+
     public function SaveDenouncement(Request $request){
         $rules = [
             'case_name' => 'required|string',
